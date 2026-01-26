@@ -4,9 +4,9 @@ This repository contains comprehensive feature documentation and requirements fo
 
 ## 📊 Repository Overview
 
-- **Total Feature Folders:** 23+ documented features
-- **Documentation Files:** 196+ markdown files
-- **Directory Structure:** 47+ directories
+- **Total Feature Folders:** 24+ documented features
+- **Documentation Files:** 202+ markdown files
+- **Directory Structure:** 48+ directories
 - **Coverage:** Complete feature mapping from code to documentation
 
 ## 📁 Repository Structure
@@ -34,6 +34,7 @@ AWAVE-Requirement/
 │   ├── Library/                      # User's audio library
 │   ├── Seach Drawer/                 # Sound discovery and search
 │   ├── Background Audio/             # Background playback support
+│   ├── Session Based Asynch Download of Audiofiles/  # On-demand audio download system
 │   ├── Favorite Functionality/       # Favorites management
 │   │
 │   ├── Profile View/                 # User profile and account
@@ -102,6 +103,7 @@ Each feature folder typically contains:
 - [Library](APP-Feature%20Description/Library/)
 - [Search Drawer](APP-Feature%20Description/Seach%20Drawer/)
 - [Background Audio](APP-Feature%20Description/Background%20Audio/)
+- [Session Based Asynchronous Download](APP-Feature%20Description/Session%20Based%20Asynch%20Download%20of%20Audiofiles/) - On-demand audio download system
 
 ### Content & Navigation
 - [Category Screens](APP-Feature%20Description/Category%20Screens/)
@@ -144,7 +146,7 @@ Each feature folder typically contains:
 
 ### Current Implementation Status
 
-- ✅ **23 Core Features** - Fully documented and implemented
+- ✅ **24 Core Features** - Fully documented and implemented
 - ⚠️ **14 Features from OLD-APP** - Partially migrated or pending
 - ⚠️ **12 Features from React APP** - Partially migrated or pending
 
@@ -203,9 +205,9 @@ See [MIGRATION_SUMMARY.md](APP-Feature%20Description/MIGRATION_SUMMARY.md) for c
 
 - **Created:** 2025-01-27
 - **Last Updated:** 2025-01-27
-- **Total Features:** 23+ documented
-- **Total Files:** 196+ markdown files
-- **Total Directories:** 47+ directories
+- **Total Features:** 24+ documented
+- **Total Files:** 202+ markdown files
+- **Total Directories:** 48+ directories
 
 ## 📞 Support
 
