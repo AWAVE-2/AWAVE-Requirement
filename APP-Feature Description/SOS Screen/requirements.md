@@ -7,19 +7,22 @@
 #### Keyword Detection
 - [x] System detects crisis-related keywords in search queries
 - [x] Keyword matching is case-insensitive
-- [x] Keywords are configurable via database
+- [x] Keywords are configurable via keywords.json file ✅ **IMPLEMENTED 2026-02-01**
 - [x] Multiple keywords can trigger SOS
 - [x] Partial keyword matches supported (query contains keyword)
-- [x] Keyword list loaded from `sos_config` table
+- [x] Keyword list loaded from `keywords.json` resource ✅ **IMPLEMENTED 2026-02-01**
+- [x] **German keywords added**: "selbstmord", "suizid" ✅ **NEW - 2026-02-01**
 - [x] Active configuration check (only active configs used)
 
 #### Trigger Behavior
 - [x] SOS screen opens automatically when keywords detected
+- [x] **Real-time trigger** (< 100ms, bypasses 300ms debounce) ✅ **NEW - 2026-02-01**
 - [x] Search results are bypassed when SOS triggered
-- [x] Search drawer closes temporarily when SOS opens
-- [x] SOS drawer overlays search drawer (higher z-index)
-- [x] Search query is logged with SOS trigger flag
+- [x] SOS sheet overlays search drawer via nested SwiftUI sheet
+- [x] SOS drawer overlays search drawer (SwiftUI sheet stacking)
+- [x] Search query is logged with SOS trigger flag ✅ **IMPLEMENTED 2026-02-01**
 - [x] No search results shown when SOS triggered
+- [x] **SOS check happens BEFORE debounce** for immediate response ✅ **NEW - 2026-02-01**
 
 ### 2. SOS Screen Display
 
@@ -71,11 +74,10 @@
 ### 4. Configuration Management
 
 #### Configuration Loading
-- [ ] SOS config loaded from `sos_config` database table (Not implemented - SOSConfig entity exists but loading not implemented)
-- [ ] Only active configurations used (`active: true`) (Not implemented)
-- [ ] Most recent config used if multiple active (Not implemented)
-- [ ] Configuration cached for 1 hour (Not implemented)
-- [ ] Cache refresh on expiration (Not implemented)
+- [x] SOS config loaded from Firestore ✅ **IMPLEMENTED 2026-02-01**
+- [x] Only active configurations used ✅ **IMPLEMENTED 2026-02-01**
+- [x] Configuration loaded on SearchViewModel init
+- [x] Async loading with error handling
 - [x] Fallback to defaults if config unavailable (SOSConfig has defaults)
 - [x] Error handling for database failures (Implemented)
 
@@ -99,13 +101,13 @@
 ### 5. Navigation & Integration
 
 #### Drawer Management
-- [x] SOS drawer opens over search drawer
-- [x] Search drawer closes when SOS opens
-- [x] Search drawer reopens when SOS closes
-- [x] Smooth transition between drawers
+- [x] SOS sheet opens over search drawer (SwiftUI nested sheets) ✅ **IMPLEMENTED 2026-02-01**
+- [x] Search drawer remains underneath (visible when SOS closes)
+- [x] Search state preserved while SOS open ✅ **IMPLEMENTED 2026-02-01**
+- [x] Smooth transition between sheets
 - [x] Swipe-down gesture to close SOS
 - [x] Close button dismisses SOS
-- [x] Z-index management (SOS: 300, Search: default)
+- [x] Sheet stacking managed by SwiftUI presentation system ✅ **IMPLEMENTED 2026-02-01**
 
 #### Search Integration
 - [x] Search hook detects SOS keywords
@@ -117,12 +119,12 @@
 ### 6. Analytics & Tracking
 
 #### Search Analytics
-- [ ] Search queries logged to `search_analytics` table (Not implemented)
-- [ ] SOS trigger flag included in analytics (Not implemented)
-- [ ] Results count logged (0 when SOS triggered) (Not implemented)
-- [ ] User ID associated (when authenticated) (Not implemented)
-- [ ] Anonymous tracking supported (Not implemented)
-- [ ] Timestamp recorded (Not implemented)
+- [x] Search queries logged to Firestore `search_analytics` collection ✅ **IMPLEMENTED 2026-02-01**
+- [x] SOS trigger flag included in analytics ✅ **IMPLEMENTED 2026-02-01**
+- [x] Results count logged (0 when SOS triggered) ✅ **IMPLEMENTED 2026-02-01**
+- [x] User ID associated (current user or "anonymous") ✅ **IMPLEMENTED 2026-02-01**
+- [x] Anonymous tracking supported ✅ **IMPLEMENTED 2026-02-01**
+- [x] Timestamp recorded (Firestore server timestamp) ✅ **IMPLEMENTED 2026-02-01**
 
 #### Analytics Fields
 - [x] `user_id` - User identifier (nullable)

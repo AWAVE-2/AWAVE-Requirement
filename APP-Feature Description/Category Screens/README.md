@@ -1,9 +1,38 @@
 # Category Screens - Feature Documentation
 
-**Feature Name:** Category Screens & Content Browsing  
-**Status:** ✅ Complete  
-**Priority:** High  
-**Last Updated:** 2025-01-27
+**Feature Name:** Category Screens & Content Browsing
+**Status:** 🚧 Partial (Swift iOS Implementation)
+**Priority:** High
+**Last Updated:** 2026-02-01
+
+## Implementation Status (Swift iOS)
+
+### ✅ Implemented
+- ✅ Category Sessions Generation (CategorySessionGenerator)
+- ✅ Category Sessions ViewModel (CategorySessionsViewModel)
+- ✅ Category Sessions View (CategorySessionsView)
+- ✅ Firestore Session Repository with category methods
+- ✅ Navigation integration (HomeView → Categories)
+- ✅ Comprehensive test coverage (30 tests)
+  - ✅ CategorySessionsViewModelTests (14 tests)
+  - ✅ CategorySessionGeneratorTests (16 tests)
+  - ✅ MockSessionRepository extension
+
+### 🚧 Partial / In Progress
+- 🚧 Full category browsing UI (basic grid view implemented)
+- 🚧 Category theming and branding
+- 🚧 Custom sounds integration
+- 🚧 Klangwelten navigation
+
+### ❌ Not Yet Implemented (from React Native app)
+- ❌ Category hero header with gradients
+- ❌ Airplane window sound card design
+- ❌ Sound grid virtualization
+- ❌ "Weitere Sessions" button
+- ❌ "Eigene Klangwelt" section
+- ❌ Backend category fetching (Firestore only, no Supabase)
+- ❌ Category selection persistence across app restarts
+- ❌ Bottom tab navigation between categories
 
 ## 📋 Feature Overview
 
@@ -145,22 +174,71 @@ The Category Screens system consists of:
 
 ## 🧪 Testing Considerations
 
-### Test Cases
-- Category screen rendering
-- Category navigation
-- Sound selection and playback
-- Favorites management
-- Custom sounds display
-- Klangwelten navigation
-- Category persistence
-- Backend data fetching and fallback
+### ✅ Implemented Tests (Swift iOS - Phase 1)
+
+**CategorySessionsViewModelTests** (14 tests):
+- ✅ loadSessions() with authenticated user and existing sessions
+- ✅ loadSessions() with authenticated user but empty Firestore
+- ✅ loadSessions() when not authenticated (offline mode)
+- ✅ loadSessions() when Firestore fails (error handling)
+- ✅ loadSessions() concurrent calls guard
+- ✅ generateSessions() when authenticated
+- ✅ generateSessions() when not authenticated
+- ✅ generateSessions() when save fails
+- ✅ generateSessions() concurrent calls guard
+- ✅ isLoading flag cleared on success
+- ✅ isLoading flag cleared on error
+- ✅ Error message set correctly (German)
+- ✅ Multiple categories use different sessions
+- ✅ Background save does not block UI
+
+**CategorySessionGeneratorTests** (16 tests):
+- ✅ Generates exactly 5 sessions for each category
+- ✅ Voice rotation cycles through all 4 voices correctly
+- ✅ Voice distribution balanced across sessions
+- ✅ Sleep category maps to sleep topic
+- ✅ Stress category maps to stress topic
+- ✅ Flow category maps to meditation topic
+- ✅ Sessions vary with different timestamps
+- ✅ All sessions have valid structure
+- ✅ Session IDs are unique within batch
+- ✅ Voice distribution even across multiple generations
+- ✅ SeededRandomNumberGenerator consistency
+- ✅ SeededRandomNumberGenerator different seeds
+- ✅ Expected phase structure
+- ✅ Text content paths include voice and topic
+- ✅ Performance test (< 3 seconds)
+- ✅ Reasonable durations
+
+### 🚧 Pending Tests (Phase 2 - Not Implemented)
+
+**Integration Tests** (5 tests):
+- ❌ End-to-end: Load → Display → Regenerate → Persist
+- ❌ Offline mode: Generate → Go online → Sync
+- ❌ User switches: Auth change during operation
+- ❌ Error recovery: Firestore fails → Retry succeeds
+- ❌ Data consistency: Sessions persist across app restarts
+
+**Repository Tests** (8 tests):
+- ❌ Fetch from nested collection path
+- ❌ Save batch operation atomicity
+- ❌ Delete batch operation completeness
+- ❌ Empty collection handling
+- ❌ Decode failure resilience
+- ❌ Batch commit failure rollback
+- ❌ Concurrent saves to same category
+- ❌ Timestamp consistency
 
 ### Edge Cases
-- Network connectivity issues
-- Empty category data
-- Missing sound metadata
-- Category selection persistence
-- Navigation state management
+- ✅ Network connectivity issues (tested with mock failures)
+- ✅ Empty category data (tested with empty Firestore)
+- ❌ Missing sound metadata
+- ❌ Category selection persistence
+- ❌ Navigation state management
+
+### Known Issues
+- 🔴 FirestoreSessionTracker conformance error (pre-existing, blocks test execution)
+- See: `TESTING_IMPLEMENTATION_SUMMARY.md` for details
 
 ---
 

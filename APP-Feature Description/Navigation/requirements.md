@@ -160,6 +160,35 @@
 - [x] Navigation state recovery on app launch (Implemented)
 - [x] State synchronization with backend (FirestoreUserRepository)
 
+### 7. Category Preference Management
+
+#### Category Selection UI
+- [x] Production UI for changing home category (CategorySelectionSheet)
+- [x] Category selection sheet with 3 options (Sleep/Stress/Flow)
+- [x] Current category highlighted in selection UI
+- [x] Toast confirmation on category change
+- [x] Tab switches to new category immediately
+- [x] Category change button in Profile settings
+
+#### Storage & Persistence
+- [x] Category saved to UserDefaults on selection (awaveSelectedCategory)
+- [x] Category persists across app restarts
+- [x] Tab switching auto-saves category preference
+- [x] Initial tab loaded from storage on app launch
+- [x] AppState.selectedCategory synced with storage
+
+#### Authentication Integration
+- [x] Sign-out clears all category data (reset to onboarding)
+- [x] Sign-out forces re-onboarding questionnaire
+- [ ] Sign-in restores category from backend (TODO: Backend implementation)
+- [ ] Registration transfers anonymous category to account (TODO: Backend implementation)
+- [ ] Category changes sync to backend for authenticated users (TODO: Backend implementation)
+
+#### Developer Features
+- [x] Reset onboarding button (DEBUG builds only)
+- [x] Reset keeps category, removes completed flag (resetToQuestionnaire)
+- [x] Dev-only category management tools
+
 ---
 
 ## 🎯 User Stories

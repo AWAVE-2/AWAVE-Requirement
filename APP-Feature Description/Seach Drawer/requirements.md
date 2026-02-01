@@ -19,8 +19,10 @@
 - [x] Drawer closes when X button is pressed
 - [x] Drawer closes when sound is selected
 - [x] Close animation is smooth (220ms duration)
-- [x] Search query is cleared on close
-- [x] Search results are cleared on close
+- [x] Search query is cleared on close ✅ **IMPLEMENTED with .onDisappear 2026-02-01**
+- [x] Search results are cleared on close ✅ **IMPLEMENTED with .onDisappear 2026-02-01**
+- [x] **Loading state cleared on close** ✅ **NEW - 2026-02-01**
+- [x] **Error messages cleared on close** ✅ **NEW - 2026-02-01**
 
 #### Header Section
 - [x] Header displays search icon with gradient background
@@ -94,6 +96,17 @@
 - [x] Empty state shows suggestions text
 - [x] Suggestions: "Versuche andere Begriffe wie 'regen', 'fokus' oder 'meditation'"
 
+#### Session Suggestion (When No Sound Results)
+- [x] Session suggestion displayed for zero-result searches ✅ **IMPLEMENTED 2026-02-01**
+- [x] Symptom finder determines suggested topic
+- [x] **Loading feedback during session generation** ✅ **NEW - 2026-02-01**
+- [x] **ProgressView spinner shown in play button** ✅ **NEW - 2026-02-01**
+- [x] **Button disabled during loading** ✅ **NEW - 2026-02-01**
+- [x] **Error handling with user-friendly message** ✅ **NEW - 2026-02-01**
+- [x] **Auto-play after successful load** ✅ **NEW - 2026-02-01**
+- [x] **Drawer dismisses only on success** ✅ **NEW - 2026-02-01**
+- [x] **Error message: "Session konnte nicht geladen werden"** ✅ **NEW - 2026-02-01**
+
 #### Results List
 - [x] Results displayed in scrollable list
 - [x] Results header shows count ("X passende Sounds gefunden")
@@ -115,33 +128,35 @@
 ### 5. SOS Trigger Detection
 
 #### SOS Detection
-- [ ] SOS config loaded from database on mount (Not implemented)
-- [ ] SOS keywords checked before search execution (Not implemented)
-- [ ] Query is checked against SOS keywords (case-insensitive) (Not implemented)
-- [ ] Keyword matching uses includes() method (Not implemented)
-- [ ] SOS trigger sets showSOSScreen state (Not implemented)
-- [ ] SOS trigger prevents normal search execution (Not implemented)
-- [ ] SOS trigger logs search analytics (0 results, sosTriggered: true) (Not implemented)
+- [x] SOS config loaded from database on mount ✅ **IMPLEMENTED 2026-02-01**
+- [x] SOS keywords checked **BEFORE** search execution (bypasses debounce) ✅ **IMPLEMENTED 2026-02-01**
+- [x] Query is checked against SOS keywords (case-insensitive) ✅ **IMPLEMENTED 2026-02-01**
+- [x] Keyword matching uses contains() method ✅ **IMPLEMENTED 2026-02-01**
+- [x] SOS trigger sets showSOSScreen state ✅ **IMPLEMENTED 2026-02-01**
+- [x] SOS trigger prevents normal search execution ✅ **IMPLEMENTED 2026-02-01**
+- [x] SOS trigger logs search analytics (0 results, sosTriggered: true) ✅ **IMPLEMENTED 2026-02-01**
+- [x] **German SOS keywords added**: "selbstmord", "suizid" ✅ **NEW - 2026-02-01**
+- [x] **Real-time trigger** (< 100ms, bypasses 300ms debounce) ✅ **NEW - 2026-02-01**
 
 #### SOS Navigation
-- [ ] SOS trigger calls onSOSTriggered callback (Not implemented)
-- [ ] SOS config is passed to parent (TabNavigator) (Not implemented)
-- [ ] Search drawer closes when SOS opens (Not implemented)
-- [ ] SOS drawer opens with higher z-index (300) (Not implemented)
-- [ ] Search drawer reopens when SOS closes (100ms delay) (Not implemented)
-- [ ] SOS state is cleared after trigger (Not implemented)
+- [x] SOS sheet opens via SwiftUI sheet presentation ✅ **IMPLEMENTED 2026-02-01**
+- [x] SOS config is displayed in SOS screen ✅ **IMPLEMENTED 2026-02-01**
+- [x] SOS drawer overlays search drawer (sheet over sheet) ✅ **IMPLEMENTED 2026-02-01**
+- [x] Search state preserved while SOS open ✅ **IMPLEMENTED 2026-02-01**
+- [x] Search drawer remains accessible after SOS closes ✅ **IMPLEMENTED 2026-02-01**
+- [x] SOS state is cleared after dismissal ✅ **IMPLEMENTED 2026-02-01**
 
 ### 6. Search Analytics
 
 #### Analytics Logging
-- [ ] All search queries are logged (Not implemented)
-- [ ] Logging includes user ID (if authenticated) (Not implemented)
-- [ ] Logging includes query text (Not implemented)
+- [x] All search queries are logged ✅ **IMPLEMENTED 2026-02-01**
+- [x] Logging includes user ID (if authenticated) ✅ **IMPLEMENTED 2026-02-01**
+- [x] Logging includes query text ✅ **IMPLEMENTED 2026-02-01**
 - [x] Logging includes results count
 - [x] Logging includes SOS trigger status
 - [x] Logging is asynchronous (non-blocking)
 - [x] Logging errors are handled gracefully
-- [x] Analytics stored in search_analytics table
+- [x] Analytics stored in Firestore search_analytics collection
 
 #### Analytics Data
 - [x] User ID (nullable for anonymous)
@@ -160,9 +175,9 @@
 - [x] Navigation stacking is handled correctly
 
 #### Drawer Coordination
-- [x] Search drawer z-index is 200
-- [x] SOS drawer z-index is 300 (overlays search)
-- [x] Library modal uses formSheet presentation
+- [x] Search drawer uses SwiftUI sheet presentation
+- [x] SOS drawer overlays search via nested sheet ✅ **IMPLEMENTED 2026-02-01**
+- [x] Sheet stacking works correctly (SOS over Search)
 - [x] Drawers don't interfere with each other
 - [x] Smooth transitions between drawers
 
