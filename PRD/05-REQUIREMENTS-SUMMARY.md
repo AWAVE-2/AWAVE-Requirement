@@ -12,6 +12,7 @@
 | 03 | `03-DATA-MODELS.swift` | Swift data models (how data is structured) |
 | 04 | `04-AUDIO-ARCHITECTURE.md` | Audio engine design (how sound works) |
 | 05 | `05-REQUIREMENTS-SUMMARY.md` | This document (overview + roadmap) |
+| 06 | `06-PROJECT-INTEGRATION-PLAN.md` | Project integration plan (Done / Open ToDo, EPICs, links to all requirements) |
 
 ---
 
