@@ -70,16 +70,16 @@
 ### 4. State Management
 
 #### Local Storage
-- [x] Save onboarding completion flag
-- [x] Save onboarding profile data (JSON)
-- [x] Save selected category preference
-- [x] Load onboarding state on app start
-- [x] Clear onboarding flags (reset functionality)
-- [x] Reset to questionnaire only (keep profile, remove completion)
+- [x] Save onboarding completion flag (OnboardingStorageService)
+- [x] Save onboarding profile data (JSON) (OnboardingStorageService)
+- [x] Save selected category preference (OnboardingStorageService)
+- [x] Load onboarding state on app start (OnboardingStorageService)
+- [x] Clear onboarding flags (reset functionality) (OnboardingStorageService)
+- [x] Reset to questionnaire only (keep profile, remove completion) (OnboardingStorageService)
 
 #### Backend Sync
-- [x] Sync onboarding data for authenticated users
-- [x] Update user profile with:
+- [x] Sync onboarding data for authenticated users (FirestoreUserRepository)
+- [x] Update user profile with: (FirestoreUserRepository)
   - `onboarding_completed: true`
   - `onboarding_category_preference: selectedChoice`
   - `onboarding_data` object with steps and preferences

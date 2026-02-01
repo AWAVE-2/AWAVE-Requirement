@@ -61,10 +61,10 @@
 ### 4. State Management
 
 #### Sound State
-- [x] Track `lastPlayedSound` from `useSoundPlayer`
-- [x] Display sound information when available
-- [x] Hide component when sound is null
-- [x] Update when sound changes
+- [ ] Track `lastPlayedSound` from `useSoundPlayer` (Not applicable - React hook, not in Swift)
+- [x] Display sound information when available (Implemented)
+- [x] Hide component when sound is null (Implemented)
+- [x] Update when sound changes (Implemented)
 
 #### Playback State
 - [x] Integrate with audio playback service
@@ -72,10 +72,10 @@
 - [x] Handle play/pause state transitions
 
 #### Persistence
-- [x] Save last played sound to local storage
-- [x] Restore last played sound on app restart
-- [x] Sync with Supabase for authenticated users
-- [x] Clear state on explicit close
+- [ ] Save last played sound to local storage (Not implemented)
+- [ ] Restore last played sound on app restart (Not implemented)
+- [ ] Sync with Supabase for authenticated users (Not applicable - app uses Firebase)
+- [x] Clear state on explicit close (Implemented)
 
 ### 5. Integration
 
@@ -138,7 +138,7 @@
 
 ### State Management
 - [x] Last played sound persists across app restarts
-- [x] State syncs with Supabase for authenticated users
+- [ ] State syncs with Supabase for authenticated users (Not applicable - app uses Firebase)
 - [x] State clears on explicit close action
 - [x] State updates correctly when new sound is selected
 
@@ -188,7 +188,7 @@
 
 ### Network Issues
 - [x] Continue working offline (local state)
-- [x] Queue Supabase sync for when online
+- [ ] Queue Supabase sync for when online (Not applicable - app uses Firebase)
 - [x] Handle sync failures gracefully
 - [x] Show appropriate error states
 

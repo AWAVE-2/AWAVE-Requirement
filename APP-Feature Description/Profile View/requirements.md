@@ -153,10 +153,10 @@
 - [x] Error handling for sync failures
 
 #### Settings Persistence
-- [x] Load settings from AsyncStorage on mount
-- [x] Sync with backend preferences
-- [x] Handle external prop updates
-- [x] Loading state during initialization
+- [ ] Load settings from AsyncStorage on mount (Not applicable - app uses Swift, not React Native)
+- [ ] Sync with backend preferences (Not implemented)
+- [ ] Handle external prop updates (Not applicable - Swift uses @Observable, not props)
+- [ ] Loading state during initialization (Not implemented)
 
 ---
 
@@ -256,10 +256,10 @@
 - [x] Local storage persistence
 
 #### Save Preferences
-- [x] Save button
-- [x] Persist to AsyncStorage
-- [x] Success confirmation
-- [x] Error handling
+- [ ] Save button (Not implemented)
+- [ ] Persist to AsyncStorage (Not applicable - app uses Swift, not React Native)
+- [ ] Success confirmation (Not implemented)
+- [ ] Error handling (Not implemented)
 
 ---
 

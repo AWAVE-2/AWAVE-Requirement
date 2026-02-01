@@ -393,7 +393,7 @@
 - [x] Smooth animation cancellation
 - [x] State cleanup on component unmount
 - [x] Animation reset on prop changes
-- [x] Proper cleanup in useEffect
+- [ ] Proper cleanup in useEffect (Not applicable - React hook, Swift uses onDisappear/deinit)
 
 ### Accessibility
 - [x] Reduced motion support

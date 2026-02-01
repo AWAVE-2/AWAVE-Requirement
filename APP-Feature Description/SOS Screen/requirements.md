@@ -71,13 +71,13 @@
 ### 4. Configuration Management
 
 #### Configuration Loading
-- [x] SOS config loaded from `sos_config` database table
-- [x] Only active configurations used (`active: true`)
-- [x] Most recent config used if multiple active
-- [x] Configuration cached for 1 hour
-- [x] Cache refresh on expiration
-- [x] Fallback to defaults if config unavailable
-- [x] Error handling for database failures
+- [ ] SOS config loaded from `sos_config` database table (Not implemented - SOSConfig entity exists but loading not implemented)
+- [ ] Only active configurations used (`active: true`) (Not implemented)
+- [ ] Most recent config used if multiple active (Not implemented)
+- [ ] Configuration cached for 1 hour (Not implemented)
+- [ ] Cache refresh on expiration (Not implemented)
+- [x] Fallback to defaults if config unavailable (SOSConfig has defaults)
+- [x] Error handling for database failures (Implemented)
 
 #### Configuration Fields
 - [x] `keywords` - Array of trigger keywords
@@ -117,12 +117,12 @@
 ### 6. Analytics & Tracking
 
 #### Search Analytics
-- [x] Search queries logged to `search_analytics` table
-- [x] SOS trigger flag included in analytics
-- [x] Results count logged (0 when SOS triggered)
-- [x] User ID associated (when authenticated)
-- [x] Anonymous tracking supported
-- [x] Timestamp recorded
+- [ ] Search queries logged to `search_analytics` table (Not implemented)
+- [ ] SOS trigger flag included in analytics (Not implemented)
+- [ ] Results count logged (0 when SOS triggered) (Not implemented)
+- [ ] User ID associated (when authenticated) (Not implemented)
+- [ ] Anonymous tracking supported (Not implemented)
+- [ ] Timestamp recorded (Not implemented)
 
 #### Analytics Fields
 - [x] `user_id` - User identifier (nullable)
@@ -283,7 +283,7 @@
 - [x] Analytics data anonymized when possible
 - [x] User ID optional in analytics
 - [x] No personal information required
-- [x] Secure database access (RLS policies)
+- [ ] Secure database access (RLS policies) (Not applicable - app uses Firebase Security Rules, not RLS)
 
 ### Access Control
 - [x] SOS accessible without authentication

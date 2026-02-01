@@ -107,30 +107,30 @@
 ### 5. Offline Support
 
 #### Local Storage
-- [x] Store favorites locally when offline
-- [x] Load favorites from local storage when offline
-- [x] Sync local favorites to backend on authentication
-- [x] Merge local and remote favorites on sync
+- [ ] Store favorites locally when offline (Not implemented - uses Firestore)
+- [ ] Load favorites from local storage when offline (Not implemented - uses Firestore)
+- [ ] Sync local favorites to backend on authentication (Not implemented)
+- [ ] Merge local and remote favorites on sync (Not implemented)
 
 #### Fallback Behavior
-- [x] Use local storage for unauthenticated users
-- [x] Graceful degradation when offline
-- [x] Queue operations for sync when online
-- [x] Conflict resolution (server wins)
+- [ ] Use local storage for unauthenticated users (Not implemented)
+- [x] Graceful degradation when offline (Implemented)
+- [ ] Queue operations for sync when online (Not implemented)
+- [ ] Conflict resolution (server wins) (Not implemented)
 
 ### 6. Real-time Synchronization
 
 #### Backend Sync
-- [x] Load favorites from Supabase on app start
-- [x] Refresh favorites after add/remove operations
-- [x] Sync favorites across devices
-- [x] Handle sync conflicts
+- [ ] Load favorites from Supabase on app start (Not applicable - uses FirestoreFavoritesRepository)
+- [x] Refresh favorites after add/remove operations (FirestoreFavoritesRepository)
+- [ ] Sync favorites across devices (Not implemented)
+- [ ] Handle sync conflicts (Not implemented)
 
 #### State Management
-- [x] Maintain favorites state in hook
-- [x] Update state optimistically
-- [x] Revert state on error
-- [x] Refresh state after operations
+- [ ] Maintain favorites state in hook (Not applicable - React hook, Swift uses @Observable)
+- [x] Update state optimistically (Implemented)
+- [x] Revert state on error (Implemented)
+- [x] Refresh state after operations (FirestoreFavoritesRepository)
 
 ---
 
@@ -190,10 +190,10 @@
 - [x] Updates persist after app restart
 
 ### Offline Support
-- [x] Favorites accessible when offline
-- [x] Add/remove works offline
-- [x] Changes sync when online
-- [x] No data loss during offline period
+- [ ] Favorites accessible when offline (Not implemented - requires Firestore offline persistence)
+- [ ] Add/remove works offline (Not implemented)
+- [ ] Changes sync when online (Not implemented)
+- [ ] No data loss during offline period (Not implemented)
 
 ---
 
@@ -232,11 +232,11 @@
 ## 🔄 Edge Cases
 
 ### Network Issues
-- [x] Offline detection before operations
-- [x] Queue operations for sync when online
-- [x] User-friendly error messages
-- [x] Retry capability
-- [x] Network status display
+- [x] Offline detection before operations (Implemented)
+- [ ] Queue operations for sync when online (Not implemented)
+- [x] User-friendly error messages (Implemented)
+- [ ] Retry capability (Not implemented)
+- [ ] Network status display (Not implemented)
 
 ### Invalid Data
 - [x] Missing sound ID handling
@@ -246,11 +246,11 @@
 - [x] Error logging for debugging
 
 ### Authentication Issues
-- [x] Check authentication before backend operations
-- [x] Fallback to local storage when unauthenticated
-- [x] Sync on authentication
-- [x] Handle expired sessions
-- [x] Clear favorites on sign out
+- [x] Check authentication before backend operations (Implemented)
+- [ ] Fallback to local storage when unauthenticated (Not implemented)
+- [ ] Sync on authentication (Not implemented)
+- [x] Handle expired sessions (Firebase Auth handles)
+- [ ] Clear favorites on sign out (Not implemented)
 
 ### Large Datasets
 - [x] Efficient loading of large favorite lists
@@ -304,28 +304,28 @@
 ## 🧪 Testing Requirements
 
 ### Unit Tests
-- [x] Add favorite functionality
-- [x] Remove favorite functionality
-- [x] Usage tracking updates
-- [x] Local storage operations
-- [x] Data mapping functions
+- [x] Add favorite functionality (Implemented)
+- [x] Remove favorite functionality (Implemented)
+- [ ] Usage tracking updates (Not implemented)
+- [ ] Local storage operations (Not applicable - uses Firestore)
+- [x] Data mapping functions (Implemented)
 
 ### Integration Tests
-- [x] Backend API calls
-- [x] Local storage sync
-- [x] State management
-- [x] Error handling
-- [x] Authentication flow
+- [x] Backend API calls (FirestoreFavoritesRepository)
+- [ ] Local storage sync (Not implemented)
+- [x] State management (Implemented)
+- [x] Error handling (Implemented)
+- [x] Authentication flow (Implemented)
 
 ### E2E Tests
-- [x] Complete add favorite flow
-- [x] Complete remove favorite flow
-- [x] View favorites list
-- [x] Filter favorites
-- [x] Search favorites
-- [x] Usage tracking flow
-- [x] Offline operations
-- [x] Sync after authentication
+- [x] Complete add favorite flow (Implemented)
+- [x] Complete remove favorite flow (Implemented)
+- [x] View favorites list (Implemented)
+- [x] Filter favorites (Implemented)
+- [x] Search favorites (Implemented)
+- [ ] Usage tracking flow (Not implemented)
+- [ ] Offline operations (Not implemented)
+- [ ] Sync after authentication (Not implemented)
 
 ---
 

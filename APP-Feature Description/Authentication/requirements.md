@@ -25,30 +25,30 @@
 ### 2. OAuth Authentication
 
 #### Google Sign-In
-- [x] Google Sign-In button available
-- [x] Native Google authentication flow
-- [x] Google Play Services availability check (Android)
-- [x] User profile data extraction (email, name, avatar)
-- [x] Automatic profile creation in Supabase
-- [x] Error handling for cancelled/failed authentication
-- [x] Configuration check (warns if credentials not set)
+- [ ] Google Sign-In button available (Not implemented)
+- [ ] Native Google authentication flow (Not implemented)
+- [ ] Google Play Services availability check (Android) (Not implemented)
+- [ ] User profile data extraction (email, name, avatar) (Not implemented)
+- [ ] Automatic profile creation in Supabase (Not implemented - app uses Firebase)
+- [ ] Error handling for cancelled/failed authentication (Not implemented)
+- [ ] Configuration check (warns if credentials not set) (Not implemented)
 
 #### Apple Sign-In
-- [x] Apple Sign-In button available (iOS only)
-- [x] Native Apple authentication flow
-- [x] Device support check
-- [x] User profile data extraction (email, name)
-- [x] Private relay email handling
-- [x] Automatic profile creation in Supabase
-- [x] Error handling for cancelled/failed authentication
+- [x] Apple Sign-In button available (iOS only) (AppleSignInHelper implemented)
+- [x] Native Apple authentication flow (AppleSignInHelper implemented)
+- [x] Device support check (Implemented)
+- [x] User profile data extraction (email, name) (AppleSignInHelper implemented)
+- [ ] Private relay email handling (Not fully implemented)
+- [ ] Automatic profile creation in Supabase (Not implemented - app uses Firebase, profile creation exists)
+- [x] Error handling for cancelled/failed authentication (AppleSignInHelper implemented)
 
 #### OAuth Profile Creation
-- [x] User profile created automatically after OAuth success
-- [x] Display name set from OAuth provider
-- [x] Avatar URL stored if available
-- [x] Registration flow state set to 'trial_active'
-- [x] Onboarding marked as completed
-- [x] Trial subscription creation if plan was selected
+- [x] User profile created automatically after OAuth success (FirestoreUserRepository)
+- [x] Display name set from OAuth provider (Implemented)
+- [ ] Avatar URL stored if available (Not implemented)
+- [ ] Registration flow state set to 'trial_active' (Not implemented)
+- [ ] Onboarding marked as completed (Not implemented)
+- [ ] Trial subscription creation if plan was selected (Not implemented)
 
 ### 3. Email Verification
 
@@ -76,22 +76,22 @@
 ### 4. Password Management
 
 #### Forgot Password
-- [x] Email input for password reset request
-- [x] Email format validation
-- [x] Reset link email sent to user
-- [x] Success confirmation
-- [x] Resend functionality with cooldown
-- [x] Error handling
+- [ ] Email input for password reset request (Not implemented)
+- [ ] Email format validation (Not implemented)
+- [ ] Reset link email sent to user (Not implemented - Firebase Auth supports this but UI not implemented)
+- [ ] Success confirmation (Not implemented)
+- [ ] Resend functionality with cooldown (Not implemented)
+- [ ] Error handling (Not implemented)
 
 #### Reset Password
-- [x] Deep link handling for reset link
-- [x] New password input with visibility toggle
-- [x] Password confirmation field
-- [x] Real-time password strength validation
-- [x] Password match validation
-- [x] Password strength requirements enforcement
-- [x] Success confirmation and navigation
-- [x] Error handling for expired/invalid links
+- [ ] Deep link handling for reset link (Not implemented)
+- [ ] New password input with visibility toggle (Not implemented)
+- [ ] Password confirmation field (Not implemented)
+- [ ] Real-time password strength validation (Not implemented)
+- [ ] Password match validation (Not implemented)
+- [ ] Password strength requirements enforcement (Not implemented)
+- [ ] Success confirmation and navigation (Not implemented)
+- [ ] Error handling for expired/invalid links (Not implemented)
 
 ### 5. Session Management
 
@@ -102,11 +102,11 @@
 - [x] Onboarding data synced from local storage
 
 #### Session Refresh
-- [x] Automatic token refresh before expiry (5 min threshold)
-- [x] Background refresh monitoring (every minute)
-- [x] Manual refresh capability
-- [x] Refresh listener system for components
-- [x] Error handling for refresh failures
+- [x] Automatic token refresh before expiry (Firebase Auth handles automatically)
+- [ ] Background refresh monitoring (every minute) (Not implemented - Firebase handles automatically)
+- [ ] Manual refresh capability (Not implemented)
+- [ ] Refresh listener system for components (Not implemented - Firebase authStateChanges used)
+- [x] Error handling for refresh failures (Firebase Auth handles)
 
 #### Session Expiry
 - [x] Session expiry detection
@@ -115,26 +115,26 @@
 - [x] Navigation to auth screen on expiry
 
 #### Multi-Device Support
-- [x] Device ID generation and storage
-- [x] Session info tracking (device, platform, last active)
-- [x] Current session info retrieval
-- [x] Session revocation capability (future: multi-device management)
+- [ ] Device ID generation and storage (Not implemented)
+- [ ] Session info tracking (device, platform, last active) (Not implemented)
+- [ ] Current session info retrieval (Not implemented)
+- [ ] Session revocation capability (future: multi-device management) (Not implemented)
 
 ### 6. Registration Flow Integration
 
 #### Registration Cache
-- [x] Cache sound selection before authentication
-- [x] Cache category selection before authentication
-- [x] Cache navigation target
-- [x] 30-minute cache expiration
-- [x] Cache retrieval after authentication
-- [x] Cache clearing after use
+- [ ] Cache sound selection before authentication (Not implemented)
+- [ ] Cache category selection before authentication (Not implemented)
+- [ ] Cache navigation target (Not implemented)
+- [ ] 30-minute cache expiration (Not implemented)
+- [ ] Cache retrieval after authentication (Not implemented)
+- [ ] Cache clearing after use (Not implemented)
 
 #### Onboarding Integration
-- [x] Category preference saved during signup
-- [x] Onboarding profile data synced to backend
-- [x] Onboarding completion status tracked
-- [x] Trial subscription creation if plan selected
+- [x] Category preference saved during signup (OnboardingStorageService)
+- [x] Onboarding profile data synced to backend (FirestoreUserRepository)
+- [x] Onboarding completion status tracked (OnboardingStorageService)
+- [ ] Trial subscription creation if plan selected (Not implemented)
 
 ---
 

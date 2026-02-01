@@ -123,28 +123,28 @@
 ### 3. Discount System
 
 #### Shake Discount
-- [x] Accelerometer sensor integration
-- [x] Shake detection threshold (speed > 15)
-- [x] 20% discount calculation
-- [x] Discount activation feedback
-- [x] Discount status storage (AsyncStorage)
-- [x] Discount persistence across sessions
-- [x] Price updates with discount applied
-- [x] Visual indicator when discount active
-- [x] Fallback for simulators
+- [x] Accelerometer sensor integration (ShakeDetector implemented)
+- [x] Shake detection threshold (speed > 15) (ShakeDetector implemented)
+- [x] 20% discount calculation (SubscriptionViewModel implemented)
+- [x] Discount activation feedback (Implemented)
+- [ ] Discount status storage (AsyncStorage) (Not applicable - uses SalesStorageService with UserDefaults)
+- [x] Discount persistence across sessions (SalesStorageService)
+- [x] Price updates with discount applied (SubscriptionViewModel)
+- [x] Visual indicator when discount active (DiscountBanner implemented)
+- [x] Fallback for simulators (ShakeDetector implemented)
 
 #### Downsell Discount
-- [x] 30% additional discount calculation
-- [x] Applied to all plans on downsell screen
-- [x] Combined with base plan discounts
-- [x] Price recalculation
-- [x] Visual indication of downsell pricing
+- [x] 30% additional discount calculation (DownsellViewModel implemented)
+- [x] Applied to all plans on downsell screen (Implemented)
+- [x] Combined with base plan discounts (Implemented)
+- [x] Price recalculation (Implemented)
+- [x] Visual indication of downsell pricing (Implemented)
 
 #### Discount Persistence
-- [x] Discount status saved to AsyncStorage
-- [x] Discount status retrieved on screen load
-- [x] Discount applied automatically if previously activated
-- [x] Discount cleared after successful purchase (optional)
+- [ ] Discount status saved to AsyncStorage (Not applicable - uses SalesStorageService with UserDefaults)
+- [x] Discount status retrieved on screen load (SalesStorageService)
+- [x] Discount applied automatically if previously activated (SalesStorageService)
+- [x] Discount cleared after successful purchase (optional) (SalesStorageService.clearSalesData)
 
 ---
 
@@ -282,11 +282,11 @@
 - [x] Purchase flow works same as SubscribeScreen
 
 ### Discount System
-- [x] Shake discount applies 20% to all prices
-- [x] Downsell discount applies 30% to all prices
-- [x] Discounts combine correctly (base + additional)
-- [x] Discount status persists in AsyncStorage
-- [x] Discount visual feedback is clear
+- [x] Shake discount applies 20% to all prices (Implemented)
+- [x] Downsell discount applies 30% to all prices (Implemented)
+- [x] Discounts combine correctly (base + additional) (Implemented)
+- [ ] Discount status persists in AsyncStorage (Not applicable - uses SalesStorageService with UserDefaults)
+- [x] Discount visual feedback is clear (Implemented)
 
 ### Trust Elements
 - [x] All trust elements display correctly

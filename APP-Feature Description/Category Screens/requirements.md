@@ -58,12 +58,12 @@
 ### 4. Category Data Management
 
 #### Data Fetching
-- [x] Backend category fetching via Supabase
-- [x] Fallback to local category data
-- [x] Sound metadata fetching
-- [x] Category metadata fetching
-- [x] Error handling for network failures
-- [x] Loading states during data fetch
+- [ ] Backend category fetching via Supabase (Not applicable - uses FirestoreSoundRepository)
+- [x] Fallback to local category data (Implemented)
+- [x] Sound metadata fetching (FirestoreSoundRepository)
+- [x] Category metadata fetching (FirestoreSoundRepository)
+- [x] Error handling for network failures (Implemented)
+- [x] Loading states during data fetch (Implemented)
 
 #### Data Structure
 - [x] Category interface with sounds array
@@ -75,12 +75,12 @@
 ### 5. Category Context Management
 
 #### State Management
-- [x] Global category context (CategoryContext)
-- [x] Selected category tracking
-- [x] Ordered categories array
-- [x] Category selection handler
-- [x] Category refresh functionality
-- [x] Loading state management
+- [ ] Global category context (CategoryContext) (Not applicable - React Context, Swift uses @Observable)
+- [x] Selected category tracking (Implemented)
+- [x] Ordered categories array (Implemented)
+- [x] Category selection handler (Implemented)
+- [x] Category refresh functionality (Implemented)
+- [x] Loading state management (Implemented)
 
 #### Persistence
 - [x] Category selection saved to onboarding storage

@@ -60,24 +60,24 @@
 - [x] Search normalizes query (lowercase)
 
 #### Search Execution
-- [x] Search calls Supabase backend (ProductionBackendService.searchSounds)
-- [x] Search queries multiple fields (title, keywords, tags)
-- [x] Search uses ILIKE for case-insensitive matching
-- [x] Search uses array contains (cs) for keywords/tags
-- [x] Search results are ordered by search_weight
-- [x] Search handles network errors gracefully
-- [x] Search shows loading state during execution
+- [ ] Search calls Supabase backend (ProductionBackendService.searchSounds) (Not applicable - uses FirestoreSoundRepository)
+- [x] Search queries multiple fields (title, keywords, tags) (FirestoreSoundRepository.searchSounds - client-side)
+- [ ] Search uses ILIKE for case-insensitive matching (Not applicable - uses client-side filtering)
+- [ ] Search uses array contains (cs) for keywords/tags (Not applicable - uses client-side filtering)
+- [ ] Search results are ordered by search_weight (Not implemented)
+- [x] Search handles network errors gracefully (Implemented)
+- [x] Search shows loading state during execution (Implemented)
 
 #### Result Processing
-- [x] Results are scored for relevance (client-side)
-- [x] Title matches score 10 points
-- [x] Keyword matches score 5 points each
-- [x] Tag matches score 3 points each
-- [x] Description matches score 2 points
-- [x] Search weight multiplies final score
-- [x] Results are sorted by score (descending)
-- [x] Results are limited to top 6
-- [x] Results are filtered (score > 0)
+- [x] Results are scored for relevance (client-side) (Implemented)
+- [ ] Title matches score 10 points (Not implemented - basic filtering only)
+- [ ] Keyword matches score 5 points each (Not implemented)
+- [ ] Tag matches score 3 points each (Not implemented)
+- [ ] Description matches score 2 points (Not implemented)
+- [ ] Search weight multiplies final score (Not implemented)
+- [ ] Results are sorted by score (descending) (Not implemented)
+- [ ] Results are limited to top 6 (Not implemented)
+- [x] Results are filtered (score > 0) (Implemented - basic filtering)
 
 ### 4. Search Results Display
 
@@ -115,28 +115,28 @@
 ### 5. SOS Trigger Detection
 
 #### SOS Detection
-- [x] SOS config loaded from database on mount
-- [x] SOS keywords checked before search execution
-- [x] Query is checked against SOS keywords (case-insensitive)
-- [x] Keyword matching uses includes() method
-- [x] SOS trigger sets showSOSScreen state
-- [x] SOS trigger prevents normal search execution
-- [x] SOS trigger logs search analytics (0 results, sosTriggered: true)
+- [ ] SOS config loaded from database on mount (Not implemented)
+- [ ] SOS keywords checked before search execution (Not implemented)
+- [ ] Query is checked against SOS keywords (case-insensitive) (Not implemented)
+- [ ] Keyword matching uses includes() method (Not implemented)
+- [ ] SOS trigger sets showSOSScreen state (Not implemented)
+- [ ] SOS trigger prevents normal search execution (Not implemented)
+- [ ] SOS trigger logs search analytics (0 results, sosTriggered: true) (Not implemented)
 
 #### SOS Navigation
-- [x] SOS trigger calls onSOSTriggered callback
-- [x] SOS config is passed to parent (TabNavigator)
-- [x] Search drawer closes when SOS opens
-- [x] SOS drawer opens with higher z-index (300)
-- [x] Search drawer reopens when SOS closes (100ms delay)
-- [x] SOS state is cleared after trigger
+- [ ] SOS trigger calls onSOSTriggered callback (Not implemented)
+- [ ] SOS config is passed to parent (TabNavigator) (Not implemented)
+- [ ] Search drawer closes when SOS opens (Not implemented)
+- [ ] SOS drawer opens with higher z-index (300) (Not implemented)
+- [ ] Search drawer reopens when SOS closes (100ms delay) (Not implemented)
+- [ ] SOS state is cleared after trigger (Not implemented)
 
 ### 6. Search Analytics
 
 #### Analytics Logging
-- [x] All search queries are logged
-- [x] Logging includes user ID (if authenticated)
-- [x] Logging includes query text
+- [ ] All search queries are logged (Not implemented)
+- [ ] Logging includes user ID (if authenticated) (Not implemented)
+- [ ] Logging includes query text (Not implemented)
 - [x] Logging includes results count
 - [x] Logging includes SOS trigger status
 - [x] Logging is asynchronous (non-blocking)
@@ -310,11 +310,11 @@
 - [x] Analytics comply with privacy regulations
 
 ### Security
-- [x] Input sanitization (trim, normalize)
-- [x] SQL injection prevention (Supabase parameterized queries)
-- [x] XSS prevention (React Native safe rendering)
-- [x] Rate limiting (via debounce)
-- [x] Error messages don't expose system details
+- [x] Input sanitization (trim, normalize) (Implemented)
+- [ ] SQL injection prevention (Supabase parameterized queries) (Not applicable - uses Firestore, not SQL)
+- [x] XSS prevention (SwiftUI safe rendering) (Implemented)
+- [x] Rate limiting (via debounce) (Implemented)
+- [x] Error messages don't expose system details (Implemented)
 
 ---
 
@@ -328,11 +328,11 @@
 - [x] Result limiting
 
 ### Integration Tests
-- [x] Supabase search integration
-- [x] SOS config loading
-- [x] Analytics logging
-- [x] Navigation flows
-- [x] Drawer animations
+- [ ] Supabase search integration (Not applicable - uses Firestore)
+- [ ] SOS config loading (Not implemented)
+- [ ] Analytics logging (Not implemented)
+- [x] Navigation flows (Implemented)
+- [x] Drawer animations (Implemented)
 
 ### E2E Tests
 - [x] Complete search flow

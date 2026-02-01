@@ -5,171 +5,171 @@
 ### 1. Supabase Client Configuration
 
 #### Client Initialization
-- [x] Supabase client configured with production credentials
-- [x] Production URL: `https://api.dripin.ai`
-- [x] Anon key configured from environment variables
-- [x] Isolated storage adapter for session management
-- [x] Automatic token refresh enabled
-- [x] PKCE flow for secure authentication
-- [x] Realtime WebSocket connection configured
-- [x] Custom headers for client identification
+- [ ] Supabase client configured with production credentials (Not applicable - app uses Firebase, not Supabase)
+- [ ] Production URL: `https://api.dripin.ai` (Not applicable - app uses Firebase)
+- [ ] Anon key configured from environment variables (Not applicable - app uses Firebase)
+- [ ] Isolated storage adapter for session management (Not applicable - app uses Firebase)
+- [ ] Automatic token refresh enabled (Not applicable - Firebase Auth handles automatically)
+- [ ] PKCE flow for secure authentication (Not applicable - Firebase Auth)
+- [ ] Realtime WebSocket connection configured (Not implemented)
+- [ ] Custom headers for client identification (Not applicable)
 
 #### Storage Isolation
-- [x] Supabase session stored separately from app data
-- [x] Storage key prefix: `awave.dev.supabase.`
-- [x] No conflicts with AWAVE Advanced storage
-- [x] Session persistence across app restarts
-- [x] Automatic session recovery
+- [ ] Supabase session stored separately from app data (Not applicable - app uses Firebase)
+- [ ] Storage key prefix: `awave.dev.supabase.` (Not applicable)
+- [ ] No conflicts with AWAVE Advanced storage (Not applicable)
+- [ ] Session persistence across app restarts (Firebase Auth handles)
+- [ ] Automatic session recovery (Firebase Auth handles)
 
 #### Connection Management
-- [x] Connection health check functionality
-- [x] Error handling for connection failures
-- [x] Automatic reconnection on failure
-- [x] Connection state tracking
-- [x] Timeout handling
+- [ ] Connection health check functionality (Not implemented)
+- [x] Error handling for connection failures (Implemented)
+- [ ] Automatic reconnection on failure (Not implemented)
+- [ ] Connection state tracking (Not implemented)
+- [ ] Timeout handling (Firebase SDK handles)
 
 ### 2. Database Tables & Schema
 
 #### Core Tables
-- [x] `user_profiles` table with all required fields
-- [x] `user_sessions` table for session tracking
-- [x] `user_favorites` table for favorites management
-- [x] `subscriptions` table for subscription data
-- [x] `sound_metadata` table for audio catalog
-- [x] `custom_sound_sessions` table for custom mixes
-- [x] `notification_preferences` table for settings
-- [x] `app_usage_analytics` table for analytics
-- [x] `search_analytics` table for search tracking
-- [x] `notification_logs` table for notification history
-- [x] `sos_config` table for SOS configuration
+- [ ] `user_profiles` table with all required fields (Not applicable - app uses Firestore `users` collection)
+- [ ] `user_sessions` table for session tracking (Not applicable - app uses Firestore `sessions` collection)
+- [ ] `user_favorites` table for favorites management (Not applicable - app uses Firestore `favorites` collection)
+- [ ] `subscriptions` table for subscription data (Not applicable - app uses StoreKit, not database)
+- [ ] `sound_metadata` table for audio catalog (Not applicable - app uses Firestore `sounds` collection)
+- [ ] `custom_sound_sessions` table for custom mixes (Not applicable - app uses Firestore `users/{userId}/mixes` subcollection)
+- [ ] `notification_preferences` table for settings (Not implemented)
+- [ ] `app_usage_analytics` table for analytics (Not implemented)
+- [ ] `search_analytics` table for search tracking (Not implemented)
+- [ ] `notification_logs` table for notification history (Not implemented)
+- [ ] `sos_config` table for SOS configuration (Not implemented)
 
 #### Schema Features
-- [x] UUID primary keys on all tables
-- [x] Foreign key relationships
-- [x] JSONB fields for flexible data
-- [x] Automatic timestamps (created_at, updated_at)
-- [x] Indexes on frequently queried columns
-- [x] Unique constraints where needed
-- [x] Default values for optional fields
+- [x] UUID primary keys on all tables (Firestore uses document IDs)
+- [x] Foreign key relationships (Firestore references)
+- [x] JSONB fields for flexible data (Firestore supports nested objects)
+- [x] Automatic timestamps (created_at, updated_at) (Firestore timestamps)
+- [x] Indexes on frequently queried columns (Firestore indexes)
+- [x] Unique constraints where needed (Firestore rules)
+- [x] Default values for optional fields (Implemented)
 
 ### 3. Row-Level Security (RLS)
 
 #### RLS Policies
-- [x] RLS enabled on all user tables
-- [x] User data isolation by user_id
-- [x] Public read access for sound_metadata
-- [x] Public read access for sos_config
-- [x] Authenticated write access for user data
-- [x] Admin-only access for system tables
-- [x] Policy testing and validation
+- [ ] RLS enabled on all user tables (Not applicable - app uses Firebase Security Rules, not RLS)
+- [x] User data isolation by user_id (Firebase Security Rules)
+- [x] Public read access for sound_metadata (Firebase Security Rules)
+- [ ] Public read access for sos_config (Not implemented)
+- [x] Authenticated write access for user data (Firebase Security Rules)
+- [ ] Admin-only access for system tables (Not implemented)
+- [ ] Policy testing and validation (Not implemented)
 
 #### Security Features
-- [x] Users can only read their own data
-- [x] Users can only update their own data
-- [x] Users can only delete their own data
-- [x] No cross-user data access possible
-- [x] System tables protected from user access
+- [x] Users can only read their own data (Firebase Security Rules)
+- [x] Users can only update their own data (Firebase Security Rules)
+- [x] Users can only delete their own data (Firebase Security Rules)
+- [x] No cross-user data access possible (Firebase Security Rules)
+- [ ] System tables protected from user access (Not implemented)
 
 ### 4. Real-Time Subscriptions
 
 #### Subscription Setup
-- [x] Real-time subscriptions for user_profiles
-- [x] Real-time subscriptions for user_favorites
-- [x] Real-time subscriptions for user_sessions
-- [x] Real-time subscriptions for subscriptions
-- [x] Real-time subscriptions for custom_sound_sessions
-- [x] Real-time subscriptions for sound_metadata
-- [x] Automatic reconnection on failure
-- [x] Channel cleanup on unmount
+- [ ] Real-time subscriptions for user_profiles (Not implemented)
+- [ ] Real-time subscriptions for user_favorites (Not implemented)
+- [ ] Real-time subscriptions for user_sessions (Not implemented)
+- [ ] Real-time subscriptions for subscriptions (Not implemented)
+- [ ] Real-time subscriptions for custom_sound_sessions (Not implemented)
+- [ ] Real-time subscriptions for sound_metadata (Not implemented)
+- [ ] Automatic reconnection on failure (Not implemented)
+- [ ] Channel cleanup on unmount (Not implemented)
 
 #### Subscription Features
-- [x] Filter by user_id for user-specific data
-- [x] Listen to INSERT, UPDATE, DELETE events
-- [x] React Query cache invalidation on changes
-- [x] Error handling for subscription failures
-- [x] Performance optimization (events per second limit)
+- [ ] Filter by user_id for user-specific data (Not implemented)
+- [ ] Listen to INSERT, UPDATE, DELETE events (Not implemented)
+- [ ] React Query cache invalidation on changes (Not applicable - React Query not in Swift)
+- [ ] Error handling for subscription failures (Not implemented)
+- [ ] Performance optimization (events per second limit) (Not implemented)
 
 ### 5. Storage Integration
 
 #### Storage Buckets
-- [x] Audio storage bucket configured
-- [x] Public access for free content
-- [x] Signed URLs for premium content
-- [x] File size limits enforced
-- [x] MIME type validation
-- [x] Storage path organization
+- [ ] Audio storage bucket configured (Not applicable - app uses Firebase Storage, not Supabase)
+- [x] Public access for free content (Firebase Storage Security Rules)
+- [ ] Signed URLs for premium content (Not implemented - uses Firebase Storage directly)
+- [x] File size limits enforced (Firebase Storage)
+- [x] MIME type validation (Firebase Storage)
+- [x] Storage path organization (FirebaseStorageRepository)
 
 #### Storage Operations
-- [x] Upload audio files to storage
-- [x] Download audio files from storage
-- [x] Generate public URLs for free content
-- [x] Generate signed URLs for premium content (1-hour TTL)
-- [x] File metadata tracking in database
-- [x] Storage path management
-- [x] File deletion and cleanup
+- [ ] Upload audio files to storage (Not implemented)
+- [x] Download audio files from storage (FirebaseStorageRepository)
+- [ ] Generate public URLs for free content (Not implemented - uses Firebase Storage directly)
+- [ ] Generate signed URLs for premium content (1-hour TTL) (Not implemented)
+- [x] File metadata tracking in database (Firestore)
+- [x] Storage path management (FirebaseStorageRepository)
+- [ ] File deletion and cleanup (Not implemented)
 
 ### 6. Database Operations
 
 #### CRUD Operations
-- [x] Create operations for all tables
-- [x] Read operations with filtering
-- [x] Update operations with validation
-- [x] Delete operations with cascade handling
-- [x] Batch operations for efficiency
-- [x] Upsert operations where needed
+- [ ] Create operations for all tables (Not applicable - uses Firestore, not Supabase tables)
+- [x] Read operations with filtering (Firestore repositories)
+- [x] Update operations with validation (Firestore repositories)
+- [x] Delete operations with cascade handling (Firestore repositories)
+- [ ] Batch operations for efficiency (Not implemented)
+- [ ] Upsert operations where needed (Not implemented)
 
 #### Query Features
-- [x] Filtering by user_id
-- [x] Sorting by created_at, updated_at
-- [x] Pagination support
-- [x] Full-text search on sound_metadata
-- [x] Complex queries with joins
-- [x] Aggregate queries for analytics
+- [x] Filtering by user_id (Firestore queries)
+- [x] Sorting by created_at, updated_at (Firestore queries)
+- [ ] Pagination support (Not implemented)
+- [ ] Full-text search on sound_metadata (Not implemented - client-side filtering only)
+- [ ] Complex queries with joins (Not implemented - Firestore doesn't support joins)
+- [ ] Aggregate queries for analytics (Not implemented)
 
 #### RPC Functions
-- [x] `calculate_trial_days_remaining` - Trial calculation
-- [x] `user_needs_registration` - Registration check
-- [x] `getSignedAudioUrl` - Signed URL generation
-- [x] Error handling for RPC calls
-- [x] Type-safe RPC function calls
+- [ ] `calculate_trial_days_remaining` - Trial calculation (Not applicable - Supabase RPC, not in Swift)
+- [ ] `user_needs_registration` - Registration check (Not applicable - Supabase RPC, not in Swift)
+- [ ] `getSignedAudioUrl` - Signed URL generation (Not applicable - Supabase RPC, not in Swift)
+- [ ] Error handling for RPC calls (Not applicable)
+- [ ] Type-safe RPC function calls (Not applicable)
 
 ### 7. Error Handling
 
 #### Error Types
-- [x] Network error handling
-- [x] Database error handling
-- [x] RLS policy violation handling
-- [x] Storage error handling
-- [x] Authentication error handling
-- [x] Validation error handling
+- [x] Network error handling (Implemented)
+- [x] Database error handling (Firestore error handling)
+- [ ] RLS policy violation handling (Not applicable - Firebase Security Rules, not RLS)
+- [x] Storage error handling (Firebase Storage error handling)
+- [x] Authentication error handling (Firebase Auth error handling)
+- [x] Validation error handling (Implemented)
 
 #### Error Recovery
-- [x] Automatic retry for transient failures
-- [x] User-friendly error messages
-- [x] Error logging for debugging
-- [x] Graceful degradation
-- [x] Offline queue for failed operations
+- [ ] Automatic retry for transient failures (Not implemented)
+- [x] User-friendly error messages (Implemented)
+- [x] Error logging for debugging (AWAVELogger)
+- [x] Graceful degradation (Implemented)
+- [ ] Offline queue for failed operations (Not implemented)
 
 ### 8. Performance Optimization
 
 #### Query Optimization
-- [x] Indexes on frequently queried columns
-- [x] Efficient JSONB queries
-- [x] Batch operations for multiple records
-- [x] Connection pooling
-- [x] Query result caching
+- [x] Indexes on frequently queried columns (Firestore indexes)
+- [ ] Efficient JSONB queries (Not applicable - Firestore uses nested objects)
+- [ ] Batch operations for multiple records (Not implemented)
+- [ ] Connection pooling (Not applicable - Firebase SDK handles)
+- [x] Query result caching (Local caching implemented)
 
 #### Real-Time Optimization
-- [x] Events per second limit (10 EPS)
-- [x] Selective subscription channels
-- [x] Channel cleanup on unmount
-- [x] Efficient payload handling
+- [ ] Events per second limit (10 EPS) (Not implemented)
+- [ ] Selective subscription channels (Not implemented)
+- [ ] Channel cleanup on unmount (Not implemented)
+- [ ] Efficient payload handling (Not implemented)
 
 #### Storage Optimization
-- [x] Signed URL caching
-- [x] File metadata caching
-- [x] Progressive download support
-- [x] Cache optimization for offline access
+- [ ] Signed URL caching (Not implemented)
+- [x] File metadata caching (Firestore caching)
+- [ ] Progressive download support (Not implemented)
+- [x] Cache optimization for offline access (FirebaseStorageRepository local cache)
 
 ---
 
@@ -213,16 +213,16 @@
 - [x] No memory leaks from subscriptions
 
 ### Storage Operations
-- [x] Public URLs generated instantly
-- [x] Signed URLs generated in < 1 second
-- [x] File uploads handle large files (> 50MB)
-- [x] Download progress tracking works correctly
+- [ ] Public URLs generated instantly (Not implemented - uses Firebase Storage directly)
+- [ ] Signed URLs generated in < 1 second (Not implemented)
+- [ ] File uploads handle large files (> 50MB) (Not implemented)
+- [ ] Download progress tracking works correctly (Not implemented)
 
 ### Security
-- [x] RLS policies prevent unauthorized access
-- [x] User data isolated by user_id
-- [x] Tokens stored securely
-- [x] No sensitive data in logs
+- [ ] RLS policies prevent unauthorized access (Not applicable - Firebase Security Rules, not RLS)
+- [x] User data isolated by user_id (Firebase Security Rules)
+- [x] Tokens stored securely (KeychainService)
+- [x] No sensitive data in logs (AWAVELogger)
 
 ---
 
@@ -235,10 +235,10 @@
 - Batch operations handle 100+ records efficiently
 
 ### Security
-- All connections use HTTPS
-- Tokens stored securely
-- RLS policies enforced on all tables
-- No credentials in code or logs
+- All connections use HTTPS (Firebase enforces HTTPS)
+- Tokens stored securely (KeychainService)
+- RLS policies enforced on all tables (Not applicable - Firebase Security Rules, not RLS)
+- No credentials in code or logs (Implemented)
 
 ### Reliability
 - Connection success rate > 99%
@@ -309,7 +309,7 @@
 
 ### Data Privacy
 - [x] User data isolated by user_id
-- [x] RLS policies on all user tables
+- [ ] RLS policies on all user tables (Not applicable - Firebase Security Rules, not RLS)
 - [x] No cross-user data access
 - [x] Secure token storage
 

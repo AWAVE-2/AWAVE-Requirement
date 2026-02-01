@@ -5,15 +5,15 @@
 ### 1. Error Transformation
 
 #### Supabase Error Handling
-- [x] Map Supabase error codes to user-friendly messages
-- [x] Handle `PGRST116` (Not Found) errors gracefully
-- [x] Handle `42501` (Permission Denied) errors
-- [x] Handle `row_level_security` (RLS) errors
-- [x] Handle `invalid_grant` (Auth) errors
-- [x] Handle `23505` (Duplicate Key) errors
-- [x] Handle `NETWORK_ERROR` errors
-- [x] Provide fallback message for unknown errors
-- [x] Log errors to console for debugging
+- [ ] Map Supabase error codes to user-friendly messages (Not applicable - app uses Firebase, not Supabase)
+- [ ] Handle `PGRST116` (Not Found) errors gracefully (Not applicable - Firebase errors)
+- [ ] Handle `42501` (Permission Denied) errors (Not applicable - Firebase errors)
+- [ ] Handle `row_level_security` (RLS) errors (Not applicable - Firebase Security Rules)
+- [ ] Handle `invalid_grant` (Auth) errors (Not applicable - Firebase Auth errors)
+- [ ] Handle `23505` (Duplicate Key) errors (Not applicable - Firebase errors)
+- [x] Handle `NETWORK_ERROR` errors (Implemented)
+- [x] Provide fallback message for unknown errors (Implemented)
+- [x] Log errors to console for debugging (AWAVELogger)
 
 #### Error Message Requirements
 - [x] All user-facing messages in German
@@ -25,11 +25,11 @@
 ### 2. Network Diagnostics
 
 #### Connectivity Checking
-- [x] Check network connectivity before API calls
-- [x] Test Supabase connection health
-- [x] Measure connection latency
-- [x] Detect network state changes
-- [x] Provide connection status to components
+- [x] Check network connectivity before API calls (Implemented)
+- [ ] Test Supabase connection health (Not applicable - app uses Firebase)
+- [ ] Measure connection latency (Not implemented)
+- [ ] Detect network state changes (Not implemented)
+- [ ] Provide connection status to components (Not implemented)
 
 #### Network Error Detection
 - [x] Detect "Could not resolve host" errors
@@ -69,11 +69,11 @@
 ### 4. Safe API Wrappers
 
 #### safeApiCall
-- [x] Wrap API calls in try-catch
-- [x] Transform errors using `handleSupabaseError`
-- [x] Throw transformed error messages
-- [x] Preserve error context
-- [x] Used by all `ProductionBackendService` methods
+- [x] Wrap API calls in try-catch (Implemented)
+- [ ] Transform errors using `handleSupabaseError` (Not applicable - Firebase errors handled differently)
+- [x] Throw transformed error messages (Implemented)
+- [x] Preserve error context (Implemented)
+- [ ] Used by all `ProductionBackendService` methods (Not applicable - ProductionBackendService is TypeScript, not in Swift)
 
 #### executeWithConnectivity
 - [x] Check network connectivity before execution

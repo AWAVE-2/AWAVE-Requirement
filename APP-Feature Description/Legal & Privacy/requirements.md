@@ -133,7 +133,7 @@
 ### 6. Privacy Preferences Storage
 
 #### Storage Requirements
-- [x] Store preferences in AsyncStorage
+- [ ] Store preferences in AsyncStorage (Not applicable - app uses Swift, not React Native)
 - [x] Storage key: `awavePrivacyPreferences`
 - [x] Store health data consent
 - [x] Store analytics consent
@@ -267,11 +267,11 @@ interface PrivacyPreferences {
 ## 🔄 Edge Cases
 
 ### Storage Issues
-- [x] Handle AsyncStorage read failures
-- [x] Handle AsyncStorage write failures
-- [x] Handle corrupted preference data
-- [x] Default to opt-in if preferences missing
-- [x] Show error messages for storage failures
+- [ ] Handle AsyncStorage read failures (Not applicable - app uses Swift, not React Native)
+- [ ] Handle AsyncStorage write failures (Not applicable - app uses Swift, not React Native)
+- [ ] Handle corrupted preference data (Not implemented)
+- [ ] Default to opt-in if preferences missing (Not implemented)
+- [ ] Show error messages for storage failures (Not implemented)
 
 ### Network Issues
 - [x] Handle external link opening failures

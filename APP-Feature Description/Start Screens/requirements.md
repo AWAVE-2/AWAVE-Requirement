@@ -15,13 +15,13 @@
 - [x] Navigation delay of 500ms after fade-out
 
 #### Routing Logic
-- [x] Check onboarding completion status from storage
-- [x] Check user profile existence from storage
-- [x] Route to MainTabs if onboarding completed
-- [x] Route to OnboardingSlides (slide 5) if profile exists but onboarding incomplete
-- [x] Route to OnboardingSlides (full) if first-time user
-- [x] Fallback to full onboarding on error
-- [x] Prevent black screen during navigation transitions
+- [x] Check onboarding completion status from storage (OnboardingStorageService)
+- [x] Check user profile existence from storage (FirestoreUserRepository)
+- [x] Route to MainTabs if onboarding completed (Implemented)
+- [x] Route to OnboardingSlides (slide 5) if profile exists but onboarding incomplete (Implemented)
+- [x] Route to OnboardingSlides (full) if first-time user (Implemented)
+- [x] Fallback to full onboarding on error (Implemented)
+- [x] Prevent black screen during navigation transitions (Implemented)
 
 #### State Management
 - [x] Load onboarding state asynchronously
@@ -70,12 +70,12 @@
 - [x] Theme-aware styling
 
 #### State Persistence
-- [x] Save onboarding completion status
-- [x] Save user profile with category preference
-- [x] Save selected category separately
-- [x] Sync to backend if user authenticated
-- [x] Handle offline mode (local storage only)
-- [x] Error handling for storage failures
+- [x] Save onboarding completion status (OnboardingStorageService)
+- [x] Save user profile with category preference (OnboardingStorageService + FirestoreUserRepository)
+- [x] Save selected category separately (OnboardingStorageService)
+- [x] Sync to backend if user authenticated (FirestoreUserRepository)
+- [x] Handle offline mode (local storage only) (OnboardingStorageService)
+- [x] Error handling for storage failures (Implemented)
 
 ### 3. Onboarding Storage Service
 

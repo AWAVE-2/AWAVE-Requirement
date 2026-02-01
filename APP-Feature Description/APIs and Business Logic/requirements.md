@@ -5,29 +5,29 @@
 ### 1. Backend Service Layer
 
 #### ProductionBackendService
-- [x] Unified API service for all backend operations
-- [x] Authentication methods (signUp, signIn, signOut, getCurrentUser)
-- [x] User profile management (get, create, update)
-- [x] Session tracking (start, end, get user sessions)
-- [x] Sound metadata operations (get, search)
-- [x] Subscription management (get, create, check trial)
-- [x] Favorites management (get, add, remove, update usage)
-- [x] Custom sound sessions (get, create, update, delete)
-- [x] Notification preferences (get, update)
-- [x] Audio file URL generation (signed URLs, public URLs)
-- [x] SOS configuration retrieval
-- [x] Search analytics logging
-- [x] Real-time subscriptions (profile, subscription changes)
-- [x] Health check functionality
-- [x] Account deletion support
+- [ ] Unified API service for all backend operations (TypeScript - not in Swift)
+- [ ] Authentication methods (signUp, signIn, signOut, getCurrentUser) (TypeScript - not in Swift)
+- [ ] User profile management (get, create, update) (TypeScript - not in Swift)
+- [ ] Session tracking (start, end, get user sessions) (TypeScript - not in Swift)
+- [ ] Sound metadata operations (get, search) (TypeScript - not in Swift)
+- [ ] Subscription management (get, create, check trial) (TypeScript - not in Swift)
+- [ ] Favorites management (get, add, remove, update usage) (TypeScript - not in Swift)
+- [ ] Custom sound sessions (get, create, update, delete) (TypeScript - not in Swift)
+- [ ] Notification preferences (get, update) (TypeScript - not in Swift)
+- [ ] Audio file URL generation (signed URLs, public URLs) (TypeScript - not in Swift)
+- [ ] SOS configuration retrieval (TypeScript - not in Swift)
+- [ ] Search analytics logging (TypeScript - not in Swift)
+- [ ] Real-time subscriptions (profile, subscription changes) (TypeScript - not in Swift)
+- [ ] Health check functionality (TypeScript - not in Swift)
+- [ ] Account deletion support (TypeScript - not in Swift)
 
 #### Error Handling
-- [x] All API calls wrapped in `safeApiCall`
+- [ ] All API calls wrapped in `safeApiCall` (TypeScript - not in Swift)
 - [x] Network connectivity checks before API calls
 - [x] User-friendly error messages
 - [x] Error logging for debugging
 - [x] Graceful degradation on errors
-- [x] Retry logic for transient failures
+- [ ] Retry logic for transient failures (partial - not fully implemented)
 
 #### Data Validation
 - [x] Input validation before API calls
@@ -38,113 +38,120 @@
 ### 2. Business Logic Hooks
 
 #### useProductionAuth
-- [x] Authentication state management
-- [x] Session retrieval and validation
-- [x] User profile loading
-- [x] Registration status checking
-- [x] Subscription data loading
-- [x] Trial days calculation
+- [ ] Authentication state management (React hook - not in Swift)
+- [ ] Session retrieval and validation (React hook - not in Swift)
+- [ ] User profile loading (React hook - not in Swift)
+- [ ] Registration status checking (React hook - not in Swift)
+- [ ] Subscription data loading (React hook - not in Swift)
+- [ ] Trial days calculation (React hook - not in Swift)
 
 #### useUserProfile
-- [x] Comprehensive user data loading
-- [x] Profile, subscription, notification preferences
-- [x] Default preference creation
-- [x] Category preference application
-- [x] Profile update operations
-- [x] Subscription status tracking
+- [ ] Comprehensive user data loading (React hook - not in Swift)
+- [ ] Profile, subscription, notification preferences (React hook - not in Swift)
+- [ ] Default preference creation (React hook - not in Swift)
+- [ ] Category preference application (React hook - not in Swift)
+- [ ] Profile update operations (React hook - not in Swift)
+- [ ] Subscription status tracking (React hook - not in Swift)
 
 #### useSessionTracking
-- [x] Session creation and management
-- [x] Progress tracking
-- [x] Session completion
-- [x] Session cancellation
-- [x] Session statistics calculation
+- [x] Session creation and management (FirestoreSessionTracker)
+- [x] Progress tracking (FirestoreSessionTracker)
+- [x] Session completion (FirestoreSessionTracker)
+- [ ] Session cancellation (not implemented)
+- [x] Session statistics calculation (FirestoreSessionTracker)
 
 #### useIntelligentSearch
-- [x] Advanced search functionality
-- [x] SOS keyword detection
-- [x] Search result scoring and ranking
-- [x] Search analytics logging
-- [x] SOS configuration loading
-- [x] Search suggestions
+- [x] Advanced search functionality (FirestoreSoundRepository.searchSounds)
+- [ ] SOS keyword detection (not implemented)
+- [x] Search result scoring and ranking (client-side filtering)
+- [ ] Search analytics logging (not implemented)
+- [ ] SOS configuration loading (not implemented)
+- [ ] Search suggestions (not implemented)
 
 #### useFavoritesManagement
-- [x] Favorites list retrieval
-- [x] Add favorite operation
-- [x] Remove favorite operation
-- [x] Update favorite usage tracking
-- [x] Favorites state management
+- [x] Favorites list retrieval (FirestoreFavoritesRepository)
+- [x] Add favorite operation (FirestoreFavoritesRepository)
+- [x] Remove favorite operation (FirestoreFavoritesRepository)
+- [ ] Update favorite usage tracking (not implemented)
+- [x] Favorites state management (FirestoreFavoritesRepository)
 
 #### useSubscriptionManagement
-- [x] Subscription data loading
-- [x] Plan change operations
-- [x] Subscription cancellation
-- [x] Subscription reactivation
-- [x] Payment history retrieval
-- [x] Proration calculation
+- [ ] Subscription data loading (StoreKitManager exists but different API)
+- [ ] Plan change operations (StoreKitManager exists but different API)
+- [ ] Subscription cancellation (StoreKitManager exists but different API)
+- [ ] Subscription reactivation (StoreKitManager exists but different API)
+- [ ] Payment history retrieval (not implemented)
+- [ ] Proration calculation (not implemented)
 
 #### useCustomSounds
-- [x] Custom sound sessions loading
-- [x] Session creation
-- [x] Session updates
-- [x] Session deletion
-- [x] Session state management
+- [x] Custom sound sessions loading (FirestoreCustomMixRepository)
+- [x] Session creation (FirestoreCustomMixRepository)
+- [x] Session updates (FirestoreCustomMixRepository)
+- [x] Session deletion (FirestoreCustomMixRepository)
+- [x] Session state management (FirestoreCustomMixRepository)
 
 ### 3. Domain Services
 
 #### SearchService
-- [x] Full-text search with filters
-- [x] SOS configuration loading and caching
-- [x] SOS trigger keyword detection
-- [x] Search suggestions generation
-- [x] Popular searches retrieval
-- [x] Search analytics logging
-- [x] Category-based search
+- [x] Full-text search with filters (FirestoreSoundRepository - client-side)
+- [ ] SOS configuration loading and caching (not implemented)
+- [ ] SOS trigger keyword detection (not implemented)
+- [ ] Search suggestions generation (not implemented)
+- [ ] Popular searches retrieval (not implemented)
+- [ ] Search analytics logging (not implemented)
+- [x] Category-based search (FirestoreSoundRepository)
 
 #### SubscriptionService
-- [x] Subscription retrieval
-- [x] Payment history retrieval
-- [x] Plan change operations
-- [x] Subscription cancellation
-- [x] Subscription reactivation
-- [x] Proration calculation
+- [ ] Subscription retrieval (StoreKitManager exists but different API)
+- [ ] Payment history retrieval (not implemented)
+- [ ] Plan change operations (StoreKitManager exists but different API)
+- [ ] Subscription cancellation (StoreKitManager exists but different API)
+- [ ] Subscription reactivation (not implemented)
+- [ ] Proration calculation (not implemented)
 
 #### CategoryService
-- [x] Primary categories fetching
-- [x] Sound metadata fetching per category
-- [x] Data merging with fallbacks
-- [x] Error handling with graceful degradation
+- [x] Primary categories fetching (FirestoreSoundRepository)
+- [x] Sound metadata fetching per category (FirestoreSoundRepository)
+- [x] Data merging with fallbacks (implemented)
+- [x] Error handling with graceful degradation (implemented)
 
 #### SessionTrackingService
-- [x] Session statistics calculation
-- [x] Most played sounds retrieval
-- [x] Weekly activity data
-- [x] Streak calculation
-- [x] Session aggregation
+- [x] Session statistics calculation (FirestoreSessionTracker)
+- [ ] Most played sounds retrieval (not implemented)
+- [ ] Weekly activity data (not implemented)
+- [ ] Streak calculation (not implemented)
+- [ ] Session aggregation (not implemented)
 
 #### OfflineQueueService
-- [x] Offline operation queuing
-- [x] Queue processing on network reconnect
-- [x] Retry logic with max attempts
-- [x] Queue status monitoring
-- [x] Automatic initialization
+- [ ] Offline operation queuing (not implemented)
+- [ ] Queue processing on network reconnect (not implemented)
+- [ ] Retry logic with max attempts (not implemented)
+- [ ] Queue status monitoring (not implemented)
+- [ ] Automatic initialization (not implemented)
 
 ### 4. Data Management
 
 #### Supabase Integration
-- [x] Database connection and queries
-- [x] Storage bucket access
-- [x] Authentication integration
-- [x] Real-time subscriptions
-- [x] Edge function invocations
-- [x] RPC function calls
+- [ ] Database connection and queries (App uses Firebase, not Supabase)
+- [ ] Storage bucket access (App uses Firebase Storage, not Supabase)
+- [ ] Authentication integration (App uses Firebase Auth, not Supabase)
+- [ ] Real-time subscriptions (Not implemented)
+- [ ] Edge function invocations (Not implemented)
+- [ ] RPC function calls (Not implemented)
+
+#### Firebase Integration (Actual Implementation)
+- [x] Database connection and queries (Firestore)
+- [x] Storage bucket access (Firebase Storage)
+- [x] Authentication integration (Firebase Auth)
+- [ ] Real-time subscriptions (Not implemented)
+- [ ] Cloud function invocations (Not implemented)
 
 #### Local Storage
-- [x] AsyncStorage for caching
-- [x] Session data persistence
-- [x] User preferences storage
-- [x] Offline queue storage
-- [x] Cache expiration management
+- [ ] AsyncStorage for caching (React Native - not in Swift)
+- [x] Session data persistence (Firestore)
+- [x] User preferences storage (Firestore)
+- [ ] Offline queue storage (Not implemented)
+- [x] Cache expiration management (FirebaseStorageRepository with local file cache)
 
 #### Error Handling
 - [x] Centralized error handler utility
@@ -155,31 +162,31 @@
 ### 5. Analytics & Tracking
 
 #### Search Analytics
-- [x] Search query logging
-- [x] Results count tracking
-- [x] SOS trigger detection logging
-- [x] User ID association
+- [ ] Search query logging (Not implemented)
+- [ ] Results count tracking (Not implemented)
+- [ ] SOS trigger detection logging (Not implemented)
+- [ ] User ID association (Not implemented)
 
 #### Session Analytics
-- [x] Session start/end tracking
-- [x] Progress updates
-- [x] Duration calculation
-- [x] Completion status tracking
+- [x] Session start/end tracking (FirestoreSessionTracker)
+- [x] Progress updates (FirestoreSessionTracker)
+- [x] Duration calculation (FirestoreSessionTracker)
+- [x] Completion status tracking (FirestoreSessionTracker)
 
 #### App Usage Analytics
-- [x] Feature usage tracking
-- [x] User interaction logging
-- [x] Performance metrics
+- [ ] Feature usage tracking (Not implemented)
+- [ ] User interaction logging (Not implemented)
+- [ ] Performance metrics (Not implemented)
 
 ### 6. Storage & Downloads
 
 #### Audio File Management
-- [x] Signed URL generation
-- [x] Public URL generation
-- [x] Download progress tracking
-- [x] Local file caching
-- [x] Storage quota management
-- [x] Background download support
+- [ ] Signed URL generation (Not implemented - uses Firebase Storage directly)
+- [ ] Public URL generation (Not implemented - uses Firebase Storage directly)
+- [ ] Download progress tracking (Not implemented)
+- [x] Local file caching (FirebaseStorageRepository)
+- [ ] Storage quota management (Not implemented)
+- [ ] Background download support (Not implemented)
 
 ---
 
@@ -204,44 +211,44 @@
 ## ✅ Acceptance Criteria
 
 ### Backend Service Layer
-- [x] All API methods use `safeApiCall` wrapper
+- [ ] All API methods use `safeApiCall` wrapper (TypeScript - not in Swift)
 - [x] Error messages are user-friendly
 - [x] Network errors are handled gracefully
 - [x] Data validation occurs before API calls
-- [x] All operations respect RLS policies
+- [ ] All operations respect RLS policies (Firebase uses Security Rules, not RLS)
 
 ### Business Logic Hooks
-- [x] Hooks provide clean API for components
-- [x] State management is consistent
+- [ ] Hooks provide clean API for components (React hooks - not in Swift)
+- [x] State management is consistent (Swift @Observable)
 - [x] Loading states are tracked
 - [x] Error states are handled
 - [x] Data is cached appropriately
 
 ### Domain Services
-- [x] Services are testable and mockable
+- [x] Services are testable and mockable (Protocol-based architecture)
 - [x] Services handle errors gracefully
 - [x] Services use caching where appropriate
 - [x] Services provide clear return types
 - [x] Services are documented
 
 ### Data Management
-- [x] Local storage is isolated per feature
-- [x] Cache expiration is managed
-- [x] Offline queue processes automatically
-- [x] Real-time subscriptions are cleaned up
-- [x] Data synchronization is reliable
+- [x] Local storage is isolated per feature (Firestore collections)
+- [x] Cache expiration is managed (File-based cache)
+- [ ] Offline queue processes automatically (Not implemented)
+- [ ] Real-time subscriptions are cleaned up (Not implemented)
+- [x] Data synchronization is reliable (Firestore)
 
 ### Analytics & Tracking
-- [x] Analytics are logged non-blocking
-- [x] User privacy is respected
-- [x] Analytics data is accurate
-- [x] Performance impact is minimal
+- [ ] Analytics are logged non-blocking (Not implemented)
+- [ ] User privacy is respected (Not implemented)
+- [ ] Analytics data is accurate (Not implemented)
+- [ ] Performance impact is minimal (Not implemented)
 
 ### Storage & Downloads
-- [x] Downloads are resumable
-- [x] Storage quota is managed
-- [x] File access is secure
-- [x] Cache is optimized
+- [ ] Downloads are resumable (Not implemented)
+- [ ] Storage quota is managed (Not implemented)
+- [x] File access is secure (Firebase Security Rules)
+- [x] Cache is optimized (Local file cache)
 
 ---
 
@@ -277,33 +284,33 @@
 
 ### Network Issues
 - [x] Offline detection before API calls
-- [x] Queue operations for offline mode
-- [x] Automatic retry on reconnect
+- [ ] Queue operations for offline mode (Not implemented)
+- [ ] Automatic retry on reconnect (Not implemented)
 - [x] User-friendly error messages
 
 ### Data Conflicts
-- [x] Last-write-wins for updates
-- [x] Conflict resolution strategies
+- [x] Last-write-wins for updates (Firestore)
+- [ ] Conflict resolution strategies (Not implemented)
 - [x] Data validation prevents conflicts
 - [x] Error handling for conflicts
 
 ### Storage Issues
-- [x] Quota exceeded handling
-- [x] Cache cleanup on low storage
-- [x] Download resumption
+- [ ] Quota exceeded handling (Not implemented)
+- [ ] Cache cleanup on low storage (Not implemented)
+- [ ] Download resumption (Not implemented)
 - [x] Storage error recovery
 
 ### Authentication Issues
-- [x] Token expiration handling
-- [x] Session refresh on expiry
-- [x] Re-authentication prompts
+- [x] Token expiration handling (Firebase Auth)
+- [x] Session refresh on expiry (Firebase Auth)
+- [ ] Re-authentication prompts (Not implemented)
 - [x] Graceful sign-out on errors
 
 ### Concurrent Operations
-- [x] Request deduplication
-- [x] Queue processing locks
-- [x] State update synchronization
-- [x] Race condition prevention
+- [ ] Request deduplication (Not implemented)
+- [ ] Queue processing locks (Not implemented)
+- [x] State update synchronization (Swift concurrency)
+- [x] Race condition prevention (Swift concurrency)
 
 ---
 
@@ -321,24 +328,32 @@
 ## 🔧 Configuration
 
 ### Environment Variables
-- `SUPABASE_URL` - Backend API URL
-- `SUPABASE_ANON_KEY` - Public API key
-- `API_BASE_URL` - Base API endpoint
-- `SITE_URL` - Website URL
+- `SUPABASE_URL` - Backend API URL (Not used - app uses Firebase)
+- `SUPABASE_ANON_KEY` - Public API key (Not used - app uses Firebase)
+- `API_BASE_URL` - Base API endpoint (Not used)
+- `SITE_URL` - Website URL (Not used)
+
+### Firebase Configuration (Actual Implementation)
+- `GoogleService-Info.plist` - Firebase configuration
+- Firebase project settings
+- Firestore database rules
+- Firebase Storage rules
 
 ### Service Configuration
-- Cache expiration times
-- Retry attempt limits
-- Queue processing intervals
-- Network timeout values
+- Cache expiration times (File-based cache)
+- Retry attempt limits (Not implemented)
+- Queue processing intervals (Not implemented)
+- Network timeout values (Firebase SDK defaults)
 
 ---
 
 ## 📝 Implementation Notes
 
-- All services use TypeScript for type safety
-- Services are statically typed with interfaces
+- All services use Swift for type safety
+- Services are protocol-based with concrete implementations
 - Error handling is consistent across services
-- Logging is development-mode only
-- Real-time subscriptions use cleanup functions
-- Offline queue uses AsyncStorage for persistence
+- Logging uses AWAVELogger (os.log)
+- Real-time subscriptions not implemented
+- Offline queue not implemented
+- Uses Firebase (Firestore, Storage, Auth) instead of Supabase
+- Architecture: Protocol-oriented with dependency injection

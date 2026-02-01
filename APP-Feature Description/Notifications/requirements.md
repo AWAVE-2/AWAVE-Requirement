@@ -13,12 +13,12 @@
 - [x] System updates notifications toggle
 
 #### Preference Storage
-- [x] Preferences stored in Supabase database
-- [x] User-specific preferences (one record per user)
-- [x] Automatic preference creation for new users
-- [x] Default preferences (all enabled except marketing)
-- [x] Preference updates persist immediately
-- [x] Local caching for offline access
+- [ ] Preferences stored in Supabase database (Not implemented - app uses Firebase)
+- [ ] User-specific preferences (one record per user) (Not implemented)
+- [ ] Automatic preference creation for new users (Not implemented)
+- [ ] Default preferences (all enabled except marketing) (Not implemented)
+- [ ] Preference updates persist immediately (Not implemented)
+- [ ] Local caching for offline access (Not implemented)
 
 #### Preference UI
 - [x] Dedicated notification preferences screen
@@ -38,12 +38,12 @@
 - [x] Handle edge cases (no subscription, expired trial)
 
 #### Reminder Sending Logic
-- [x] Check if reminder was already sent (prevent duplicates)
-- [x] Verify user preference (trial_reminders_enabled)
-- [x] Send reminder only if enabled and not already sent
-- [x] Log notification to database
-- [x] Mark reminder as sent in local storage
-- [x] Handle errors gracefully
+- [ ] Check if reminder was already sent (prevent duplicates) (Not implemented)
+- [ ] Verify user preference (trial_reminders_enabled) (Not implemented)
+- [ ] Send reminder only if enabled and not already sent (Not implemented)
+- [ ] Log notification to database (Not implemented)
+- [ ] Mark reminder as sent in local storage (Not implemented)
+- [ ] Handle errors gracefully (Not implemented)
 
 #### Reminder Content
 - [x] Dynamic message based on days remaining
@@ -60,12 +60,12 @@
 ### 3. Notification Logging
 
 #### Log Storage
-- [x] Store all sent notifications in database
-- [x] Track notification type
-- [x] Record user ID
-- [x] Store notification message
-- [x] Timestamp recording (sent_at)
-- [x] User-specific log access
+- [ ] Store all sent notifications in database (Not implemented)
+- [ ] Track notification type (Not implemented)
+- [ ] Record user ID (Not implemented)
+- [ ] Store notification message (Not implemented)
+- [ ] Timestamp recording (sent_at) (Not implemented)
+- [ ] User-specific log access (Not implemented)
 
 #### Log Data
 - [x] Notification type identifier
@@ -92,33 +92,33 @@
 - [x] Visual feedback
 
 #### ProfileScreen Integration
-- [x] Notification preferences display
-- [x] Quick toggle functionality
-- [x] Sync with backend preferences
-- [x] Update via useUserProfile hook
+- [ ] Notification preferences display (Not implemented)
+- [ ] Quick toggle functionality (Not implemented)
+- [ ] Sync with backend preferences (Not implemented)
+- [ ] Update via useUserProfile hook (Not applicable - React hook, not in Swift)
 
 ### 5. Preference Synchronization
 
 #### Data Loading
-- [x] Load preferences on screen mount
-- [x] Load preferences on user authentication
-- [x] Create defaults if preferences don't exist
-- [x] Handle loading errors gracefully
+- [ ] Load preferences on screen mount (Not implemented)
+- [ ] Load preferences on user authentication (Not implemented)
+- [ ] Create defaults if preferences don't exist (Not implemented)
+- [ ] Handle loading errors gracefully (Not implemented)
 
 #### Data Saving
-- [x] Save preferences immediately on toggle
-- [x] Optimistic UI updates
-- [x] Revert on save failure
-- [x] Error feedback to user
-- [x] Success confirmation
+- [ ] Save preferences immediately on toggle (Not implemented)
+- [ ] Optimistic UI updates (Not implemented)
+- [ ] Revert on save failure (Not implemented)
+- [ ] Error feedback to user (Not implemented)
+- [ ] Success confirmation (Not implemented)
 
 #### Default Preferences
-- [x] push_notifications_enabled: true
-- [x] email_notifications_enabled: true
-- [x] trial_reminders_enabled: true
-- [x] favorites_updates_enabled: true
-- [x] new_content_enabled: true
-- [x] system_updates_enabled: true
+- [ ] push_notifications_enabled: true (Not implemented)
+- [ ] email_notifications_enabled: true (Not implemented)
+- [ ] trial_reminders_enabled: true (Not implemented)
+- [ ] favorites_updates_enabled: true (Not implemented)
+- [ ] new_content_enabled: true (Not implemented)
+- [ ] system_updates_enabled: true (Not implemented)
 
 ---
 
@@ -248,7 +248,7 @@
 
 ### Data Access
 - [x] Users can only view/edit their own preferences
-- [x] RLS policies enforce user isolation
+- [ ] RLS policies enforce user isolation (Not applicable - app uses Firebase Security Rules, not RLS)
 - [x] Notification logs are user-specific
 - [x] No sensitive data in logs
 
@@ -298,22 +298,22 @@
 ## 🔄 Integration Requirements
 
 ### Authentication Integration
-- [x] Check trial reminders on sign-in
-- [x] Load preferences on authentication
-- [x] Create defaults for new users
-- [x] Clear preferences on sign-out (optional)
+- [ ] Check trial reminders on sign-in (Not implemented)
+- [ ] Load preferences on authentication (Not implemented)
+- [ ] Create defaults for new users (Not implemented)
+- [ ] Clear preferences on sign-out (optional) (Not implemented)
 
 ### Subscription Integration
-- [x] Check subscription status for trial reminders
-- [x] Query user_subscriptions table
-- [x] Calculate trial expiration date
-- [x] Handle subscription status changes
+- [ ] Check subscription status for trial reminders (Not implemented)
+- [ ] Query user_subscriptions table (Not applicable - app uses StoreKit, not database table)
+- [ ] Calculate trial expiration date (Not implemented)
+- [ ] Handle subscription status changes (Not implemented)
 
 ### Profile Integration
-- [x] Display notification preferences in profile
-- [x] Quick toggle in profile screen
-- [x] Sync with backend preferences
-- [x] Update via useUserProfile hook
+- [ ] Display notification preferences in profile (Not implemented)
+- [ ] Quick toggle in profile screen (Not implemented)
+- [ ] Sync with backend preferences (Not implemented)
+- [ ] Update via useUserProfile hook (Not applicable - React hook, not in Swift)
 
 ---
 

@@ -5,12 +5,12 @@
 ### 1. Sound Catalog Display
 
 #### Sound Loading
-- [x] Load all sounds from Supabase sound_metadata table
-- [x] Display sound metadata (title, description, category, duration, tags)
-- [x] Show loading state during data fetch
-- [x] Handle loading errors with user-friendly messages
-- [x] Retry functionality on load failure
-- [x] Real-time updates when metadata changes
+- [ ] Load all sounds from Supabase sound_metadata table (Not applicable - uses Firestore `sounds` collection)
+- [x] Display sound metadata (title, description, category, duration, tags) (FirestoreSoundRepository)
+- [x] Show loading state during data fetch (Implemented)
+- [x] Handle loading errors with user-friendly messages (Implemented)
+- [x] Retry functionality on load failure (Implemented)
+- [ ] Real-time updates when metadata changes (Not implemented)
 
 #### Sound Display
 - [x] Display sound cards with title and description
@@ -57,25 +57,25 @@
 ### 4. Favorites Management
 
 #### Add Favorite
-- [x] Add sound to favorites via heart icon
-- [x] Require user authentication
-- [x] Sync with Supabase backend
-- [x] Update UI immediately (optimistic update)
-- [x] Handle locked content (show paywall)
-- [x] Error handling for failed additions
+- [x] Add sound to favorites via heart icon (Implemented)
+- [x] Require user authentication (Implemented)
+- [ ] Sync with Supabase backend (Not applicable - uses FirestoreFavoritesRepository)
+- [x] Update UI immediately (optimistic update) (Implemented)
+- [ ] Handle locked content (show paywall) (Not implemented)
+- [x] Error handling for failed additions (Implemented)
 
 #### Remove Favorite
-- [x] Remove sound from favorites via heart icon
-- [x] Require user authentication
-- [x] Sync with Supabase backend
-- [x] Update UI immediately
-- [x] Error handling for failed removals
+- [x] Remove sound from favorites via heart icon (Implemented)
+- [x] Require user authentication (Implemented)
+- [ ] Sync with Supabase backend (Not applicable - uses FirestoreFavoritesRepository)
+- [x] Update UI immediately (Implemented)
+- [x] Error handling for failed removals (Implemented)
 
 #### Favorite Status
-- [x] Display favorite status on sound cards
-- [x] Real-time favorite status updates
-- [x] Sync favorite status from backend
-- [x] Visual favorite indicator (filled heart)
+- [x] Display favorite status on sound cards (Implemented)
+- [ ] Real-time favorite status updates (Not implemented)
+- [x] Sync favorite status from backend (FirestoreFavoritesRepository)
+- [x] Visual favorite indicator (filled heart) (Implemented)
 
 ### 5. Subscription-Based Access Control
 

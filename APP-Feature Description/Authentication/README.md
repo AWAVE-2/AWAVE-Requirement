@@ -1,9 +1,9 @@
 # Authentication System - Feature Documentation
 
-**Feature Name:** Authentication & Account Management  
-**Status:** ✅ Complete  
-**Priority:** High  
-**Last Updated:** 2025-01-27
+**Feature Name:** Authentication & Account Management
+**Status:** ⚠️ Partially Complete (Core features done, OAuth and email verification pending)
+**Priority:** High
+**Last Updated:** 2026-01-29
 
 ## 📋 Feature Overview
 
@@ -33,40 +33,40 @@ The authentication system is built on Supabase Auth and provides:
 ## 🎯 Core Features
 
 ### 1. Email/Password Authentication
-- Sign up with email and password
-- Sign in with existing credentials
-- Password strength validation
-- Secure password storage
+- [x] Sign up with email and password
+- [x] Sign in with existing credentials
+- [x] Password strength validation
+- [x] Secure password storage
 
 ### 2. OAuth Authentication
-- **Google Sign-In** - Native Google authentication
-- **Apple Sign-In** - Native Apple authentication
-- Automatic profile creation
-- Avatar and name sync
+- [ ] **Google Sign-In** - Native Google authentication (placeholder only)
+- [ ] **Apple Sign-In** - Native Apple authentication (placeholder only)
+- [ ] Automatic profile creation
+- [ ] Avatar and name sync
 
 ### 3. Email Verification
-- Verification email sending
-- Deep link handling for verification
-- Resend functionality with cooldown
-- Status tracking (pending, verifying, success, error)
+- [ ] Verification email sending
+- [ ] Deep link handling for verification
+- [ ] Resend functionality with cooldown
+- [ ] Status tracking (pending, verifying, success, error)
 
 ### 4. Password Management
-- **Forgot Password** - Request reset link via email
-- **Reset Password** - Set new password with strength validation
-- Password visibility toggle
-- Real-time strength indicator
+- [ ] **Forgot Password** - Request reset link via email
+- [ ] **Reset Password** - Set new password with strength validation
+- [x] Password visibility toggle
+- [x] Real-time strength indicator
 
 ### 5. Session Management
-- Automatic token refresh
-- Session expiry handling
-- Multi-device session tracking
-- Secure session storage
+- [x] Automatic token refresh
+- [x] Session expiry handling
+- [ ] Multi-device session tracking
+- [x] Secure session storage
 
 ### 6. Registration Flow
-- Registration cache for preserving selections
-- Onboarding integration
-- Trial subscription creation
-- Profile setup
+- [ ] Registration cache for preserving selections
+- [x] Onboarding integration
+- [ ] Trial subscription creation
+- [x] Profile setup
 
 ---
 

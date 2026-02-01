@@ -36,10 +36,10 @@
 ### 2. Routing Logic
 
 #### State Checking
-- [x] Load onboarding state from local storage asynchronously
-- [x] Check onboarding completion flag
-- [x] Check user profile existence
-- [x] Handle storage read errors gracefully
+- [x] Load onboarding state from local storage asynchronously (OnboardingStorageService)
+- [x] Check onboarding completion flag (OnboardingStorageService)
+- [x] Check user profile existence (FirestoreUserRepository)
+- [x] Handle storage read errors gracefully (Implemented)
 
 #### Navigation Rules
 - [x] **If onboarding completed:**
@@ -69,15 +69,15 @@
 ### 3. State Management
 
 #### Onboarding State
-- [x] Read `awaveOnboardingCompleted` from storage
-- [x] Read `awaveOnboardingProfile` from storage
-- [x] Parse completion flag (string 'true' → boolean)
-- [x] Handle null/undefined values
-- [x] Use Promise.all for parallel reads
+- [x] Read `awaveOnboardingCompleted` from storage (OnboardingStorageService)
+- [x] Read `awaveOnboardingProfile` from storage (OnboardingStorageService)
+- [x] Parse completion flag (string 'true' → boolean) (OnboardingStorageService)
+- [x] Handle null/undefined values (Implemented)
+- [ ] Use Promise.all for parallel reads (Not applicable - Swift uses async/await)
 
 #### Storage Keys
-- [x] `awaveOnboardingCompleted` - Boolean flag
-- [x] `awaveOnboardingProfile` - JSON string of profile data
+- [x] `awaveOnboardingCompleted` - Boolean flag (OnboardingStorageService)
+- [x] `awaveOnboardingProfile` - JSON string of profile data (OnboardingStorageService)
 
 ### 4. Visual Design
 

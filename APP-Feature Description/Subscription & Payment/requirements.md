@@ -57,35 +57,35 @@
 ### 3. Receipt Validation
 
 #### Backend Validation
-- [x] Receipt sent to Supabase Edge Function
-- [x] Apple receipt validation (production)
-- [x] Apple receipt validation (sandbox fallback)
-- [x] Google receipt validation via Play API
-- [x] Validation result processing
-- [x] Receipt storage in database
-- [x] Subscription update after validation
-- [x] Error handling for invalid receipts
+- [ ] Receipt sent to Supabase Edge Function (Not implemented - app uses StoreKitManager)
+- [x] Apple receipt validation (production) (StoreKitManager)
+- [x] Apple receipt validation (sandbox fallback) (StoreKitManager)
+- [ ] Google receipt validation via Play API (Not applicable - iOS app)
+- [x] Validation result processing (StoreKitManager)
+- [ ] Receipt storage in database (Not implemented)
+- [ ] Subscription update after validation (Not fully implemented)
+- [x] Error handling for invalid receipts (Implemented)
 
 #### Receipt Storage
-- [x] Receipt data stored in `iap_receipts` table
-- [x] Transaction ID storage
-- [x] Original transaction ID storage
-- [x] Platform identification (iOS/Android)
-- [x] Purchase date storage
-- [x] Expiration date storage
-- [x] Trial period flag storage
-- [x] Intro offer flag storage
+- [ ] Receipt data stored in `iap_receipts` table (Not implemented)
+- [ ] Transaction ID storage (Not implemented)
+- [ ] Original transaction ID storage (Not implemented)
+- [ ] Platform identification (iOS/Android) (Not implemented)
+- [ ] Purchase date storage (Not implemented)
+- [ ] Expiration date storage (Not implemented)
+- [ ] Trial period flag storage (Not implemented)
+- [ ] Intro offer flag storage (Not implemented)
 
 ### 4. Trial Management
 
 #### Trial Creation
-- [x] Automatic trial creation on signup
-- [x] 7-day trial period
-- [x] Trial start date tracking
-- [x] Trial end date calculation
-- [x] Trial days remaining calculation
-- [x] Trial status tracking (active/expired)
-- [x] Trial subscription record creation
+- [ ] Automatic trial creation on signup (Not implemented)
+- [ ] 7-day trial period (Not implemented)
+- [ ] Trial start date tracking (Not implemented)
+- [ ] Trial end date calculation (Not implemented)
+- [ ] Trial days remaining calculation (Not implemented)
+- [ ] Trial status tracking (active/expired) (Not implemented)
+- [ ] Trial subscription record creation (Not implemented)
 
 #### Trial Status
 - [x] Trial status display

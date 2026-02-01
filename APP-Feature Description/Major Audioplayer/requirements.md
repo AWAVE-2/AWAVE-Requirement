@@ -103,35 +103,35 @@
 ### 6. Procedural Sound Generation
 
 #### Wave Sound Generation
-- [x] Generate ocean wave sounds
-- [x] Generate lake wave sounds
-- [x] Generate river wave sounds
-- [x] Configurable duration (default 300s)
-- [x] Native module integration
-- [x] File caching and storage
+- [ ] Generate ocean wave sounds
+- [ ] Generate lake wave sounds
+- [ ] Generate river wave sounds
+- [ ] Configurable duration (default 300s)
+- [ ] Native module integration
+- [ ] File caching and storage
 
 #### Rain Sound Generation
-- [x] Generate light rain sounds
-- [x] Generate medium rain sounds
-- [x] Generate heavy rain sounds
-- [x] Configurable duration
-- [x] Native module integration
-- [x] File caching and storage
+- [ ] Generate light rain sounds
+- [ ] Generate medium rain sounds
+- [ ] Generate heavy rain sounds
+- [ ] Configurable duration
+- [ ] Native module integration
+- [ ] File caching and storage
 
 #### Noise Sound Generation
-- [x] Generate white noise
-- [x] Generate pink noise
-- [x] Generate brown noise
-- [x] Configurable duration
-- [x] Native module integration
-- [x] File caching and storage
+- [ ] Generate white noise
+- [ ] Generate pink noise
+- [ ] Generate brown noise
+- [ ] Configurable duration
+- [ ] Native module integration
+- [ ] File caching and storage
 
 #### Cache Management
-- [x] Check for existing generated files
-- [x] Cache files for 7 days
-- [x] Automatic cleanup of old files
-- [x] Regenerate if cache expired
-- [x] Directory structure management
+- [ ] Check for existing generated files
+- [ ] Cache files for 7 days
+- [ ] Automatic cleanup of old files
+- [ ] Regenerate if cache expired
+- [ ] Directory structure management
 
 ### 7. Session Tracking
 
@@ -178,7 +178,7 @@
 ### 9. Audio Source Management
 
 #### Source Priority
-- [x] Generated sounds (highest priority)
+- [ ] Generated sounds (highest priority)
 - [x] Local files (downloaded)
 - [x] Server streaming (Supabase)
 - [x] Automatic source selection
@@ -187,7 +187,7 @@
 #### Audio Loading
 - [x] Load from Supabase storage
 - [x] Load from local file system
-- [x] Generate procedural sounds
+- [ ] Generate procedural sounds
 - [x] Download management
 - [x] Error handling for failed loads
 
@@ -271,11 +271,11 @@
 - [x] Gradient animations are continuous
 
 ### Sound Generation
-- [x] Generated sounds are created within 5 seconds
-- [x] Cached sounds load instantly
-- [x] Old cache files are cleaned up automatically
-- [x] Generation errors are handled gracefully
-- [x] Generated files are stored correctly
+- [ ] Generated sounds are created within 5 seconds
+- [ ] Cached sounds load instantly
+- [ ] Old cache files are cleaned up automatically
+- [ ] Generation errors are handled gracefully
+- [ ] Generated files are stored correctly
 
 ### Session Tracking
 - [x] Sessions are created on playback start

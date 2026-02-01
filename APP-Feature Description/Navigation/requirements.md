@@ -15,11 +15,11 @@
 - [x] Screen transitions with animations
 
 #### Route Definitions
-- [x] Type-safe route parameter definitions (RootStackParamList)
-- [x] Route names match blueprint exactly
-- [x] Optional route parameters supported
-- [x] Route parameter validation
-- [x] TypeScript type checking for navigation
+- [ ] Type-safe route parameter definitions (RootStackParamList) (Not applicable - Swift uses NavigationStack, not React Navigation)
+- [x] Route names match blueprint exactly (Implemented)
+- [x] Optional route parameters supported (Implemented)
+- [x] Route parameter validation (Implemented)
+- [ ] TypeScript type checking for navigation (Not applicable - Swift uses Swift types)
 
 #### Screen Registration
 - [x] All screens registered in stack navigator
@@ -31,12 +31,12 @@
 ### 2. Tab Navigation
 
 #### Custom Tab Navigator
-- [x] Custom tab navigator replaces React Navigation bottom tabs
-- [x] Tab state managed locally (not by React Navigation)
-- [x] Initial tab determination from onboarding
-- [x] Tab persistence across app lifecycle
-- [x] Tab switching with screen rendering
-- [x] Active tab state tracking
+- [ ] Custom tab navigator replaces React Navigation bottom tabs (Not applicable - Swift uses TabView)
+- [x] Tab state managed locally (MainTabView)
+- [x] Initial tab determination from onboarding (OnboardingStorageService)
+- [x] Tab persistence across app lifecycle (Implemented)
+- [x] Tab switching with screen rendering (TabView)
+- [x] Active tab state tracking (Implemented)
 
 #### Category Tabs
 - [x] 3 category tabs (schlafen, stress, leichtigkeit)
@@ -53,11 +53,11 @@
 - [x] Tab state preserved during modal open
 
 #### Tab State Management
-- [x] Initial tab loaded from onboarding storage
-- [x] Initial tab can be passed as route parameter
-- [x] Default tab fallback to 'schlafen'
-- [x] Tab state updates on tab press
-- [x] Last active tab tracking before modal
+- [x] Initial tab loaded from onboarding storage (OnboardingStorageService)
+- [x] Initial tab can be passed as route parameter (Implemented)
+- [x] Default tab fallback to 'schlafen' (Implemented)
+- [x] Tab state updates on tab press (TabView)
+- [x] Last active tab tracking before modal (Implemented)
 
 ### 3. Modal & Drawer Navigation
 
@@ -149,16 +149,16 @@
 - [x] Initial tab loaded from storage
 
 #### Navigation History
-- [x] Last active tab before search tracked
-- [x] Navigation stack maintained by React Navigation
-- [x] Back button functionality
-- [x] Navigation history preserved
+- [x] Last active tab before search tracked (Implemented)
+- [ ] Navigation stack maintained by React Navigation (Not applicable - Swift uses NavigationStack)
+- [x] Back button functionality (NavigationStack)
+- [x] Navigation history preserved (NavigationStack)
 
 #### State Persistence
-- [x] Onboarding state loaded from AsyncStorage
-- [x] Category selection loaded from storage
-- [x] Navigation state recovery on app launch
-- [x] State synchronization with backend
+- [ ] Onboarding state loaded from AsyncStorage (Not applicable - uses OnboardingStorageService)
+- [x] Category selection loaded from storage (OnboardingStorageService)
+- [x] Navigation state recovery on app launch (Implemented)
+- [x] State synchronization with backend (FirestoreUserRepository)
 
 ---
 
