@@ -56,7 +56,6 @@ AWAVE-Requirement/
 │   │
 │   ├── APIs and Business Logic/      # API integrations and business logic
 │   ├── Databases/                    # Database schemas and specifications
-│   │   └── supabase/                 # Supabase-specific documentation
 │   │
 │   ├── Styles and UI/                # UI components and styling
 │   │
@@ -135,7 +134,6 @@ Each feature folder typically contains:
 ### Backend & Infrastructure
 - [APIs and Business Logic](APP-Feature%20Description/APIs%20and%20Business%20Logic/)
 - [Databases](APP-Feature%20Description/Databases/)
-- [Supabase Documentation](APP-Feature%20Description/Databases/supabase/)
 
 ### Migration Status
 - [Migration Summary](APP-Feature%20Description/MIGRATION_SUMMARY.md)

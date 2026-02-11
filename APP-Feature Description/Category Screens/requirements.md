@@ -39,7 +39,7 @@
 ### 3. Sound Display and Interaction
 
 #### Sound Grid
-- [x] Sound cards with airplane window design
+- [x] Sound cards
 - [x] Sound title and description display
 - [x] Sound image display
 - [x] Sound selection handling

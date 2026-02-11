@@ -13,6 +13,7 @@
 | 04 | `04-AUDIO-ARCHITECTURE.md` | Audio engine design (how sound works) |
 | 05 | `05-REQUIREMENTS-SUMMARY.md` | This document (overview + roadmap) |
 | 06 | `06-PROJECT-INTEGRATION-PLAN.md` | Project integration plan (Done / Open ToDo, EPICs, links to all requirements) |
+| 07 | `07-PRODUCTION-READY-OVERVIEW.md` | Production ready overview and full parity check (PRD, F01–F16, quality criteria, ship checklist) |
 
 ---
 

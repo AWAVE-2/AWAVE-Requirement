@@ -3,7 +3,7 @@
 
 **Purpose:** Single documented overview of all requirements, with Done vs Open ToDo Review and full traceability to PRD, Feature Specs, and APP-Feature Description (user stories).
 
-**Related PRD docs:** [01-PRD](01-PRD.md) · [02-FEATURE-SPECS](02-FEATURE-SPECS.md) · [03-DATA-MODELS](03-DATA-MODELS.swift) · [04-AUDIO-ARCHITECTURE](04-AUDIO-ARCHITECTURE.md) · [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md)
+**Related PRD docs:** [01-PRD](01-PRD.md) · [02-FEATURE-SPECS](02-FEATURE-SPECS.md) · [03-DATA-MODELS](03-DATA-MODELS.swift) · [04-AUDIO-ARCHITECTURE](04-AUDIO-ARCHITECTURE.md) · [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md) · [07-PRODUCTION-READY-OVERVIEW](07-PRODUCTION-READY-OVERVIEW.md)
 
 ---
 
@@ -16,6 +16,7 @@
 | **DATA-MODELS** | [docs/Requirements/PRD/03-DATA-MODELS.swift](03-DATA-MODELS.swift) – Swift data structures |
 | **AUDIO-ARCH** | [docs/Requirements/PRD/04-AUDIO-ARCHITECTURE.md](04-AUDIO-ARCHITECTURE.md) – Audio engine design |
 | **REQ-SUMMARY** | [docs/Requirements/PRD/05-REQUIREMENTS-SUMMARY.md](05-REQUIREMENTS-SUMMARY.md) – Scope, risks, phases, quality criteria |
+| **PROD-READY** | [docs/Requirements/PRD/07-PRODUCTION-READY-OVERVIEW.md](07-PRODUCTION-READY-OVERVIEW.md) – Production ready checklist, parity check |
 | **APP-Feature** | [docs/Requirements/APP-Feature Description/](../APP-Feature%20Description/) – Feature folders (requirements, user-flows, technical-spec, components, services) |
 
 **Link convention:** Feature folders are referenced as `APP-Feature Description/<FeatureName>/`; user stories and requirements live in `requirements.md`, `user-flows.md`, and related files inside each folder.
@@ -45,13 +46,36 @@ Items below are considered done for the purpose of this plan (e.g. documentation
 | Structure summary | Feature folder list and doc structure per feature | [APP-Feature Description/STRUCTURE_SUMMARY.md](../APP-Feature%20Description/STRUCTURE_SUMMARY.md) |
 | Requirements update summary | Alignment of requirements to Swift/Firebase stack | [REQUIREMENTS_UPDATE_SUMMARY.md](../REQUIREMENTS_UPDATE_SUMMARY.md) |
 
-### 1.3 Delivered Features / Implementation (to be updated)
+### 1.3 Delivered Features / Implementation
 
-*Add rows here when a feature is implemented and accepted (e.g. “Splash & Content Loader – F01, F02 – Done”). Leave empty until first deliveries.*
+*Add rows here when a feature is implemented and accepted (e.g. “Splash & Content Loader – F01, F02 – Done”). Full parity check: [07-PRODUCTION-READY-OVERVIEW](07-PRODUCTION-READY-OVERVIEW.md).*
 
 | Feature / EPIC | PRD / Spec ref | Feature folder | Status |
 |----------------|----------------|----------------|--------|
-| *(none yet)* | — | — | — |
+| Splash & Preloader | F01, F02 | Start Screens | Done |
+| Main Menu & Tab Navigation | F03 | Navigation | Done |
+| Category Screens (Meditation) | F04 | Category Screens | Done |
+| Symptom Finder / Search | F05 | Search Drawer | Partial |
+| SOS Screen | F06 | SOS Screen | Done |
+| User Session Config / Guided Session | F07 | Major Audioplayer | Done |
+| Soundscapes / Klangwelten | F08 | Klangwelten | Done |
+| Live Player | F09 | Major Audioplayer | Done |
+| After Session | F10 | Major Audioplayer | Partial |
+| Favorites / Custom Mixes | F11 | Favorite Functionality | Done |
+| Session Editor (Pro) | F12 | Major Audioplayer | Open |
+| Info Menu | F13 | Support, Legal | Partial |
+| Upgrade / Subscription | F14 | Subscription & Payment | Done |
+| EEG View | F15 | — | Deferred |
+| Dialog System | F16 | Styles and UI | Partial |
+| Authentication | — | Authentication | Done |
+| Onboarding, Profile, Library, Offline, Stats | — | Various | Done |
+| 3-track playback | §7.1 | Major Audioplayer | Done |
+| Frequency synthesis, Noise, Multi-phase | §7.3–7.4, §6 | Audio Architecture | Open |
+| Demo timer, .awave import/export, Pro SHA256 | §2, §10.3 | Various | Open |
+| Real user ID (no local-user), Sleep timer, Seeking | — | Cross-cutting | Open |
+| Schlafscreen Hero → Full-Player, Session min. 3 Phasen, Content-ID-Schema & Mapping-Fallback | Session Generation, Major Audioplayer | Session Generation, Major Audioplayer | Done |
+
+**Regression nach Session-/Vollsession-Umsetzung:** Session-Generierung und Playback, Lock Screen und Dynamic Island manuell prüfen (Checkliste: [docs/learn/PLAY_TESTS_LOCKSCREEN_DYNAMIC_ISLAND.md](../../learn/PLAY_TESTS_LOCKSCREEN_DYNAMIC_ISLAND.md)); kein Dispatch-/Main-Thread-Crash.
 
 ---
 
@@ -262,4 +286,4 @@ For sequencing, see [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md) §4:
 
 ---
 
-*Document version: 1.0 · Single overview alongside [PRD](01-PRD.md) and [Requirements Summary](05-REQUIREMENTS-SUMMARY.md).*
+*Document version: 1.1 · Single overview alongside [PRD](01-PRD.md), [Requirements Summary](05-REQUIREMENTS-SUMMARY.md), and [Production Ready Overview](07-PRODUCTION-READY-OVERVIEW.md).*

@@ -3,8 +3,23 @@
 **Feature Name:** Major Audioplayer & Multi-Track Audio System
 **Status:** ⚠️ Partially Complete (Basic 3-track mixer done, advanced features pending)
 **Priority:** High
-**Last Updated:** 2026-01-29
+**Last Updated:** 2026-02-06
 **Swift Implementation:** Basic mixer with 3 tracks (vs. required 7 tracks)
+
+### Full-Player Screen Design (Swift UI)
+
+The Major Audio Player is presented as a **full-screen cover** (no tab bar). One screen contains **two components**:
+
+1. **Upper area (session playback):** Full-bleed visualization, session/track title, progress slider, and transport (Play, Nächste Session, Letzte Session in session mode). No navigation or share/options buttons in the player.
+2. **Lower area (mixer):** Reachable by **swipe-up** or tap on „Mehr anzeigen“. An in-screen drawer shows the same mixer content as `MixerSheetView` (mode picker, track slots, Mix speichern). Swipe-down on the drawer closes it; swipe-down on the main area closes the full player.
+
+**Gestures:**
+
+- **Swipe-down** on the main area: closes the full player; **playback continues** and is handed over to the mini-player strip.
+- **Swipe-up** (or tap „Mehr anzeigen“): reveals the mixer drawer.
+- **Swipe-down** on the mixer drawer: closes the drawer only.
+
+**Session Generator:** After generating a session, the generator dismisses and the full player opens automatically („sofort starten“).
 
 ## 📋 Feature Overview
 

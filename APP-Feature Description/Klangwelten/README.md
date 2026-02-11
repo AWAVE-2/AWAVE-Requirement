@@ -87,6 +87,15 @@ Klangwelten is a **multi-track audio mixing system (multiplayer setup)** that al
 - `useMultiTrackMixer` - Multi-track mixing hook
 - `NativeMultiTrackAudioService` - Native audio service
 
+### Swift Sound Drawer (iOS)
+
+From category screens (Schlaf, Ruhe, Im Fluss) and Home, the **Sound Drawer** is presented as a bottom sheet when the user taps **"Klangwelten erstellen"**:
+
+- **Selection phase:** Three horizontal carousels; one sound selectable per carousel (radio). Confirm button loads the three tracks and switches to the player phase.
+- **Player phase:** Title, time display, seek slider, play/pause, stop. "Zurück zur Auswahl" returns to selection. **Swipe up** (or tap "Mehr anzeigen") reveals the **nested mixer** (`MixerEmbeddedView`) in the same drawer; swipe down or tap the handle to hide it.
+
+**Swift components:** `KlangweltenSoundDrawerView`, `SingleSelectionCarouselView`. Handover and summary: `docs/Klangwelten-Sound-Drawer/`.
+
 ---
 
 ## 📱 Screens
