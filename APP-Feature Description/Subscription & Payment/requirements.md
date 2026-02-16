@@ -57,7 +57,7 @@
 ### 3. Receipt Validation
 
 #### Backend Validation
-- [ ] Receipt sent to Supabase Edge Function (Not implemented - app uses StoreKitManager)
+- [ ] Receipt sent to backend (e.g. Cloud Function) (Not implemented; app uses StoreKitManager)
 - [x] Apple receipt validation (production) (StoreKitManager)
 - [x] Apple receipt validation (sandbox fallback) (StoreKitManager)
 - [ ] Google receipt validation via Play API (Not applicable - iOS app)

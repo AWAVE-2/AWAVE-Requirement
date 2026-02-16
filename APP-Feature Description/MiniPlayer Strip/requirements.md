@@ -74,7 +74,7 @@
 #### Persistence
 - [ ] Save last played sound to local storage (Not implemented)
 - [ ] Restore last played sound on app restart (Not implemented)
-- [ ] Sync with Supabase for authenticated users (Not applicable - app uses Firebase)
+- [x] Sync with Firestore for authenticated users
 - [x] Clear state on explicit close (Implemented)
 
 ### 5. Integration
@@ -173,7 +173,7 @@
 ### Reliability
 - Graceful handling of missing artwork
 - Error handling for failed state operations
-- Network failure handling for Supabase sync
+- Network failure handling for Firebase sync
 - State recovery after app crashes
 
 ---
@@ -188,7 +188,7 @@
 
 ### Network Issues
 - [x] Continue working offline (local state)
-- [ ] Queue Supabase sync for when online (Not applicable - app uses Firebase)
+- [ ] Queue Firebase sync for when online (Not implemented)
 - [x] Handle sync failures gracefully
 - [x] Show appropriate error states
 
@@ -225,8 +225,8 @@
 ## 🔐 Security & Privacy
 
 ### Data Storage
-- Sound data stored locally (AsyncStorage)
-- Supabase sync only for authenticated users
+- Sound data stored locally (UserDefaults / Swift)
+- Firebase sync for authenticated users (Firestore)
 - No sensitive data in component state
 - Proper cleanup on component unmount
 

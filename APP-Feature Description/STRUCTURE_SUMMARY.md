@@ -12,7 +12,7 @@ A comprehensive folder structure has been created for documenting all features o
 3. **Index & Landing/** - Entry point and landing screens
 
 #### Main Navigation & Content (4)
-4. **Main Navigation/** - Navigation structure and routing
+4. **Navigation/** - Navigation structure and routing
 5. **Category Screens/** - Main content category screens (Schlaf, Ruhe, Im Fluss)
 6. **Start Screens/** - Home screen variations
 7. **Klangwelten/** - Sound world exploration
@@ -23,7 +23,7 @@ A comprehensive folder structure has been created for documenting all features o
    - Multi Trackplayer Setup/
    - Player Funktionality/
 9. **Library/** - User's audio library
-10. **Sound Search /** - Sound discovery and search
+10. **Seach Drawer/** - Search Drawer (sound discovery and search)
 11. **Background Audio/** - Background playback support
 12. **Favorite Functionality/** - Favorites management
 
@@ -47,6 +47,9 @@ A comprehensive folder structure has been created for documenting all features o
 21. **Visual Effects/** - Visual enhancements and animations
 22. **Notifications/** - Push notifications
 23. **Offline Support/** - Offline functionality
+
+#### Parity & baseline (1)
+24. **Backlog-Parity-OLD-APP-and-Web/** - Single backlog of features from OLD-APP (V.1) and Web App not yet in current iOS; current iOS = baseline for Android. Supersedes deprecated "missing migration from OLD-APP" and "missing migration from React APP (Lovalbe)" folders.
 
 ## 📄 Documentation Files Created
 

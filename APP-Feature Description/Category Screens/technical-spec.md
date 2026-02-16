@@ -5,28 +5,27 @@
 ### Technology Stack
 
 #### Backend
-- **Supabase** - Primary data source
-  - `audio_categories` table - Category metadata
-  - `sound_metadata` table - Sound metadata
+- **Firestore** - Primary data source (Firebase / Google Cloud)
+  - `sounds` collection - Sound metadata (with category)
+  - Category data via FirestoreSoundRepository
   - Real-time subscriptions (future enhancement)
 
 #### State Management
-- **React Context API** - `CategoryContext` for global category state
-- **Custom Hooks** - `useCategoryManagement`, `useCategoryContext`
-- **AsyncStorage** - Local caching and persistence
+- **SwiftUI / @Observable** - ViewModels and shared state
+- **OnboardingStorageService** - Category selection persistence
+- **UserDefaults** - Local caching where needed
 
 #### UI Components
-- **React Native** - Core UI framework
-- **React Native Linear Gradient** - Gradient backgrounds
-- **Lucide React Native** - Icons (Sparkles, Activity)
-- **React Navigation** - Navigation structure
+- **SwiftUI** - Core UI framework
+- **AWAVEDesign** - Gradients, spacing, colors
+- **SF Symbols** - Icons
+- **NavigationStack / TabView** - Navigation structure
 
 #### Services Layer
-- `CategoryService` - Backend data fetching
-- `onboardingStorage` - Category selection persistence
-- `useSoundPlayer` - Audio playback integration
-- `useFavoritesManagement` - Favorites handling
-- `useCustomSounds` - Custom sounds management
+- `FirestoreSoundRepository` - Backend data fetching
+- `OnboardingStorageService` - Category selection persistence
+- Player and Favorites - Via FirestoreSessionTracker, FirestoreFavoritesRepository
+- Custom mixes - FirestoreCustomMixRepository
 
 ---
 
@@ -272,12 +271,11 @@ interface SoundGridProps {
 
 **Methods:**
 
-**`fetchPrimaryCategories(): Promise<Category[]>`**
-- Fetches all three primary categories from Supabase
-- Fetches category metadata from `audio_categories` table
-- Fetches sound metadata from `sound_metadata` table
-- Merges backend data with fallback data
-- Returns ordered categories array
+**Category/sound fetching (FirestoreSoundRepository):**
+- Fetches primary categories and sound metadata from Firestore `sounds` collection
+- Uses FirestoreSoundRepository (getSounds, filter by category)
+- Merges backend data with fallback data where applicable
+- Returns ordered categories/sounds for UI
 
 **Data Fetching:**
 - Fetches from `audio_categories` table (id, name, display_name, description, icon_name, color_hex, sort_order)
@@ -448,7 +446,7 @@ interface CategoryContent {
 1. App starts → `CategoryProvider` mounts
 2. `loadInitialCategories` called
 3. `CategoryService.fetchPrimaryCategories()` fetches data
-4. Categories loaded from Supabase or fallback
+4. Categories loaded from Firestore or fallback
 5. Initial category selected from onboarding storage
 6. `orderedCategories` state updated
 
@@ -456,53 +454,16 @@ interface CategoryContent {
 
 ## 🌐 API Integration
 
-### Supabase Tables
+### Firestore Collections
 
-#### audio_categories
-```sql
-- id: string
-- name: string (schlafen, stress, leichtigkeit)
-- display_name: string
-- description: string | null
-- icon_name: string | null
-- color_hex: string | null
-- sort_order: number | null
-```
+#### sounds (primary for category/sound metadata)
+- Documents with fields: contentId, title, category, tags, fileURL, etc. (see FIRESTORE_SCHEMA.md)
+- Category filtering via FirestoreSoundRepository.getSounds(category:)
+- Sound metadata used for grid and playback
 
-#### sound_metadata
-```sql
-- sound_id: string
-- title: string | null
-- description: string | null
-- category_id: string | null
-- tags: string[] | null
-- keywords: string[] | null
-- search_weight: number | null
-- metadata: JSON | null
-- image_url: string | null
-- artwork_url: string | null
-- bucket_id: string | null
-- storage_path: string | null
-- created_at: string
-- updated_at: string
-```
-
-### Query Patterns
-```typescript
-// Fetch categories
-supabase
-  .from('audio_categories')
-  .select('id, name, display_name, description, icon_name, color_hex, sort_order')
-  .in('name', ['schlafen', 'stress', 'leichtigkeit'])
-
-// Fetch sounds for category
-supabase
-  .from('sound_metadata')
-  .select('sound_id, title, description, category_id, tags, keywords, search_weight, metadata, image_url, artwork_url, bucket_id, storage_path')
-  .eq('category_id', categoryId)
-  .order('search_weight', { ascending: false })
-  .limit(8)
-```
+### Query Patterns (Swift / Firestore)
+- FirestoreSoundRepository.getSounds() / filter by category
+- No direct Supabase; all data from Firestore (Google Cloud)
 
 ---
 
@@ -553,7 +514,7 @@ supabase
 ## 🐛 Error Handling
 
 ### Error Types
-- Network errors (Supabase connection failures)
+- Network errors (Firestore/connection failures)
 - Data validation errors (invalid category/sound data)
 - Storage errors (AsyncStorage failures)
 - Navigation errors (invalid routes)
@@ -592,7 +553,7 @@ supabase
 ## 🔐 Security Considerations
 
 ### Data Security
-- Category data fetched from authenticated Supabase
+- Category data from Firestore (public read for sounds; auth where required)
 - Sound metadata validated before display
 - Category selection stored securely
 - No sensitive data in category screens

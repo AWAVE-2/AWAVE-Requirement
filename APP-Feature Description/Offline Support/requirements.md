@@ -34,7 +34,7 @@
 ### 2. Audio Download System
 
 #### Download Capabilities
-- [ ] Download audio files from Supabase Storage (Not applicable - uses Firebase Storage)
+- [x] Download audio files from Firebase Storage (FirebaseStorageRepository)
 - [x] On-demand download when playing non-downloaded sounds (FirebaseStorageRepository)
 - [ ] Background download of user favorites (Not implemented)
 - [ ] Category-based bulk downloads (Not implemented)
@@ -72,7 +72,7 @@
 - [x] Connectivity status display
 
 #### Network Diagnostics
-- [ ] Supabase connection testing (Not applicable - app uses Firebase)
+- [ ] Firebase/network connection testing (optional)
 - [ ] Latency measurement (Not implemented)
 - [x] Error detection and reporting (Implemented)
 - [x] User-friendly error messages (Implemented)
@@ -229,7 +229,7 @@
 - Storage errors are handled gracefully
 
 ### Reliability
-- Queue operations are never lost (persisted to AsyncStorage)
+- Queue operations are never lost (persisted to local storage when offline queue implemented)
 - Downloads can be resumed after interruption
 - Network state changes are detected reliably
 - Sync operations complete successfully
@@ -299,7 +299,7 @@
 
 ### Data Protection
 - Downloaded files stored securely on device
-- Queue data encrypted in AsyncStorage
+- Queue data encrypted in local storage (when implemented)
 - No sensitive data in logs
 - Secure file deletion on cache cleanup
 

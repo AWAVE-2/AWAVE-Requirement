@@ -271,11 +271,11 @@ No Selection → Selection Made → Saved Locally → Synced to Backend
 
 ## 📝 Implementation Notes
 
-- Preloader timing matches React web app exactly
-- Onboarding slides match React web app content
+- Preloader timing matches reference specification
+- Onboarding slides match reference content
 - Storage keys use `awave*` prefix
 - Backend sync is optional (local storage is primary)
 - Guest mode supported (no authentication required)
 - Translation keys follow `t.onboarding.*` pattern
 - Icons are SVG components for scalability
-- Animations use React Native Reanimated for performance
+- Animations use SwiftUI for performance

@@ -2,13 +2,15 @@
 
 ## 📋 Core Requirements
 
-### 1. Supabase Database Integration
+### 1. Backend Database (Firestore – current)
+
+*Legacy requirements referred to Supabase; the app uses **Firebase (Firestore, Storage, Auth)** on Google Cloud.*
 
 #### Database Connection
-- [ ] Supabase client configured with production credentials (App uses Firebase, not Supabase)
-- [ ] Isolated storage adapter for session management (App uses Firebase, not Supabase)
-- [ ] Automatic token refresh enabled (App uses Firebase, not Supabase)
-- [ ] PKCE flow for secure authentication (App uses Firebase, not Supabase)
+- [x] Firebase/Firestore configured (production)
+- [x] Session management via Firebase Auth
+- [x] Automatic token refresh (Firebase Auth)
+- [x] Secure authentication (Firebase Auth; Apple Sign-In, email/password)
 - [ ] Connection health check functionality (Not implemented)
 - [x] Error handling for connection failures
 
@@ -256,10 +258,10 @@
 - [x] WaveformData validation
 
 #### Type Safety
-- [x] TypeScript interfaces for all tables
+- [x] Swift Codable types for all Firestore models
 - [x] Type-safe database queries
 - [x] Runtime type checking utilities
-- [x] JSONB field type definitions
+- [x] Structured field type definitions
 
 ---
 
@@ -280,9 +282,9 @@
 - Debug storage issues easily
 
 ### As a system, I need to:
-- Automatically sync offline operations when online
+- Automatically sync offline operations when online (Not implemented – no offline queue)
 - Validate all data before storage
-- Enforce security policies (RLS)
+- Enforce security policies (Firebase Security Rules)
 - Handle connection failures gracefully
 - Maintain data consistency
 
@@ -303,22 +305,22 @@
 - [x] Data persists across app restarts
 
 ### Offline Queue
-- [x] Operations queued when offline
-- [x] Queue processed automatically when online
-- [x] Failed operations retried up to 3 times
-- [x] Queue status available for debugging
+- [ ] Operations queued when offline (Not implemented)
+- [ ] Queue processed automatically when online (Not implemented)
+- [ ] Failed operations retried up to 3 times (Not implemented)
+- [ ] Queue status available for debugging (Not implemented)
 
 ### Data Operations
 - [x] All CRUD operations supported
-- [x] Type-safe queries with TypeScript
+- [x] Type-safe queries with Swift
 - [x] Error handling for all operations
 - [x] Data validation before storage
 
 ### Synchronization
-- [x] Offline operations synced when online
-- [x] Conflict resolution (server wins)
-- [x] Retry logic for transient failures
-- [x] Queue status tracking
+- [ ] Offline operations synced when online (Offline queue not implemented)
+- [ ] Conflict resolution (server wins) (Not implemented)
+- [ ] Retry logic for transient failures (Not implemented)
+- [ ] Queue status tracking (Not implemented)
 
 ---
 
@@ -332,8 +334,8 @@
 
 ### Security
 - All database connections use HTTPS
-- RLS policies enforce data isolation
-- Tokens stored securely (isolated storage)
+- Firebase Security Rules enforce data isolation
+- Tokens stored securely (Keychain / isolated storage)
 - No sensitive data in local storage
 
 ### Usability
@@ -404,7 +406,7 @@
 ## 🔐 Security Requirements
 
 ### Data Privacy
-- [x] RLS policies on all user tables
+- [x] Firebase Security Rules on user collections
 - [x] User data isolated by user_id
 - [x] No cross-user data access
 - [x] Secure token storage
@@ -412,14 +414,14 @@
 ### Data Integrity
 - [x] Input validation before storage
 - [x] Type checking for all operations
-- [x] JSONB structure validation
-- [x] Foreign key constraints
+- [x] Document structure validation
+- [x] Referential consistency where applicable
 
 ### Access Control
 - [x] Authenticated access for user data
 - [x] Public read access for sound_metadata
-- [x] Admin-only access for system tables
-- [x] Role-based access control (RLS)
+- [ ] Admin-only access for system tables (Not implemented)
+- [x] Role-based access via Firebase Security Rules
 
 ---
 

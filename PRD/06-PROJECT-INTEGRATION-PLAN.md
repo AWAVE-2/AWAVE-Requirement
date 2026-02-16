@@ -75,7 +75,7 @@ Items below are considered done for the purpose of this plan (e.g. documentation
 | Real user ID (no local-user), Sleep timer, Seeking | — | Cross-cutting | Open |
 | Schlafscreen Hero → Full-Player, Session min. 3 Phasen, Content-ID-Schema & Mapping-Fallback | Session Generation, Major Audioplayer | Session Generation, Major Audioplayer | Done |
 
-**Regression nach Session-/Vollsession-Umsetzung:** Session-Generierung und Playback, Lock Screen und Dynamic Island manuell prüfen (Checkliste: [docs/learn/PLAY_TESTS_LOCKSCREEN_DYNAMIC_ISLAND.md](../../learn/PLAY_TESTS_LOCKSCREEN_DYNAMIC_ISLAND.md)); kein Dispatch-/Main-Thread-Crash.
+**Regression after session/full-session implementation:** Manually verify session generation and playback, Lock Screen and Dynamic Island (checklist: [docs/learn/PLAY_TESTS_LOCKSCREEN_DYNAMIC_ISLAND.md](../../learn/PLAY_TESTS_LOCKSCREEN_DYNAMIC_ISLAND.md)); ensure no dispatch/main-thread crash.
 
 ---
 

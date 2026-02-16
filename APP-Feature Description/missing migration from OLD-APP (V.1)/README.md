@@ -1,97 +1,18 @@
-# Missing Features Migration from OLD-APP (V.1)
+# Deprecated: Missing Migration from OLD-APP (V.1)
 
-This folder documents features from the original AWAVE app (OLD-APP V.1) that need to be migrated to the React Native iOS app.
+**This folder is deprecated.** The migration target was previously "React Native iOS app"; the current app is **native iOS (Swift)** and is the **baseline for Android**.
 
-## 📋 Overview
+## Where to look instead
 
-The OLD-APP (V.1) is a Capacitor-based web app with extensive audio generation, session management, and content features. This document tracks all features that exist in V.1 but are missing or incomplete in the current React Native implementation.
+- **Parity backlog (single source of truth):** [Backlog-Parity-OLD-APP-and-Web](../Backlog-Parity-OLD-APP-and-Web/README.md)  
+  Lists all OLD-APP (V.1) and Web App features not yet in the current iOS app, with links to existing requirement folders and PRD.
 
-## 🎯 Migration Priority
+- **Current iOS features:** See the main [APP-Feature Description](../) folders (Session Generation, Major Audioplayer, Category Screens, SalesScreens, etc.) and [PRD](../../PRD/) for what is implemented or specified.
 
-### High Priority (Core Features)
-1. **Multi-Phase Session System** - Complex session editing with multiple phases
-2. **Frequency Generation System** - Binaural, monaural, isochronic beats
-3. **Noise Generation System** - White, pink, brown, grey, blue, violet noise
-4. **Session Import/Export** - Share sessions as .awave files
-5. **Content Database** - Extensive guided meditation and audio content library
+## Why this folder remains (read-only)
 
-### Medium Priority (User Experience)
-6. **Preset Sounds Library** - Preloaded audio files and preset configurations per category
-7. **Symptom Finder** - AI-like topic detection from user input
-8. **Multiple Voice Options** - Flo, Franca, Marion, Corinna voice selection
-9. **Live Volume Control** - Real-time volume adjustment during playback
-10. **Session Generator** - Topic-based automatic session generation
-11. **Preset Frequency Settings** - Gamma, beta, alpha, theta, delta presets
-
-### Low Priority (Advanced Features)
-11. **Pro Mode Unlock** - Hidden unlock mechanism
-12. **Session Phase Editor** - Advanced phase editing interface
-13. **Volume Slider Editor** - Per-phase volume control
-14. **Content Editor** - Live content switching during playback
-
-## 📁 Feature Folders
-
-Each missing feature has its own folder with complete documentation:
-- `Multi-Phase Session System/`
-- `Frequency Generation System/`
-- `Noise Generation System/`
-- `Session Import Export/`
-- `Content Database/`
-- `Preset Sounds Library/` - **Preloaded audio files and preset configurations**
-- `Symptom Finder/`
-- `Multiple Voice Options/`
-- `Live Volume Control/`
-- `Session Generator/`
-- `Preset Frequency Settings/`
-- `Pro Mode Unlock/`
-- `Session Phase Editor/`
-- `Volume Slider Editor/`
-- `Content Editor/`
-
-## 🔍 Source Code References
-
-### OLD-APP Repository
-- **Repository:** https://github.com/AWAVE-2/OLD-APP
-- **Main Entry:** `src/js/main.js`
-- **Session Management:** `src/js/session-object.js`
-- **Frequency/Noise:** `src/js/generator-frequency-noise.js`
-- **Content Database:** `src/js/content-database.js`
-- **Session Generator:** `src/js/generator-session-content.js`
-- **Live Editor:** `src/js/editor-live.js`
-- **Phase Editor:** `src/js/editor-phase.js`
-
-## 📊 Feature Comparison Matrix
-
-| Feature | OLD-APP (V.1) | React Native | Status |
-|---------|---------------|--------------|--------|
-| Multi-Phase Sessions | ✅ Full | ⚠️ Partial | Missing |
-| Frequency Generation | ✅ Full | ❌ None | Missing |
-| Noise Generation | ✅ Full | ❌ None | Missing |
-| Session Import/Export | ✅ Full | ❌ None | Missing |
-| Content Database | ✅ Full | ⚠️ Partial | Missing |
-| Symptom Finder | ✅ Full | ❌ None | Missing |
-| Multiple Voices | ✅ Full | ❌ None | Missing |
-| Live Volume Control | ✅ Full | ⚠️ Partial | Missing |
-| Session Generator | ✅ Full | ❌ None | Missing |
-| Preset Frequencies | ✅ Full | ❌ None | Missing |
-| Preset Sounds Library | ✅ Full | ❌ None | Missing |
-
-## 🚀 Migration Strategy
-
-1. **Phase 1:** Core audio generation (Frequency + Noise)
-2. **Phase 2:** Multi-phase session system
-3. **Phase 3:** Content database and session generator
-4. **Phase 4:** Advanced editing features
-5. **Phase 5:** Import/export and sharing
-
-## 📝 Notes
-
-- All features from OLD-APP should be reviewed for React Native compatibility
-- Some features may need native module implementations
-- Audio generation features require careful performance optimization
-- Session format compatibility must be maintained for import/export
+The subfolders here (Multi-Phase Session System, Frequency Generation System, Preset Sounds Library, Session Import Export, Content Database, etc.) still contain detailed OLD-APP specs. They are kept for **reference only** until that content is moved into Backlog-Parity or the main feature folders. Do not use this folder as the primary reference for new work or Android baseline.
 
 ---
 
-*Last Updated: 2025-01-27*
-*Total Missing Features: 15*
+*Deprecated: 2026-02-16. Replaced by Backlog-Parity-OLD-APP-and-Web.*

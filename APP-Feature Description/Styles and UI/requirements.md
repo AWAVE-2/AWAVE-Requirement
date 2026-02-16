@@ -286,7 +286,7 @@
 - Documentation is comprehensive
 
 ### Compatibility
-- React Native version compatibility
+- SwiftUI / iOS version compatibility
 - Platform version support (iOS 13+, Android 5+)
 - Font loading handled gracefully
 - Fallbacks for missing features
@@ -345,8 +345,8 @@
 
 ## 📝 Implementation Notes
 
-- All colors converted from HSL (web) to HEX (React Native)
-- Theme system ensures exact parity with React web app
+- All colors use SwiftUI Color / design system
+- Theme system ensures consistency across the app
 - Platform-specific optimizations improve performance
 - Glass morphism uses platform-native blur where available
 - Design tokens are the single source of truth

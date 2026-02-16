@@ -199,7 +199,7 @@ The audio player system is built on a **multiplayer architecture**:
 - **Subscription** - Premium feature access
 
 ### External Services
-- Supabase Storage (audio file streaming)
+- Firebase Storage (audio file streaming; Google Cloud)
 - Native Audio Engine (iOS/Android)
 - Session Tracking Service (analytics)
 - Audio Library Manager (download management)

@@ -13,7 +13,7 @@
 - [x] System updates notifications toggle
 
 #### Preference Storage
-- [ ] Preferences stored in Supabase database (Not implemented - app uses Firebase)
+- [ ] Preferences stored in Firebase/Firestore (Not implemented; app uses Firebase)
 - [ ] User-specific preferences (one record per user) (Not implemented)
 - [ ] Automatic preference creation for new users (Not implemented)
 - [ ] Default preferences (all enabled except marketing) (Not implemented)

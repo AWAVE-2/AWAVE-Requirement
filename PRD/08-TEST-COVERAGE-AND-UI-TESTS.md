@@ -123,7 +123,7 @@ The following IDs are taken from [TEST_COVERAGE.md](../TEST_COVERAGE.md) and for
 | CUJ-05 | Search → Session (no SOS): Search drawer → Text → Topic match → Session → Play | High | F05, F07, F09 |
 | CUJ-06 | Search → SOS: Search drawer → SOS keyword → SOS screen → Call/Chat/Dismiss | High | F05, F06 |
 | CUJ-07 | Favorites: Add from player/list; remove from list; list updates | Medium | F11 |
-| CUJ-08 | Category: ≥5 sessions visible; tap “Generate new session” → new session appears | Critical | F04, §3.4 |
+| CUJ-08 | Category: ≥5 sessions visible; tap "Generate new session" → new session appears | Critical | F04, §3.4 |
 
 *Note: CUJ-05 depends on sound generation via search; currently not working (see §2).*
 
@@ -136,7 +136,7 @@ The following IDs are taken from [TEST_COVERAGE.md](../TEST_COVERAGE.md) and for
   - **Given** app is launched **When** Preloader is shown **Then** logo/branding visible, after ~3 s fade-out and navigation.
   - **Given** onboarding not completed **When** Preloader ends **Then** navigate to Onboarding (full slides).
   - **Given** onboarding completed **When** Preloader ends **Then** navigate to Main Tabs; initial tab may depend on category.
-  - **Given** first-time user **When** on last slide (category) **Then** category selectable, “Get Started” active only after selection; tap → Main Tabs.
+  - **Given** first-time user **When** on last slide (category) **Then** category selectable, "Get Started" active only after selection; tap → Main Tabs.
   - **Given** user has completed onboarding **When** app is restarted **Then** no onboarding, direct entry to Main Tabs.
 - **Priority:** High (CUJ-01).
 
@@ -152,10 +152,10 @@ The following IDs are taken from [TEST_COVERAGE.md](../TEST_COVERAGE.md) and for
 
 #### 3. Categories (F04)
 
-- **Description:** Sleep, Stress, In Flow: session list, “Generate new session”, navigation to Session Config.
+- **Description:** Sleep, Stress, In Flow: session list, "Generate new session", navigation to Session Config.
 - **Test cases:**
-  - **Given** user on category screen (e.g. Sleep) **Then** at least 5 sessions visible, “Generate new session” (or equivalent) button visible.
-  - **Given** user on category screen **When** “Generate new session” tapped **Then** short loading indicator, new session in list, list updated.
+  - **Given** user on category screen (e.g. Sleep) **Then** at least 5 sessions visible, "Generate new session" (or equivalent) button visible.
+  - **Given** user on category screen **When** "Generate new session" tapped **Then** short loading indicator, new session in list, list updated.
   - **Given** user has sessions in a category **When** navigate to Home and back to category **Then** previous sessions still visible (no unexpected reset).
   - **Given** user on category screen **When** session tapped **Then** navigate to User Session Config (or session detail); Start/Regenerate available from there.
 - **Priority:** Critical (CUJ-02, CUJ-08).
@@ -164,9 +164,9 @@ The following IDs are taken from [TEST_COVERAGE.md](../TEST_COVERAGE.md) and for
 
 - **Description:** Open search drawer, text input, topic match → session; SOS keywords → SOS screen, Call/Chat, Dismiss.
 - **Test cases:**
-  - **Given** search drawer open **When** text entered (e.g. “I can’t sleep”) **Then** input accepted, keyword matching runs (possibly with debounce).
+  - **Given** search drawer open **When** text entered (e.g. "I can't sleep") **Then** input accepted, keyword matching runs (possibly with debounce).
   - **Given** text matches a topic **When** match complete **Then** session is created, user can go to Config/Playback.
-  - **Given** text matches no topic **When** match complete **Then** error or “Choose topic” dialog/message; correction or manual selection possible.
+  - **Given** text matches no topic **When** match complete **Then** error or "Choose topic" dialog/message; correction or manual selection possible.
   - **Given** text contains no SOS keywords **When** search runs **Then** SOS screen does not appear, normal search/session flow.
   - **Given** text contains SOS keyword **When** search runs **Then** SOS screen appears in time; Call button with number, possibly Chat button; Dismiss closes and resets state.
 - **Priority:** High (CUJ-05, CUJ-06). *Sound generation from search is currently not working (§2).*
@@ -175,10 +175,10 @@ The following IDs are taken from [TEST_COVERAGE.md](../TEST_COVERAGE.md) and for
 
 - **Description:** Session overview, Start, Live Player: Play/Pause, progress/timer, Exit/Restart; Mini-Player if applicable.
 - **Test cases:**
-  - **Given** user on Session Config **Then** session name and duration (or overview) visible, “Start”/“Start session” button visible.
+  - **Given** user on Session Config **Then** session name and duration (or overview) visible, "Start"/"Start session" button visible.
   - **Given** session with voice **When** on Config **Then** voice selection (e.g. Franca, Flo, Marion, Corinna) available; preview if applicable.
   - **Given** session with frequency **When** on Config **Then** frequency on/off toggle; selection applied on start.
-  - **Given** user on Session Config **When** “Start session” tapped **Then** playback starts, navigate to Live Player; Play ↔ Pause, timer/progress visible.
+  - **Given** user on Session Config **When** "Start session" tapped **Then** playback starts, navigate to Live Player; Play ↔ Pause, timer/progress visible.
   - **Given** playback running **When** Pause tapped **Then** audio paused; Play again **Then** resume at same position.
   - **Given** user in Live Player **When** Exit tapped **Then** possibly confirmation, then return to previous screen; Restart starts session from beginning.
   - **Given** playback running **When** switch to another tab **Then** Mini-Player/strip visible, Pause/Resume and return to full player possible.
@@ -186,7 +186,7 @@ The following IDs are taken from [TEST_COVERAGE.md](../TEST_COVERAGE.md) and for
 
 #### 6. After Session & Favorites (F10, F11)
 
-- **Description:** Completion/cancellation message, “Save to Favorites”; favorites list, empty state, add/remove, load session.
+- **Description:** Completion/cancellation message, "Save to Favorites"; favorites list, empty state, add/remove, load session.
 - **Test cases:** (Same structure as in TEST_COVERAGE; completion/abort messages, save to favorites, list behaviour, empty state, delete, load.)
 - **Priority:** Medium to High (CUJ-07).
 

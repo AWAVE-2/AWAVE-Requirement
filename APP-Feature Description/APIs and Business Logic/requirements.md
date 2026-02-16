@@ -131,13 +131,13 @@
 
 ### 4. Data Management
 
-#### Supabase Integration
-- [ ] Database connection and queries (App uses Firebase, not Supabase)
-- [ ] Storage bucket access (App uses Firebase Storage, not Supabase)
-- [ ] Authentication integration (App uses Firebase Auth, not Supabase)
+#### Firebase Integration (current backend)
+- [x] Database connection and queries (Firestore)
+- [x] Storage bucket access (Firebase Storage)
+- [x] Authentication integration (Firebase Auth; Apple Sign-In, email/password)
 - [ ] Real-time subscriptions (Not implemented)
-- [ ] Edge function invocations (Not implemented)
-- [ ] RPC function calls (Not implemented)
+- [ ] Cloud function invocations (Not implemented)
+- [ ] RPC-style calls (Not implemented)
 
 #### Firebase Integration (Actual Implementation)
 - [x] Database connection and queries (Firestore)
@@ -215,7 +215,7 @@
 - [x] Error messages are user-friendly
 - [x] Network errors are handled gracefully
 - [x] Data validation occurs before API calls
-- [ ] All operations respect RLS policies (Firebase uses Security Rules, not RLS)
+- [x] All operations respect Firebase Security Rules
 
 ### Business Logic Hooks
 - [ ] Hooks provide clean API for components (React hooks - not in Swift)
@@ -263,7 +263,7 @@
 ### Security
 - All API calls use HTTPS
 - Tokens are stored securely
-- RLS policies are enforced
+- Firebase Security Rules are enforced
 - Input validation prevents injection
 
 ### Usability
@@ -355,5 +355,5 @@
 - Logging uses AWAVELogger (os.log)
 - Real-time subscriptions not implemented
 - Offline queue not implemented
-- Uses Firebase (Firestore, Storage, Auth) instead of Supabase
+- Uses Firebase (Firestore, Storage, Auth) on Google Cloud; no Supabase in the iOS app
 - Architecture: Protocol-oriented with dependency injection

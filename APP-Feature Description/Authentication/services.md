@@ -8,46 +8,22 @@ The authentication system uses a service-oriented architecture with clear separa
 
 ## 📦 Services
 
-### OAuthService
-**File:** `src/services/OAuthService.ts`  
-**Type:** Singleton Class  
-**Purpose:** OAuth provider abstraction and management
+### AuthService / AppleSignInHelper (Swift)
 
-#### Configuration
-```typescript
-const GOOGLE_WEB_CLIENT_ID = process.env.GOOGLE_WEB_CLIENT_ID;
-const GOOGLE_IOS_CLIENT_ID = process.env.GOOGLE_IOS_CLIENT_ID;
-```
+**Purpose:** Authentication and OAuth. Backend: Firebase Auth (Google Cloud).
 
-#### Methods
+#### Apple Sign-In (implemented)
+- **AppleSignInHelper** – Initiates Apple Sign-In via AuthenticationServices
+- Integrates with Firebase Auth Apple provider
+- Profile creation in Firestore via FirestoreUserRepository
 
-**`initialize(): Promise<void>`**
-- Initializes Google Sign-In configuration
-- Checks if credentials are configured
-- Sets up OAuth providers
-- Called once at app startup
+#### Google Sign-In (not implemented)
+- Would use Firebase Auth Google provider; Google Cloud Console OAuth client required
+- No Google Sign-In flow in app yet
 
-**`isGoogleConfigured(): boolean`**
-- Checks if Google OAuth is properly configured
-- Returns false if credentials are missing
-
-**`signInWithGoogle(): Promise<OAuthUser | null>`**
-- Initiates Google Sign-In flow
-- Checks Google Play Services (Android)
-- Handles user cancellation gracefully
-- Returns OAuth user data or null if cancelled
-- Throws error on failure
-
-**`signInWithApple(): Promise<OAuthUser | null>`**
-- Initiates Apple Sign-In flow
-- Checks device support
-- Handles private relay emails
-- Returns OAuth user data or null if cancelled
-- Throws error on failure
-
-**`handleSuccessfulOAuth(oauthUser: OAuthUser): Promise<void>`**
-- Creates/updates user profile in Supabase
-- Creates trial subscription if plan was selected
+**Post–OAuth (Swift):** `AuthService` + `FirestoreUserRepository`
+- Creates/updates user profile in Firestore
+- Trial subscription via StoreKit when implemented
 - Cleans up stored plan selection
 - Sets onboarding completion status
 

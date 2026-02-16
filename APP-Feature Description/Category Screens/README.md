@@ -61,10 +61,10 @@ The Category Screens system consists of:
 - "Eigene Klangwelt" (Own Sound World) creation
 
 ### 5. Category Data Management
-- Backend category fetching via Supabase
-- Fallback to local category data
-- Category ordering and persistence
-- Sound metadata integration
+- Backend category fetching via Firestore (FirestoreSoundRepository)
+- Fallback to local category data where applicable
+- Category ordering and persistence (OnboardingStorageService)
+- Sound metadata integration (Firestore `sounds` collection)
 - Category content configuration
 
 ---
@@ -72,11 +72,11 @@ The Category Screens system consists of:
 ## 🏗️ Architecture
 
 ### Technology Stack
-- **Backend:** Supabase (audio_categories, sound_metadata tables)
-- **State Management:** React Context API (CategoryContext)
-- **Navigation:** Custom Tab Navigator with bottom navigation
-- **Data Layer:** CategoryService for backend integration
-- **UI Components:** Reusable CategoryScreenBase component
+- **Backend:** Firestore (sounds collection, FirestoreSoundRepository)
+- **State Management:** SwiftUI, @Observable (ViewModels)
+- **Navigation:** TabView with category tabs
+- **Data Layer:** FirestoreSoundRepository for backend integration
+- **UI Components:** Category screens (SchlafScreen, StressScreen, ImFlussScreen)
 
 ### Key Components
 - `CategoryScreenBase` - Reusable base component for all category screens
@@ -137,9 +137,9 @@ The Category Screens system consists of:
 - **Search** - Sound search and discovery
 
 ### External Services
-- Supabase (category and sound metadata)
-- Audio playback services
-- Storage services (favorites, custom sounds)
+- Firebase / Firestore (category and sound metadata)
+- Audio playback services (AWAVEAudio, Firebase Storage for files)
+- Firestore (favorites, custom mixes)
 
 ---
 
@@ -166,9 +166,9 @@ The Category Screens system consists of:
 
 ## 📚 Additional Resources
 
-- [Supabase Documentation](https://supabase.com/docs)
-- [React Navigation Documentation](https://reactnavigation.org/)
-- [React Native Linear Gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient)
+- [Firestore Documentation](https://firebase.google.com/docs/firestore)
+- [SwiftUI Navigation](https://developer.apple.com/documentation/swiftui/navigationstack)
+- AWAVEDesign package (in repo)
 
 ---
 

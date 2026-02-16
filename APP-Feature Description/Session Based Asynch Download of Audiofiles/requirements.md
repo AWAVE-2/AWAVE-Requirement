@@ -36,7 +36,7 @@
 - [ ] Load metadata in batches (100 files per batch) (Not implemented - loads all at once)
 - [x] Handle large catalogs (3000+ files) (Implemented)
 - [x] Store metadata in in-memory Map for fast access (Implemented)
-- [ ] Convert Supabase metadata to AudioFile format (Not applicable - uses Firestore)
+- [x] Convert Firestore metadata to audio file format (FirebaseStorageRepository, Sound model)
 - [ ] Track loading progress (Not implemented)
 - [x] Handle loading errors gracefully (Implemented)
 
@@ -57,7 +57,7 @@
 - [x] Return results in < 50ms
 
 #### Real-Time Metadata Sync
-- [ ] Subscribe to Supabase real-time changes (Not implemented - app uses Firebase, not Supabase)
+- [ ] Subscribe to Firestore real-time changes (Not implemented)
 - [ ] Handle INSERT events (new files) (Not implemented)
 - [ ] Handle UPDATE events (file changes) (Not implemented)
 - [ ] Handle DELETE events (file removal) (Not implemented)

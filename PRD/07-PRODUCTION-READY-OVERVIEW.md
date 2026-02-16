@@ -22,7 +22,7 @@ The following are **known not to work or to be incomplete** in the current build
 | 3 | **Category screens** | Incomplete | Two category screens still need finalization (content/UX). |
 | 4 | **Push notifications** | Not working | FCM/Firebase Messaging present but push delivery/registration not fully working. |
 | 5 | **Background play** | Not working | Sound in background, Lock Screen, and Dynamic Island / Control Center Now Playing controls are not working reliably. |
-| 6 | **Test coverage** | Low | No UI test target; unit coverage ~15–20%; many ViewModels and flows untested. See [08-TESTABDECKUNG-UND-UI-TESTS.md](08-TESTABDECKUNG-UND-UI-TESTS.md). |
+| 6 | **Test coverage** | Low | No UI test target; unit coverage ~15–20%; many ViewModels and flows untested. See [08-TEST-COVERAGE-AND-UI-TESTS.md](08-TEST-COVERAGE-AND-UI-TESTS.md). |
 | 7 | **Sound generation via search** | Not working | Search → topic match → session generation/play flow does not work as expected. |
 
 ### 1.2 Percentage Implementation (Overview)

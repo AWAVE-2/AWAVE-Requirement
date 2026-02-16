@@ -197,7 +197,7 @@
 ## 🔮 Future Enhancements
 
 ### Planned Features
-- [ ] Supabase integration for form submission
+- [ ] Backend integration for form submission (Firebase or custom backend – not implemented)
 - [ ] Support ticket tracking
 - [ ] FAQ screen implementation
 - [ ] Getting Started guide screen

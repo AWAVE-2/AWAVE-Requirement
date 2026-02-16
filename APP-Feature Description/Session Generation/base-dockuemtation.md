@@ -1,5 +1,9 @@
 # Session Generation – Basis-Dokumentation (QWAVE / AWAVE)
 
+**Note:** The canonical English version of this document is [base-documentation.md](base-documentation.md). This file is kept for reference only.
+
+---
+
 Diese Analyse basiert auf den bereitgestellten technischen Dokumenten, Code-Snippets und Konzeptzeichnungen für das Projekt QWAVE / OWOVE – MORE THAN MEDITATION. Es handelt sich um eine hochkomplexe, interaktive Audio-Plattform für geführte Meditationen und Klangwelten (Soundscapes).
 
 ---

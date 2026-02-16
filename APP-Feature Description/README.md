@@ -1,6 +1,6 @@
 # AWAVE App Feature Documentation
 
-This directory contains structured documentation for all features and functionalities of the AWAVE iOS/React Native application.
+This directory contains structured documentation for all features and functionalities of the AWAVE iOS (Swift/SwiftUI) application.
 
 ## 📁 Folder Structure
 
@@ -25,7 +25,7 @@ This directory contains structured documentation for all features and functional
 
 ### Main Navigation & Content
 
-- **`Main Navigation/`** - Navigation structure and routing
+- **`Navigation/`** - Navigation structure and routing
   - Tab navigator
   - Bottom navigation bar
   - Stack navigation
@@ -63,7 +63,7 @@ This directory contains structured documentation for all features and functional
   - Favorites collection
   - Playlists
 
-- **`Sound Search /`** - Sound discovery and search
+- **`Seach Drawer/`** - Search Drawer (sound discovery and search). *Note: folder name is "Seach Drawer"; feature is Search Drawer.*
   - Search functionality
   - Intelligent search
   - Search results
@@ -154,6 +154,10 @@ This directory contains structured documentation for all features and functional
   - Sync management
   - Background downloads
 
+### Parity backlog (Android baseline)
+
+- **`Backlog-Parity-OLD-APP-and-Web/`** – Single backlog of features from OLD-APP (V.1) or Web App not yet in the current iOS app. The **current iOS app is the baseline for Android**; this folder lists candidate features to add for parity. Do not use the deprecated "missing migration from OLD-APP" or "missing migration from React APP (Lovalbe)" folders as primary reference.
+
 ## 📝 Documentation Template
 
 Each feature folder should contain:
@@ -173,7 +177,7 @@ This structure enables:
 - **Structured documentation** of all app features
 - **Requirement gathering** and specification
 - **Technical documentation** for developers
-- **Feature parity tracking** between web and native
+- **Feature parity tracking** and **Android baseline** (current iOS = baseline; Backlog-Parity for candidate features)
 - **Testing documentation** and test case management
 - **Onboarding** for new team members
 
@@ -195,4 +199,4 @@ Track feature completion status in each folder's README:
 
 ---
 
-*Last Updated: 2025-01-27*
+*Last Updated: 2026-02-16*

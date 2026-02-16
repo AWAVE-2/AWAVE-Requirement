@@ -5,7 +5,7 @@
 ### 1. Sound Catalog Display
 
 #### Sound Loading
-- [ ] Load all sounds from Supabase sound_metadata table (Not applicable - uses Firestore `sounds` collection)
+- [x] Load all sounds from Firestore `sounds` collection (FirestoreSoundRepository)
 - [x] Display sound metadata (title, description, category, duration, tags) (FirestoreSoundRepository)
 - [x] Show loading state during data fetch (Implemented)
 - [x] Handle loading errors with user-friendly messages (Implemented)
@@ -59,7 +59,7 @@
 #### Add Favorite
 - [x] Add sound to favorites via heart icon (Implemented)
 - [x] Require user authentication (Implemented)
-- [ ] Sync with Supabase backend (Not applicable - uses FirestoreFavoritesRepository)
+- [x] Sync with Firestore (FirestoreFavoritesRepository)
 - [x] Update UI immediately (optimistic update) (Implemented)
 - [ ] Handle locked content (show paywall) (Not implemented)
 - [x] Error handling for failed additions (Implemented)
@@ -67,7 +67,7 @@
 #### Remove Favorite
 - [x] Remove sound from favorites via heart icon (Implemented)
 - [x] Require user authentication (Implemented)
-- [ ] Sync with Supabase backend (Not applicable - uses FirestoreFavoritesRepository)
+- [x] Sync with Firestore (FirestoreFavoritesRepository)
 - [x] Update UI immediately (Implemented)
 - [x] Error handling for failed removals (Implemented)
 
@@ -268,7 +268,7 @@
 
 - User authentication required for favorites
 - Subscription tier validation on backend
-- Secure API calls to Supabase
+- Secure API calls to Firebase (Firestore, Storage)
 - No sensitive data in client logs
 - Access control for premium content
 

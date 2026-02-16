@@ -280,7 +280,7 @@
 ### Technical Improvements
 - [ ] Period-specific statistics calculation
 - [ ] Caching for improved performance
-- [ ] Real-time updates via Supabase subscriptions
+- [ ] Real-time updates via Firebase (not implemented)
 - [ ] Background sync for analytics
 - [ ] Optimized database queries
 - [ ] Chart animation improvements

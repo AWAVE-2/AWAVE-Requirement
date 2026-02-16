@@ -44,10 +44,10 @@
 
 #### Input Behavior
 - [x] Text input is editable
-- [x] Input value is controlled (React state)
+- [x] Input value is controlled (SwiftUI state)
 - [x] Input supports auto-focus
-- [x] Keyboard-aware layout (KeyboardAvoidingView)
-- [x] Platform-specific keyboard offset (iOS: 0, Android: 20)
+- [x] Keyboard-aware layout (SwiftUI)
+- [x] Keyboard offset for iOS
 
 ### 3. Search Functionality
 
@@ -60,7 +60,7 @@
 - [x] Search normalizes query (lowercase)
 
 #### Search Execution
-- [ ] Search calls Supabase backend (ProductionBackendService.searchSounds) (Not applicable - uses FirestoreSoundRepository)
+- [x] Search uses FirestoreSoundRepository (client-side filtering)
 - [x] Search queries multiple fields (title, keywords, tags) (FirestoreSoundRepository.searchSounds - client-side)
 - [ ] Search uses ILIKE for case-insensitive matching (Not applicable - uses client-side filtering)
 - [ ] Search uses array contains (cs) for keywords/tags (Not applicable - uses client-side filtering)
@@ -311,7 +311,7 @@
 
 ### Security
 - [x] Input sanitization (trim, normalize) (Implemented)
-- [ ] SQL injection prevention (Supabase parameterized queries) (Not applicable - uses Firestore, not SQL)
+- [x] Injection prevention (Firestore – no SQL; client-side filtering)
 - [x] XSS prevention (SwiftUI safe rendering) (Implemented)
 - [x] Rate limiting (via debounce) (Implemented)
 - [x] Error messages don't expose system details (Implemented)
@@ -328,7 +328,7 @@
 - [x] Result limiting
 
 ### Integration Tests
-- [ ] Supabase search integration (Not applicable - uses Firestore)
+- [x] Search integration (FirestoreSoundRepository, client-side)
 - [ ] SOS config loading (Not implemented)
 - [ ] Analytics logging (Not implemented)
 - [x] Navigation flows (Implemented)

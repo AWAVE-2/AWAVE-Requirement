@@ -58,7 +58,7 @@
 ### 4. Category Data Management
 
 #### Data Fetching
-- [ ] Backend category fetching via Supabase (Not applicable - uses FirestoreSoundRepository)
+- [x] Backend category fetching via Firestore (FirestoreSoundRepository)
 - [x] Fallback to local category data (Implemented)
 - [x] Sound metadata fetching (FirestoreSoundRepository)
 - [x] Category metadata fetching (FirestoreSoundRepository)
@@ -247,7 +247,7 @@
 
 ## 🔐 Security Considerations
 
-- Category data fetched from authenticated Supabase
+- Category data fetched from Firestore (authenticated where required)
 - Sound metadata validated before display
 - Category selection stored securely
 - No sensitive data in category screens
@@ -295,6 +295,6 @@
 - Categories are fixed in order to maintain icon positions in navigation
 - Category selection is stored in onboarding storage
 - Backend data fetching has comprehensive fallback mechanism
-- Sound grid uses airplane window design matching React web app
+- Sound grid uses airplane window design matching reference design
 - Category screens support both regular and custom sounds
 - Mini player strip appears when audio is playing

@@ -74,7 +74,7 @@
 - [ ] Push notifications toggle (Not implemented)
 - [ ] Email notifications toggle (Not implemented)
 - [ ] Real-time preference updates (Not implemented)
-- [ ] Backend synchronization (Supabase) (Not applicable - app uses Firebase)
+- [ ] Backend synchronization (Firebase/Firestore when implemented)
 - [ ] Optimistic UI updates (Not implemented)
 - [ ] Error handling with rollback (Not implemented)
 
@@ -100,7 +100,7 @@
 
 #### Paywall Bypass
 - [x] Paywall bypass toggle (DEV only)
-- [x] Toggle state persistence (AsyncStorage)
+- [x] Toggle state persistence (UserDefaults / Swift)
 - [x] Hidden in production builds
 - [x] Access to all content when enabled
 - [x] Clear indication of dev feature
@@ -292,8 +292,8 @@
 
 ## 📝 Implementation Notes
 
-- Privacy preferences use AsyncStorage for local persistence
-- Notification preferences use Supabase for backend sync
+- Privacy preferences use UserDefaults or Firestore for local persistence
+- Notification preferences use Firebase for backend sync (when implemented)
 - Developer settings are only available in `__DEV__` mode
 - Password minimum length is 10 characters
 - Email updates require confirmation dialog

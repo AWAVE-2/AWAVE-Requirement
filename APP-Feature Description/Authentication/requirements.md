@@ -29,7 +29,7 @@
 - [ ] Native Google authentication flow (Not implemented)
 - [ ] Google Play Services availability check (Android) (Not implemented)
 - [ ] User profile data extraction (email, name, avatar) (Not implemented)
-- [ ] Automatic profile creation in Supabase (Not implemented - app uses Firebase)
+- [ ] Automatic profile creation in Firestore (Not implemented - Google Sign-In not implemented)
 - [ ] Error handling for cancelled/failed authentication (Not implemented)
 - [ ] Configuration check (warns if credentials not set) (Not implemented)
 
@@ -39,7 +39,7 @@
 - [x] Device support check (Implemented)
 - [x] User profile data extraction (email, name) (AppleSignInHelper implemented)
 - [ ] Private relay email handling (Not fully implemented)
-- [ ] Automatic profile creation in Supabase (Not implemented - app uses Firebase, profile creation exists)
+- [x] Automatic profile creation in Firestore (FirestoreUserRepository; profile created on Apple Sign-In)
 - [x] Error handling for cancelled/failed authentication (AppleSignInHelper implemented)
 
 #### OAuth Profile Creation

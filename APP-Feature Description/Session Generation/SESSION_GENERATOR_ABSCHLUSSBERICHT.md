@@ -1,5 +1,9 @@
 # Abschlussbericht: Session-Generator – Einzigartigkeit & Personalisierung
 
+**Note:** The canonical English version of this report is [SESSION_GENERATOR_COMPLETION_REPORT.md](SESSION_GENERATOR_COMPLETION_REPORT.md). This file is kept for reference.
+
+---
+
 **Projekt:** AWAVE iOS (Swift)  
 **Thema:** Einzigartige Category-Sessions, First-Time-Personalization-Drawer, Persistenz Anonymous/Registered  
 **Stand:** Februar 2026

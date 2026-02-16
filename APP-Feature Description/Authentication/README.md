@@ -1,24 +1,24 @@
 # Authentication System - Feature Documentation
 
 **Feature Name:** Authentication & Account Management
-**Status:** ⚠️ Partially Complete (Core features done, OAuth and email verification pending)
+**Status:** ⚠️ Partially Complete (Email/password and Apple Sign-In done; Google Sign-In and some flows pending)
 **Priority:** High
-**Last Updated:** 2026-01-29
+**Last Updated:** 2026-02-16
 
 ## 📋 Feature Overview
 
-The Authentication system provides secure user authentication and account management for the AWAVE app. It supports multiple authentication methods including email/password, Google Sign-In, and Apple Sign-In, with comprehensive password management, email verification, and session management capabilities.
+The Authentication system provides secure user authentication and account management for the AWAVE iOS app. It is built on **Firebase Auth** and supports email/password and **Apple Sign-In** (implemented). **Google Sign-In** is not yet implemented. The app also uses **Google Cloud** (Firebase runs on GCP) for backend services.
 
 ### Description
 
-The authentication system is built on Supabase Auth and provides:
-- **Multi-provider authentication** (Email/Password, Google, Apple)
+The authentication system is built on **Firebase Auth** and provides:
+- **Multi-provider authentication** (Email/Password ✓, Apple Sign-In ✓, Google Sign-In – not implemented)
 - **Secure password management** with strength validation
 - **Email verification** workflow
-- **Password reset** functionality
+- **Password reset** functionality (backend supported; UI pending)
 - **Session management** with automatic token refresh
 - **Registration flow** with onboarding integration
-- **User profile** creation and management
+- **User profile** creation and management (Firestore)
 
 ### User Value
 
@@ -39,10 +39,10 @@ The authentication system is built on Supabase Auth and provides:
 - [x] Secure password storage
 
 ### 2. OAuth Authentication
-- [ ] **Google Sign-In** - Native Google authentication (placeholder only)
-- [ ] **Apple Sign-In** - Native Apple authentication (placeholder only)
-- [ ] Automatic profile creation
-- [ ] Avatar and name sync
+- [ ] **Google Sign-In** - Not implemented (would use Firebase Auth Google provider; requires Google Cloud OAuth client config)
+- [x] **Apple Sign-In** - Implemented (AppleSignInHelper, Firebase Auth Apple provider)
+- [x] Automatic profile creation (FirestoreUserRepository on Apple Sign-In)
+- [ ] Avatar and name sync (partial)
 
 ### 3. Email Verification
 - [ ] Verification email sending
@@ -73,19 +73,18 @@ The authentication system is built on Supabase Auth and provides:
 ## 🏗️ Architecture
 
 ### Technology Stack
-- **Backend:** Supabase Auth
-- **OAuth Libraries:**
-  - `@react-native-google-signin/google-signin` - Google Sign-In
-  - `react-native-apple-authentication` - Apple Sign-In
-- **Storage:** AsyncStorage for local caching
-- **State Management:** React Context API
+- **Backend:** Firebase Auth (Google Cloud)
+- **Apple Sign-In:** AuthenticationServices (native) + Firebase Auth Apple provider
+- **Google Sign-In:** Not implemented (would use Firebase Auth Google provider; Google Cloud Console OAuth client required)
+- **Storage:** UserDefaults, Keychain (tokens); user data in Firestore
+- **State Management:** SwiftUI, @Observable
 
 ### Key Components
-- `AuthContext` - Global authentication state
-- `AuthScreen` - Main authentication UI
-- `AuthForm` - Reusable form component
-- `OAuthService` - OAuth provider abstraction
-- `SessionManagementService` - Session lifecycle management
+- `AuthService` / `AuthServiceProtocol` - Authentication and session
+- `AuthView` / `AuthViewModel` - Main authentication UI
+- `AppleSignInHelper` - Apple Sign-In flow
+- `FirestoreUserRepository` - User profile creation/update after sign-in
+- Session lifecycle via Firebase Auth
 
 ---
 
@@ -134,10 +133,10 @@ The authentication system is built on Supabase Auth and provides:
 - **Navigation** - Route protection and redirects
 
 ### External Services
-- Supabase Auth (authentication backend)
-- Google OAuth (Google Sign-In)
-- Apple OAuth (Apple Sign-In)
-- Email service (verification and reset emails)
+- Firebase Auth (authentication backend; runs on Google Cloud)
+- Apple Sign-In (AuthenticationServices + Firebase Auth)
+- Google Sign-In (not implemented; would use Firebase Auth + Google Cloud OAuth)
+- Email service (verification and reset emails via Firebase Auth)
 
 ---
 
@@ -163,9 +162,10 @@ The authentication system is built on Supabase Auth and provides:
 
 ## 📚 Additional Resources
 
-- [Supabase Auth Documentation](https://supabase.com/docs/guides/auth)
-- [Google Sign-In for React Native](https://github.com/react-native-google-signin/google-signin)
-- [Apple Sign-In for React Native](https://github.com/invertase/react-native-apple-authentication)
+- [Firebase Auth Documentation](https://firebase.google.com/docs/auth)
+- [Apple Sign-In (AuthenticationServices)](https://developer.apple.com/documentation/authenticationservices)
+- [Firebase Auth Apple Provider](https://firebase.google.com/docs/auth/ios/apple)
+- [Firebase Auth Google Provider](https://firebase.google.com/docs/auth/ios/google-signin) (for when Google Sign-In is implemented)
 
 ---
 

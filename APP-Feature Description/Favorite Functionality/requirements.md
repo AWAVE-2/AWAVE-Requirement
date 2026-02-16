@@ -121,7 +121,7 @@
 ### 6. Real-time Synchronization
 
 #### Backend Sync
-- [ ] Load favorites from Supabase on app start (Not applicable - uses FirestoreFavoritesRepository)
+- [x] Load favorites from Firestore on app start (FirestoreFavoritesRepository)
 - [x] Refresh favorites after add/remove operations (FirestoreFavoritesRepository)
 - [ ] Sync favorites across devices (Not implemented)
 - [ ] Handle sync conflicts (Not implemented)

@@ -1,6 +1,10 @@
 # Supabase Integration - User Flows
 
-## 🔄 Primary User Flows
+**Deprecated.** The iOS app uses **Firebase (Firestore, Storage, Auth)** on Google Cloud, not Supabase. This file is kept for historical reference only. For current backend flows, see Firestore schema (FIRESTORE_SCHEMA.md) and feature-specific docs (e.g. Authentication, Databases/requirements.md).
+
+---
+
+## 🔄 Primary User Flows (legacy Supabase)
 
 ### 1. Database Query Flow (Online)
 

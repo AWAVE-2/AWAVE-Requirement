@@ -68,7 +68,7 @@
 - [x] Remove tracks from mixer
 - [x] Toggle tracks on/off
 - [x] Clear track (remove sound)
-- [x] Track state persistence in AsyncStorage
+- [x] Track state persistence (local storage / Swift persistence)
 - [x] Auto-save mixer state (1s debounce)
 
 #### Play Control Rules (Applies to All Player Integrations)
@@ -180,12 +180,12 @@
 #### Source Priority
 - [ ] Generated sounds (highest priority)
 - [x] Local files (downloaded)
-- [x] Server streaming (Supabase)
+- [x] Server streaming (Firebase Storage)
 - [x] Automatic source selection
 - [x] Fallback mechanism
 
 #### Audio Loading
-- [x] Load from Supabase storage
+- [x] Load from Firebase Storage
 - [x] Load from local file system
 - [ ] Generate procedural sounds
 - [x] Download management
@@ -414,17 +414,17 @@
 ## 🔄 Integration Requirements
 
 ### Required Services
-- [x] SupabaseAudioLibraryManager
-- [x] SessionTrackingService
-- [x] SoundGenerationService
-- [x] NativeAudioBridge
-- [x] TrackPlayerService
+- [x] FirebaseStorageRepository / SoundRepository (audio library)
+- [x] SessionTrackingService (FirestoreSessionTracker)
+- [x] SoundGenerationService (partial – frequency/noise not fully implemented)
+- [x] Native audio (AWAVEAudio / PhasePlayer)
+- [x] TrackPlayerService (player layer)
 
-### Required Hooks
-- [x] useAudioPlayer
-- [x] useMultiTrackMixer
-- [x] useSupabaseAudio
-- [x] useFavoritesManagement
+### Required Integration (Swift)
+- [x] Audio player (PlayerViewModel, PhasePlayer)
+- [x] Multi-track mixer (MixerSheetView, track management)
+- [x] Sound/audio loading (FirebaseStorageRepository, SoundRepository)
+- [x] Favorites management (FirestoreFavoritesRepository)
 
 ### Required Components
 - [x] AudioPlayerEnhanced

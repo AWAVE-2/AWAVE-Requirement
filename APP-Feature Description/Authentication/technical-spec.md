@@ -5,37 +5,35 @@
 ### Technology Stack
 
 #### Backend
-- **Supabase Auth** - Primary authentication service
+- **Firebase Auth** (Google Cloud) - Primary authentication service
   - Email/password authentication
-  - OAuth provider integration
+  - Apple Sign-In (implemented)
+  - Google Sign-In (not implemented; would use Firebase Auth Google provider)
   - Session management
   - Token refresh
   - Email verification
-  - Password reset
+  - Password reset (backend supported; UI pending)
 
 #### OAuth Providers
-- **Google Sign-In**
-  - Library: `@react-native-google-signin/google-signin`
-  - iOS Client ID required
-  - Web Client ID required
-  - Google Play Services required (Android)
+- **Google Sign-In** – Not implemented
+  - Would use Firebase Auth Google provider
+  - Google Cloud Console OAuth client ID required when implemented
 
-- **Apple Sign-In**
-  - Library: `react-native-apple-authentication`
-  - iOS only
-  - Native Apple authentication
-  - Private relay email support
+- **Apple Sign-In** – Implemented
+  - AuthenticationServices (native) + Firebase Auth Apple provider
+  - AppleSignInHelper in app
+  - iOS only; private relay email support partial
 
 #### State Management
-- **React Context API** - `AuthContext` for global auth state
-- **Custom Hooks** - `useAuth`, `useOAuth`, `useProductionAuth`, `useAuthForm`
-- **AsyncStorage** - Local caching and persistence
+- **SwiftUI / @Observable** - AuthViewModel, auth state
+- **Firebase Auth** - Session and token handling
+- **UserDefaults / Keychain** - Local persistence where needed
 
 #### Services Layer
-- `OAuthService` - OAuth provider abstraction
-- `SessionManagementService` - Session lifecycle management
-- `ProductionBackendService` - Supabase integration
-- `RegistrationCacheService` - Registration flow caching
+- `AuthService` / `AuthServiceProtocol` - Authentication and session
+- `AppleSignInHelper` - Apple Sign-In flow
+- `FirestoreUserRepository` - User profile after sign-in
+- Firebase Auth - Session lifecycle
 
 ---
 

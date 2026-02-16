@@ -4,8 +4,8 @@
 
 ### 1. Error Transformation
 
-#### Supabase Error Handling
-- [ ] Map Supabase error codes to user-friendly messages (Not applicable - app uses Firebase, not Supabase)
+#### Firebase / Backend Error Handling
+- [x] Map Firebase/backend error codes to user-friendly messages
 - [ ] Handle `PGRST116` (Not Found) errors gracefully (Not applicable - Firebase errors)
 - [ ] Handle `42501` (Permission Denied) errors (Not applicable - Firebase errors)
 - [ ] Handle `row_level_security` (RLS) errors (Not applicable - Firebase Security Rules)
@@ -26,7 +26,7 @@
 
 #### Connectivity Checking
 - [x] Check network connectivity before API calls (Implemented)
-- [ ] Test Supabase connection health (Not applicable - app uses Firebase)
+- [ ] Test Firebase/network connection health (optional)
 - [ ] Measure connection latency (Not implemented)
 - [ ] Detect network state changes (Not implemented)
 - [ ] Provide connection status to components (Not implemented)
@@ -70,7 +70,7 @@
 
 #### safeApiCall
 - [x] Wrap API calls in try-catch (Implemented)
-- [ ] Transform errors using `handleSupabaseError` (Not applicable - Firebase errors handled differently)
+- [x] Transform errors for user display (Firebase/backend errors)
 - [x] Throw transformed error messages (Implemented)
 - [x] Preserve error context (Implemented)
 - [ ] Used by all `ProductionBackendService` methods (Not applicable - ProductionBackendService is TypeScript, not in Swift)
@@ -116,24 +116,24 @@
 ### 6. Offline Error Handling
 
 #### Offline Queue
-- [x] Queue failed operations when offline
-- [x] Store queue in AsyncStorage
-- [x] Process queue on network reconnect
-- [x] Max retry limit per action (default: 3)
-- [x] Remove successfully processed actions
+- [ ] Queue failed operations when offline (Not implemented)
+- [ ] Store queue in local storage (Not implemented)
+- [ ] Process queue on network reconnect (Not implemented)
+- [ ] Max retry limit per action (default: 3) (Not implemented)
+- [ ] Remove successfully processed actions (Not implemented)
 
 #### Queue Management
-- [x] Prevent concurrent queue processing
-- [x] Track retry count per action
-- [x] Discard actions after max retries
-- [x] Log queue processing status
-- [x] Return processed action count
+- [ ] Prevent concurrent queue processing (Not implemented)
+- [ ] Track retry count per action (Not implemented)
+- [ ] Discard actions after max retries (Not implemented)
+- [ ] Log queue processing status (Not implemented)
+- [ ] Return processed action count (Not implemented)
 
 #### Error Recovery
-- [x] Automatic retry on network reconnect
-- [x] Manual queue processing trigger
-- [x] Queue status monitoring
-- [x] Error persistence across app restarts
+- [ ] Automatic retry on network reconnect (Not implemented)
+- [ ] Manual queue processing trigger (Not implemented)
+- [ ] Queue status monitoring (Not implemented)
+- [ ] Error persistence across app restarts (Not implemented)
 
 ---
 
@@ -162,7 +162,7 @@
 ## ✅ Acceptance Criteria
 
 ### Error Transformation
-- [x] All Supabase errors mapped to user-friendly messages
+- [x] Firebase/backend errors mapped to user-friendly messages
 - [x] Unknown errors show generic fallback message
 - [x] Error messages are in German
 - [x] Error logging includes full error details
