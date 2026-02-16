@@ -4,16 +4,31 @@
 
 **Related docs:** [01-PRD](01-PRD.md) · [02-FEATURE-SPECS](02-FEATURE-SPECS.md) · [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md) · [06-PROJECT-INTEGRATION-PLAN](06-PROJECT-INTEGRATION-PLAN.md)
 
-**Status date:** 2026-02-03
+**Status date:** 2026-02-16  
+**Language:** English  
 
 ---
 
-## 1. Document Index & Prozentuale Übersicht
+## 1. Document Index & Percentage Overview
 
-### 1.1 Prozentuale Umsetzung (Übersicht)
+### 1.1 Known Issues (as of 2026-02-16)
 
-| Bereich | Erfüllt | Teilweise | Offen / N/A | **Umsetzung** |
-|---------|---------|-----------|-------------|----------------|
+The following are **known not to work or to be incomplete** in the current build. They affect production readiness and should be tracked until resolved:
+
+| # | Area | Status | Notes |
+|---|------|--------|--------|
+| 1 | **Sound generation** | Not working | Frequency/noise synthesis in playback not fully functional end-to-end. |
+| 2 | **Email authentication** | Can be deprioritized | Implemented in code but may have issues; lower priority for release. |
+| 3 | **Category screens** | Incomplete | Two category screens still need finalization (content/UX). |
+| 4 | **Push notifications** | Not working | FCM/Firebase Messaging present but push delivery/registration not fully working. |
+| 5 | **Background play** | Not working | Sound in background, Lock Screen, and Dynamic Island / Control Center Now Playing controls are not working reliably. |
+| 6 | **Test coverage** | Low | No UI test target; unit coverage ~15–20%; many ViewModels and flows untested. See [08-TESTABDECKUNG-UND-UI-TESTS.md](08-TESTABDECKUNG-UND-UI-TESTS.md). |
+| 7 | **Sound generation via search** | Not working | Search → topic match → session generation/play flow does not work as expected. |
+
+### 1.2 Percentage Implementation (Overview)
+
+| Area | Met | Partial | Open / N/A | **Implementation** |
+|------|-----|--------|------------|---------------------|
 | **PRD (01-PRD)** §2–§12 | 12 | 20 | 9 | **~54 %** |
 | **Feature Specs (F01–F16)** | 10 | 5 | 1 (⏸ 1) | **~78 %** |
 | **Quality: Functional** | 2 | 6 | 4 | **~42 %** |
@@ -21,16 +36,16 @@
 | **Quality: Performance** | 0 | 5 | 0 | **~50 %** |
 | **Ship Checklist** (Critical/High/Medium/Launch) | 0 | 1 | 18 | **~3 %** |
 
-**Gesamt-Parity (gewichtet):** PRD und Feature Specs abgedeckt, Quality und Ship offen → **ca. 52 %** production-ready gegenüber vollem PRD-Soll.
+**Overall parity (weighted):** PRD and Feature Specs covered; Quality and Ship open → **~52 %** production-ready against full PRD target.
 
-*Berechnung: Erfüllt = 100 %, Teilweise = 50 %, Offen/N/A = 0 %; ⏸ = bei Berechnung ausgenommen.*
+*Calculation: Met = 100 %, Partial = 50 %, Open/N/A = 0 %; ⏸ = excluded from calculation.*
 
-### 1.2 Dokument-Navigation
+### 1.3 Document Navigation
 
 | Section | Content |
 |---------|---------|
 | §2 | PRD parity (01-PRD section-by-section) |
-| §3 | Feature specs parity (F01–F16) mit Links zu Requirements |
+| §3 | Feature specs parity (F01–F16) with links to Requirements |
 | §4 | Quality criteria (functional, audio, performance) |
 | §5 | Old App (Cordova) vs New iOS – gap summary |
 | §6 | Ship preparation checklist |
@@ -40,7 +55,7 @@
 
 ## 2. PRD Parity Check (01-PRD)
 
-*Reference: [01-PRD](01-PRD.md). ✓ = met, ◐ = partial, ✗ = not met. **Gesamt §2: ~54 %.***
+*Reference: [01-PRD](01-PRD.md). ✓ = met, ◐ = partial, ✗ = not met. **Overall §2: ~54 %.***
 
 ### 2.1 Product Overview (§1) — ~67 %
 
@@ -142,9 +157,9 @@
 
 ## 3. Feature Specs Parity (F01–F16) — ~78 %
 
-*Reference: [02-FEATURE-SPECS](02-FEATURE-SPECS.md). Jedes Feature verlinkt auf den passenden Requirements-Ordner in [APP-Feature Description](../APP-Feature%20Description/) (requirements.md).*
+*Reference: [02-FEATURE-SPECS](02-FEATURE-SPECS.md). Each feature links to the corresponding requirements folder in [APP-Feature Description](../APP-Feature%20Description/) (requirements.md).*
 
-| Spec | Name | Umsetzungsstatus | Implementation / Gap | Requirements |
+| Spec | Name | Implementation status | Implementation / Gap | Requirements |
 |------|------|------------------|------------------------|--------------|
 | F01 | Splash Screen | ✓ 100 % | PreloaderView, onboarding flow | [Start Screens](../APP-Feature%20Description/Start%20Screens/requirements.md) |
 | F02 | Content Loader | ◐ 50 % | Preloader/onboarding; no explicit “content availability check” screen | [Start Screens](../APP-Feature%20Description/Start%20Screens/requirements.md), [Index & Landing](../APP-Feature%20Description/Index%20%26%20Landing/requirements.md) |
@@ -163,13 +178,13 @@
 | F15 | EEG View | ⏸ — | Deferred | — |
 | F16 | Dialog System | ◐ 50 % | Native .alert, toasts; no unified modal with optional text input | [Styles and UI](../APP-Feature%20Description/Styles%20and%20UI/requirements.md) |
 
-**Legend:** ✓ Done (100 %) · ◐ Partial (50 %) · ✗ Open (0 %) · ⏸ Deferred (nicht in Berechnung)
+**Legend:** ✓ Done (100 %) · ◐ Partial (50 %) · ✗ Open (0 %) · ⏸ Deferred (excluded from calculation)
 
 ---
 
 ## 4. Quality Criteria (from 05-REQUIREMENTS-SUMMARY §6)
 
-*Source: [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md). Functional ~42 %, Audio ~30 %, Performance ~50 % (siehe §1.1).*
+*Source: [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md). Functional ~42 %, Audio ~30 %, Performance ~50 % (see §1.2).*
 
 ### 4.1 Functional Parity
 
@@ -322,4 +337,4 @@
 
 ---
 
-*Document version: 1.1 · Production ready overview with percentage views and requirement links (APP-Feature Description) for AWAVE iOS.*
+*Document version: 1.2 · Production ready overview with known issues, percentage views, and requirement links (APP-Feature Description) for AWAVE iOS. Last updated 2026-02-16.*

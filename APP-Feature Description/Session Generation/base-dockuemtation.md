@@ -95,7 +95,9 @@ In der nativen iOS-App (Swift) werden Session-Phasen über **Content-IDs** aufge
 | **Sound** | z. B. `Glockenspiel` | `SessionGenerator.buildSoundConfig` (nur für Stage `alarm` bei Topic OBE) |
 | **Noise** | Dateiname, z. B. `pink.mp3`, `white.mp3` | `NoiseType.audioFileName` (Phase.noise.type) |
 
-Fehlgeschlagene Auflösungen werden in der App geloggt (`AWAVELogger.audio.warning`). Ohne passende Firestore-`contentId`-Einträge oder ein App-seitiges Session-Content-Mapping spielen nur Frequency (und ggf. Noise, falls Dateiname als contentId vorhanden) – der Nutzer hört dann „nur Wellen“. Optional kann die App ein **Session-Content-Mapping** nutzen (`SessionContentMapping.soundId(for:)`): wenn `getSound(byContentId:)` nil liefert, wird ein gemappter Firestore-Sound per ID geladen (Fallback, siehe Option B im Arbeitsplan Schlafscreen/Session/Vollsession).
+**Auflösungsreihenfolge (Stand Refactoring 2026):** (1) `getSound(byContentId:)`, (2) `SessionContentMapping.soundId(for:)`. Es gibt **keinen** kategoriebasierten Fallback mehr („erster Sound der Kategorie“), damit jede Session nur Inhalte aus der Audio-Bibliothek mit passendem `contentId` lädt und nicht immer derselbe Demo-Track. Fehlgeschlagene Auflösungen werden geloggt (`AWAVELogger.audio.warning`). Ohne passende Firestore-`contentId`-Einträge oder SessionContentMapping spielen nur Frequency und ggf. Noise.
+
+**Mixer-Anzeige:** Die aus der Bibliothek aufgelösten Tracks werden im Mixer mit dem **Anzeigenamen** (`Sound.title`) angezeigt (z. B. „Wald“, „Ambient“, „Franca – Einleitung“), nicht mit Dateiname oder Content-ID. Dafür liefert `preResolveSessionContentURLs` neben den URLs eine Map `contentId → displayName` und PhasePlayer übergibt diesen Namen an die Audio-Engine.
 
 ### Schlafscreen und Session-Generator (iOS)
 

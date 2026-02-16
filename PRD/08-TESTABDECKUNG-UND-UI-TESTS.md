@@ -1,247 +1,247 @@
-# 08 – Testabdeckung und UI-Testvorschläge
+# 08 – Test Coverage and UI Test Proposals
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** DRAFT  
-**Datum:** 2026-02-04  
+**Date:** 2026-02-16  
+**Language:** English  
 
 ---
 
-## 1. Zweck und Geltungsbereich
+## 1. Purpose and Scope
 
-Dieses Dokument bündelt:
+This document consolidates:
 
-- eine **Analyse der aktuellen Testabdeckung** der AWAVE-iOS-App (gesamte App aus Testperspektive),
-- **konkrete UI-Testvorschläge** für alle relevanten Screens und User Journeys inkl. Priorität und technischer Hinweise.
+- an **analysis of current test coverage** of the AWAVE iOS app (entire app from a test perspective),
+- **concrete UI test proposals** for all relevant screens and user journeys, including priority and technical notes.
 
-**Geltungsbereich:** Gesamte native iOS-App (AWAVE2-Swift).  
-**Abgrenzung:**
+**Scope:** Entire native iOS app (AWAVE2-Swift).  
+**Boundaries:**
 
-- Detaillierte Akzeptanzszenarien (Given/When/Then) für F01–F16 liegen in [TEST_COVERAGE.md](../TEST_COVERAGE.md); dieses Dokument referenziert sie und ergänzt die Analyse sowie die fokussierten UI-Testvorschläge.
-- Phasenplan und Ziele für Unit-Tests (Domain, Audio, SessionGenerator, CI) sind in [AWAVE-Test-Coverage-Plan.md](../../AWAVE-Test-Coverage-Plan.md) beschrieben; hier wird darauf verwiesen, nicht dupliziert.
-
----
-
-## 2. Analyse der Testabdeckung
-
-### 2.1 Zusammenfassung
-
-| Art | Geschätzte Abdeckung | Anmerkung |
-|----|----------------------|-----------|
-| **Unit-Tests** | ~15–20 % | Domain, Audio, Auth, Category-Sessions, SessionGenerator; viele ViewModels/Services ohne Tests |
-| **UI-Tests** | 0 % | Kein `AWAVEUITests`-Target vorhanden |
-| **Integration** | 0 % | Keine automatisierten Tests für Firestore/Storage/Session Tracking |
-| **Regression** | Manuell | Hohes Regressionsrisiko bei kritischen Flows |
-
-### 2.2 Testabdeckung nach Modul/Feature
-
-| Modul / Feature | Art | Status | Spec-Ref |
-|-----------------|-----|--------|----------|
-| AWAVEDomain (Entities) | Unit | Vorhanden | Session, PlaybackSession, UserStats, Sound, FrequencyType, NoiseType, ContentCategory, CustomMix, Favorite, etc. |
-| AWAVECore | Unit | Vorhanden | KeychainService, HTTPClient, ColorHex, FoundationExtensions |
-| AWAVEAudio | Unit | Vorhanden | FrequencyGenerator, ShepardEngine, PulseModulator, FrequencySweep, FrequencyModeEngine |
-| AWAVEDesign / AWAVEFeatures / AWAVEData | Unit | Minimal / Platzhalter | — |
-| Auth | Unit | Vorhanden | AuthViewModelTests |
-| Category Screens (F04) | Unit | Vorhanden | CategorySessionsViewModel, CategorySessionGenerator |
-| SessionGenerator (App) | Unit | Vorhanden | SessionGeneratorTests |
-| SessionPreloadService | Unit | Vom Scheme ausgeschlossen | excludes in project.yml |
-| Splash & Preloader (F01, F02) | UI/Unit | Fehlt | — |
-| Main Menu & Navigation (F03) | UI/Unit | Fehlt | — |
-| Onboarding | UI/Unit | Fehlt | — |
-| Symptom Finder (F05) | UI/Unit | Fehlt | — |
-| SOS Screen (F06) | UI/Unit | Fehlt | — |
-| User Session Config (F07) | UI/Unit | Fehlt | — |
-| Soundscapes / Explore (F08) | UI/Unit | Fehlt | — |
-| Live Player (F09) | UI/Unit | Fehlt | — |
-| After Session (F10) | UI/Unit | Fehlt | — |
-| Favorites (F11) | UI/Unit | Fehlt | — |
-| Profile, Support, Legal (F13) | UI/Unit | Fehlt | — |
-| Upgrade / Subscription (F14) | UI/Unit | Fehlt | — |
-| Dialog system (F16) | UI/Unit | Fehlt | — |
-| HomeViewModel, LibraryViewModel, PlayerViewModel | Unit | Fehlt | — |
-| OnboardingViewModel, SearchViewModel, SubscriptionViewModel | Unit | Fehlt | — |
-| Firestore/Storage Repositories, Session Tracking | Integration | Fehlt | — |
-
-### 2.3 Lücken
-
-- **Kein UI-Test-Target:** In `project.yml` existiert nur `AWAVETests` (Unit); ein **AWAVEUITests**-Target (XCUIApplication) ist nicht definiert. Ohne UI-Target können keine automatisierten UI- oder User-Flow-Tests ausgeführt werden.
-- **ViewModels ohne Unit-Tests:** HomeViewModel, LibraryViewModel, PlayerViewModel, OnboardingViewModel, SearchViewModel, SubscriptionViewModel, DownsellViewModel und weitere sind nicht durch Unit-Tests abgedeckt.
-- **Services/Integration:** Keine automatisierten Tests für Firestore-/Storage-Repositories, Session Tracking oder Audio-Download; Player- und Playback-Logik sind nicht getestet.
-- **Accessibility für UI-Tests:** Nur vereinzelt `accessibilityIdentifier` / `accessibilityLabel` (z. B. MainTabView, SoundCarouselView, KlangweltenScreen). Systematische IDs für zentrale Buttons, Tabs und Listen fehlen und sind Voraussetzung für stabile UI-Tests.
-
-**Referenzen:** Detaillierte Szenarien und Gap-Analyse siehe [TEST_COVERAGE.md](../TEST_COVERAGE.md). Phasen und Ziele für Unit-Tests siehe [AWAVE-Test-Coverage-Plan.md](../../AWAVE-Test-Coverage-Plan.md).
+- Detailed acceptance scenarios (Given/When/Then) for F01–F16 are in [TEST_COVERAGE.md](../TEST_COVERAGE.md); this document references them and adds the analysis plus focused UI test proposals.
+- Phased plan and goals for unit tests (Domain, Audio, SessionGenerator, CI) are in [AWAVE-Test-Coverage-Plan.md](../../AWAVE-Test-Coverage-Plan.md); referenced here, not duplicated.
 
 ---
 
-## 3. UI-Testvorschläge
+## 2. Known Issues and Current Limitations (as of 2026-02-16)
 
-### 3.1 Technische Voraussetzungen
+The following are **known not to work or to be incomplete**; they affect testability and production readiness:
 
-- **AWAVEUITests-Target:** Ein neues UI-Test-Target (z. B. `AWAVEUITests`) in `project.yml` anlegen, das die App startet und über XCUIApplication steuert. Keine Implementierung in diesem Dokument; nur Empfehlung.
-- **Accessibility-IDs:** Für stabile Selektoren sollten zentrale Elemente (Tab Bar, Hauptbuttons, Listen, Suchfeld, Player-Controls) mit `.accessibilityIdentifier()` versehen werden. Bestehende Verwendung: z. B. MainTabView, SoundCarouselView, KlangweltenScreen; auf weitere Bereiche ausweiten.
-- **Backend/Mocks:** UI-Tests sollten möglichst unabhängig von Live-Firebase laufen (Firebase Emulator oder injizierte Mocks). Konkrete Implementierung bleibt der Umsetzungsphase vorbehalten.
+| # | Area | Status | Notes |
+|---|------|--------|--------|
+| 1 | **Sound generation** | Not working | Frequency/noise synthesis in playback not fully functional end-to-end. |
+| 2 | **Email authentication** | Can be deprioritized | Implemented in code (AuthService, AuthView) but may have issues; lower priority for release. |
+| 3 | **Category screens** | Incomplete | Two category screens still need finalization (content/UX). |
+| 4 | **Push notifications** | Not working | FCM/Firebase Messaging present but push delivery/registration not fully working. |
+| 5 | **Background play** | Not working | Sound in background, Lock Screen, and Dynamic Island / Control Center Now Playing controls are not working reliably. |
+| 6 | **Test coverage** | Low | No UI test target; unit coverage ~15–20%; many ViewModels and flows untested. |
+| 7 | **Sound generation via search** | Not working | Search → topic match → session generation/play flow does not work as expected. |
 
-### 3.2 Smoke-Tests und Critical User Journeys
+When writing or prioritizing tests, account for these limitations: e.g. skip or mock sound generation in search until fixed; treat background/lock-screen behaviour as manual checks until implemented.
 
-Die folgenden IDs werden aus [TEST_COVERAGE.md](../TEST_COVERAGE.md) übernommen und bilden den Kern der UI-Testvorschläge.
+---
 
-**Smoke-Tests (zuerst umsetzen):**
+## 3. Test Coverage Analysis
 
-| ID | Beschreibung | Priorität |
-|----|--------------|-----------|
-| SMOKE-01 | App startet; Preloader oder Haupt-UI sichtbar | Kritisch |
-| SMOKE-02 | Nach Preloader: Onboarding oder Main Tabs erreichbar | Kritisch |
-| SMOKE-03 | Alle Haupt-Tabs (Home, Explore, Library, Search, Profile) tappbar und laden ohne Crash | Kritisch |
-| SMOKE-04 | Beim Öffnen jedes Tabs kein Crash | Kritisch |
+### 3.1 Summary
+
+| Type | Estimated Coverage | Notes |
+|------|--------------------|--------|
+| **Unit tests** | ~15–20 % | Domain, Audio, Auth, Category-Sessions, SessionGenerator; many ViewModels/Services without tests |
+| **UI tests** | 0 % | No `AWAVEUITests` target present |
+| **Integration** | 0 % | No automated tests for Firestore/Storage/Session Tracking |
+| **Regression** | Manual | High regression risk on critical flows |
+
+### 3.2 Coverage by Module/Feature
+
+| Module / Feature | Type | Status | Spec Ref |
+|------------------|------|--------|----------|
+| AWAVEDomain (Entities) | Unit | Present | Session, PlaybackSession, UserStats, Sound, FrequencyType, NoiseType, ContentCategory, CustomMix, Favorite, etc. |
+| AWAVECore | Unit | Present | KeychainService, HTTPClient, ColorHex, FoundationExtensions |
+| AWAVEAudio | Unit | Present | FrequencyGenerator, ShepardEngine, PulseModulator, FrequencySweep, FrequencyModeEngine |
+| AWAVEDesign / AWAVEFeatures / AWAVEData | Unit | Minimal / placeholder | — |
+| Auth | Unit | Present | AuthViewModelTests |
+| Category Screens (F04) | Unit | Present | CategorySessionsViewModel, CategorySessionGenerator |
+| SessionGenerator (App) | Unit | Present | SessionGeneratorTests |
+| SessionPreloadService | Unit | Excluded from scheme | excludes in project.yml |
+| Splash & Preloader (F01, F02) | UI/Unit | Missing | — |
+| Main Menu & Navigation (F03) | UI/Unit | Missing | — |
+| Onboarding | UI/Unit | Missing | — |
+| Symptom Finder (F05) | UI/Unit | Missing | — |
+| SOS Screen (F06) | UI/Unit | Missing | — |
+| User Session Config (F07) | UI/Unit | Missing | — |
+| Soundscapes / Explore (F08) | UI/Unit | Missing | — |
+| Live Player (F09) | UI/Unit | Missing | — |
+| After Session (F10) | UI/Unit | Missing | — |
+| Favorites (F11) | UI/Unit | Missing | — |
+| Profile, Support, Legal (F13) | UI/Unit | Missing | — |
+| Upgrade / Subscription (F14) | UI/Unit | Missing | — |
+| Dialog system (F16) | UI/Unit | Missing | — |
+| HomeViewModel, LibraryViewModel, PlayerViewModel | Unit | Missing | — |
+| OnboardingViewModel, SearchViewModel, SubscriptionViewModel | Unit | Missing | — |
+| Firestore/Storage Repositories, Session Tracking | Integration | Missing | — |
+
+### 3.3 Gaps
+
+- **No UI test target:** In `project.yml` only `AWAVETests` (unit) exists; an **AWAVEUITests** target (XCUIApplication) is not defined. Without a UI target, automated UI or user-flow tests cannot be run.
+- **ViewModels without unit tests:** HomeViewModel, LibraryViewModel, PlayerViewModel, OnboardingViewModel, SearchViewModel, SubscriptionViewModel, DownsellViewModel and others are not covered by unit tests.
+- **Services/Integration:** No automated tests for Firestore/Storage repositories, Session Tracking, or audio download; player and playback logic are untested.
+- **Accessibility for UI tests:** Only sporadic `accessibilityIdentifier` / `accessibilityLabel` (e.g. MainTabView, SoundCarouselView, KlangweltenScreen). Systematic IDs for main buttons, tabs, and lists are missing and are a prerequisite for stable UI tests.
+
+**References:** Detailed scenarios and gap analysis in [TEST_COVERAGE.md](../TEST_COVERAGE.md). Phases and goals for unit tests in [AWAVE-Test-Coverage-Plan.md](../../AWAVE-Test-Coverage-Plan.md).
+
+---
+
+## 4. UI Test Proposals
+
+### 4.1 Technical Prerequisites
+
+- **AWAVEUITests target:** Add a new UI test target (e.g. `AWAVEUITests`) in `project.yml` that launches the app and drives it via XCUIApplication. Not implemented in this document; recommendation only.
+- **Accessibility IDs:** For stable selectors, key elements (Tab Bar, main buttons, lists, search field, player controls) should use `.accessibilityIdentifier()`. Existing use: e.g. MainTabView, SoundCarouselView, KlangweltenScreen; extend to other areas.
+- **Backend/Mocks:** UI tests should run as independently as possible from live Firebase (Firebase Emulator or injected mocks). Concrete implementation is left to the implementation phase.
+
+### 4.2 Smoke Tests and Critical User Journeys
+
+The following IDs are taken from [TEST_COVERAGE.md](../TEST_COVERAGE.md) and form the core of the UI test proposals.
+
+**Smoke tests (implement first):**
+
+| ID | Description | Priority |
+|----|-------------|----------|
+| SMOKE-01 | App launches; Preloader or main UI visible | Critical |
+| SMOKE-02 | After Preloader: Onboarding or Main Tabs reachable | Critical |
+| SMOKE-03 | All main tabs (Home, Explore, Library, Search, Profile) tappable and load without crash | Critical |
+| SMOKE-04 | Opening each tab does not crash | Critical |
 
 **Critical User Journeys (CUJ):**
 
-| ID | Journey | Priorität | Spec |
-|----|---------|-----------|------|
-| CUJ-01 | Onboarding: Preloader → Onboarding → Kategorieauswahl → Main Tabs | Hoch | F01, F02, §3.2 |
-| CUJ-02 | Session: Topic/Kategorie wählen → Session generiert → Session Config → Playback starten | Kritisch | F04, F07, F09 |
-| CUJ-03 | Audio: Play → Timer/Fortschritt → Pause → Resume → Exit (oder Restart) | Kritisch | F09 |
-| CUJ-04 | Subscription: Paywall bei gesperrtem Inhalt; Restore sichtbar und nutzbar | Hoch | F14 |
-| CUJ-05 | Suche → Session (ohne SOS): Suchdrawer → Text → Topic-Match → Session → Play | Hoch | F05, F07, F09 |
-| CUJ-06 | Suche → SOS: Suchdrawer → SOS-Keyword → SOS-Screen → Call/Chat/Dismiss | Hoch | F05, F06 |
-| CUJ-07 | Favoriten: Aus Player/Liste hinzufügen; aus Liste entfernen; Liste aktualisiert sich | Mittel | F11 |
-| CUJ-08 | Kategorie: ≥5 Sessions sichtbar; „Neue Session generieren“ tappen → neue Session erscheint | Kritisch | F04, §3.4 |
+| ID | Journey | Priority | Spec |
+|----|---------|----------|------|
+| CUJ-01 | Onboarding: Preloader → Onboarding → Category selection → Main Tabs | High | F01, F02, §3.2 |
+| CUJ-02 | Session: Choose topic/category → Session generated → Session Config → Start playback | Critical | F04, F07, F09 |
+| CUJ-03 | Audio: Play → Timer/progress → Pause → Resume → Exit (or Restart) | Critical | F09 |
+| CUJ-04 | Subscription: Paywall on locked content; Restore visible and usable | High | F14 |
+| CUJ-05 | Search → Session (no SOS): Search drawer → Text → Topic match → Session → Play | High | F05, F07, F09 |
+| CUJ-06 | Search → SOS: Search drawer → SOS keyword → SOS screen → Call/Chat/Dismiss | High | F05, F06 |
+| CUJ-07 | Favorites: Add from player/list; remove from list; list updates | Medium | F11 |
+| CUJ-08 | Category: ≥5 sessions visible; tap “Generate new session” → new session appears | Critical | F04, §3.4 |
 
-### 3.3 UI-Testfälle nach Bereichen
+*Note: CUJ-05 depends on sound generation via search; currently not working (see §2).*
+
+### 4.3 UI Test Cases by Area
 
 #### 1. Launch & Onboarding (F01, F02)
 
-- **Beschreibung:** Preloader, Content Check, Onboarding-Slides, Kategorieauswahl, Routing First-Time vs. Returning User.
-- **Testfälle (Beispiele):**
-  - **Given** App wird gestartet **When** Preloader angezeigt **Then** Logo/Branding sichtbar, nach ca. 3 s Fade-Out und Navigation.
-  - **Given** Onboarding nicht abgeschlossen **When** Preloader endet **Then** Navigation zu Onboarding (volle Slides).
-  - **Given** Onboarding abgeschlossen **When** Preloader endet **Then** Navigation zu Main Tabs; initialer Tab ggf. nach Kategorie.
-  - **Given** Erstnutzer **When** letzte Slide (Kategorie) **Then** Kategorie wählbar, „Get Started“ erst nach Auswahl aktiv; Tap → Main Tabs.
-  - **Given** Nutzer hat Onboarding abgeschlossen **When** App neu startet **Then** kein Onboarding, direkter Einstieg Main Tabs.
-- **Priorität:** Hoch (CUJ-01).
+- **Description:** Preloader, content check, onboarding slides, category selection, routing first-time vs. returning user.
+- **Test cases (examples):**
+  - **Given** app is launched **When** Preloader is shown **Then** logo/branding visible, after ~3 s fade-out and navigation.
+  - **Given** onboarding not completed **When** Preloader ends **Then** navigate to Onboarding (full slides).
+  - **Given** onboarding completed **When** Preloader ends **Then** navigate to Main Tabs; initial tab may depend on category.
+  - **Given** first-time user **When** on last slide (category) **Then** category selectable, “Get Started” active only after selection; tap → Main Tabs.
+  - **Given** user has completed onboarding **When** app is restarted **Then** no onboarding, direct entry to Main Tabs.
+- **Priority:** High (CUJ-01).
 
 #### 2. Main Navigation (F03)
 
-- **Beschreibung:** TabBar sichtbar, alle Tabs tappbar, Wechsel ohne Crash, initialer Tab nach Onboarding.
-- **Testfälle:**
-  - **Given** Nutzer auf Main Tabs **Then** Tabs Home, Explore, Library, Search, Profile sichtbar und aktiv deutlich.
-  - **Given** Nutzer auf Main Tabs **When** anderer Tab gewählt **Then** zugehöriger Screen erscheint; beim Zurückwechseln Zustand erhalten.
-  - **Given** Nutzer kommt von Onboarding mit gewählter Kategorie **When** Main Tabs laden **Then** initialer Tab entspricht Kategorie wo vorgesehen.
-  - **Given** Nutzer in Detail-Screen eines Tabs **When** Back/Geste **Then** zurück zum vorherigen Screen, Navigation konsistent.
-- **Priorität:** Kritisch (Smoke, CUJ).
+- **Description:** Tab bar visible, all tabs tappable, switch without crash, initial tab after onboarding.
+- **Test cases:**
+  - **Given** user on Main Tabs **Then** tabs Home, Explore, Library, Search, Profile visible and clearly active.
+  - **Given** user on Main Tabs **When** another tab is selected **Then** corresponding screen appears; state preserved when switching back.
+  - **Given** user comes from onboarding with chosen category **When** Main Tabs load **Then** initial tab matches category where specified.
+  - **Given** user on detail screen of a tab **When** Back/gesture **Then** return to previous screen, navigation consistent.
+- **Priority:** Critical (Smoke, CUJ).
 
-#### 3. Kategorien (F04)
+#### 3. Categories (F04)
 
-- **Beschreibung:** Schlaf, Stress, Im Fluss: Session-Liste, „Neue Session generieren“, Navigation zu Session Config.
-- **Testfälle:**
-  - **Given** Nutzer auf Kategorie-Screen (z. B. Schlafen) **Then** mind. 5 Sessions sichtbar, Button „Neue Session generieren“ (oder Äquivalent) sichtbar.
-  - **Given** Nutzer auf Kategorie-Screen **When** „Neue Session generieren“ getappt **Then** kurzer Lade-Indikator, neue Session in Liste, Liste aktualisiert.
-  - **Given** Nutzer hat Sessions in einer Kategorie **When** zu Home und zurück zur Kategorie **Then** bisherige Sessions weiter sichtbar (kein unerwarteter Reset).
-  - **Given** Nutzer auf Kategorie-Screen **When** Session getappt **Then** Navigation zu User Session Config (oder Session-Detail); Start/Regenerieren von dort möglich.
-- **Priorität:** Kritisch (CUJ-02, CUJ-08).
+- **Description:** Sleep, Stress, In Flow: session list, “Generate new session”, navigation to Session Config.
+- **Test cases:**
+  - **Given** user on category screen (e.g. Sleep) **Then** at least 5 sessions visible, “Generate new session” (or equivalent) button visible.
+  - **Given** user on category screen **When** “Generate new session” tapped **Then** short loading indicator, new session in list, list updated.
+  - **Given** user has sessions in a category **When** navigate to Home and back to category **Then** previous sessions still visible (no unexpected reset).
+  - **Given** user on category screen **When** session tapped **Then** navigate to User Session Config (or session detail); Start/Regenerate available from there.
+- **Priority:** Critical (CUJ-02, CUJ-08).
 
-#### 4. Suche & SOS (F05, F06)
+#### 4. Search & SOS (F05, F06)
 
-- **Beschreibung:** Suchdrawer öffnen, Texteingabe, Topic-Match → Session; SOS-Keywords → SOS-Screen, Call/Chat, Dismiss.
-- **Testfälle:**
-  - **Given** Suchdrawer geöffnet **When** Text eingegeben (z. B. „Ich kann nicht einschlafen“) **Then** Eingabe akzeptiert, Keyword-Matching läuft (ggf. mit Debounce).
-  - **Given** Text passt zu Topic **When** Match fertig **Then** Session wird erzeugt, Nutzer kann zu Config/Playback.
-  - **Given** Text passt zu keinem Topic **When** Match fertig **Then** Fehler- oder „Topic wählen“-Dialog/Meldung; Korrektur/manuelle Auswahl möglich.
-  - **Given** Text enthält keine SOS-Keywords **When** Suche läuft **Then** SOS-Screen erscheint nicht, normaler Such-/Session-Flow.
-  - **Given** Text enthält SOS-Keyword **When** Suche läuft **Then** SOS-Screen erscheint zeitnah; Call-Button mit Nummer, ggf. Chat-Button; Dismiss schließt und setzt Zustand zurück.
-- **Priorität:** Hoch (CUJ-05, CUJ-06).
+- **Description:** Open search drawer, text input, topic match → session; SOS keywords → SOS screen, Call/Chat, Dismiss.
+- **Test cases:**
+  - **Given** search drawer open **When** text entered (e.g. “I can’t sleep”) **Then** input accepted, keyword matching runs (possibly with debounce).
+  - **Given** text matches a topic **When** match complete **Then** session is created, user can go to Config/Playback.
+  - **Given** text matches no topic **When** match complete **Then** error or “Choose topic” dialog/message; correction or manual selection possible.
+  - **Given** text contains no SOS keywords **When** search runs **Then** SOS screen does not appear, normal search/session flow.
+  - **Given** text contains SOS keyword **When** search runs **Then** SOS screen appears in time; Call button with number, possibly Chat button; Dismiss closes and resets state.
+- **Priority:** High (CUJ-05, CUJ-06). *Sound generation from search is currently not working (§2).*
 
 #### 5. Session Config & Player (F07, F09)
 
-- **Beschreibung:** Session-Übersicht, Start, Live Player: Play/Pause, Fortschritt/Timer, Exit/Restart; ggf. Mini-Player.
-- **Testfälle:**
-  - **Given** Nutzer auf Session Config **Then** Sessionname und Dauer (oder Übersicht) sichtbar, Button „Start“/„Session starten“ sichtbar.
-  - **Given** Session mit Stimme **When** auf Config **Then** Stimmenauswahl (z. B. Franca, Flo, Marion, Corinna) verfügbar; ggf. Vorschau.
-  - **Given** Session mit Frequenz **When** auf Config **Then** Frequenz-An/Aus-Toggle; Auswahl wird beim Start übernommen.
-  - **Given** Nutzer auf Session Config **When** „Session starten“ getappt **Then** Playback startet, Navigation zu Live Player; Play → Pause-Wechsel, Timer/Fortschritt sichtbar.
-  - **Given** Playback läuft **When** Pause getappt **Then** Audio pausiert; Play wieder **Then** Fortsetzung an gleicher Position.
-  - **Given** Nutzer im Live Player **When** Exit getappt **Then** ggf. Bestätigung, dann Rückkehr zum vorherigen Screen; Restart startet Session von vorn.
-  - **Given** Playback läuft **When** zu anderem Tab gewechselt **Then** Mini-Player/Strip sichtbar, Pause/Resume und Rückkehr zum Full-Player möglich.
-- **Priorität:** Kritisch (CUJ-02, CUJ-03).
+- **Description:** Session overview, Start, Live Player: Play/Pause, progress/timer, Exit/Restart; Mini-Player if applicable.
+- **Test cases:**
+  - **Given** user on Session Config **Then** session name and duration (or overview) visible, “Start”/“Start session” button visible.
+  - **Given** session with voice **When** on Config **Then** voice selection (e.g. Franca, Flo, Marion, Corinna) available; preview if applicable.
+  - **Given** session with frequency **When** on Config **Then** frequency on/off toggle; selection applied on start.
+  - **Given** user on Session Config **When** “Start session” tapped **Then** playback starts, navigate to Live Player; Play ↔ Pause, timer/progress visible.
+  - **Given** playback running **When** Pause tapped **Then** audio paused; Play again **Then** resume at same position.
+  - **Given** user in Live Player **When** Exit tapped **Then** possibly confirmation, then return to previous screen; Restart starts session from beginning.
+  - **Given** playback running **When** switch to another tab **Then** Mini-Player/strip visible, Pause/Resume and return to full player possible.
+- **Priority:** Critical (CUJ-02, CUJ-03). *Lock screen / Dynamic Island controls currently not working (§2).*
 
-#### 6. After Session & Favoriten (F10, F11)
+#### 6. After Session & Favorites (F10, F11)
 
-- **Beschreibung:** Abschluss-/Abbruch-Message, „In Favoriten speichern“; Favoriten-Liste, Leerzustand, Hinzufügen/Entfernen, Session laden.
-- **Testfälle:**
-  - **Given** Session normal beendet **When** After-Session-Screen **Then** Abschluss-Message (z. B. „Session erfolgreich abgeschlossen“), Optionen z. B. In Favoriten speichern, Beenden.
-  - **Given** Session abgebrochen **When** After-Session-Screen **Then** Abbruch-Message, gleiche Aktionsbuttons wie bei Abschluss.
-  - **Given** After-Session-Screen **When** „In Favoriten speichern“ getappt **Then** ggf. Namenabfrage oder Default, Speichern und Bestätigung.
-  - **Given** Nutzer hat Favoriten **When** Favoriten-Liste (z. B. Library) geöffnet **Then** gespeicherte Sessions (z. B. neueste zuerst), Laden/Löschen wie spezifiziert.
-  - **Given** Keine Favoriten **When** Favoriten-Liste geöffnet **Then** Leerzustand (z. B. „Keine Favoriten vorhanden“), Hinweis auf Hinzufügen (z. B. aus Player).
-  - **Given** Favoriten-Liste **When** Favorit gelöscht (Swipe/Button) **Then** ggf. Bestätigung, Eintrag verschwindet.
-  - **Given** Favoriten-Liste **When** Favorit getappt **Then** Session geladen, Playback oder Bearbeitung (Pro) möglich.
-- **Priorität:** Mittel bis Hoch (CUJ-07).
+- **Description:** Completion/cancellation message, “Save to Favorites”; favorites list, empty state, add/remove, load session.
+- **Test cases:** (Same structure as in TEST_COVERAGE; completion/abort messages, save to favorites, list behaviour, empty state, delete, load.)
+- **Priority:** Medium to High (CUJ-07).
 
 #### 7. Soundscapes / Explore (F08) & Library
 
-- **Beschreibung:** Kategorien/Listen auf Explore; Tap zu Detail/Player. Library: Favorites, All Mixes, History.
-- **Testfälle:**
-  - **Given** Nutzer auf Explore/Soundscapes **Then** Kategorien (z. B. Music, Nature, Frequency, Noise) sichtbar, Tapp auf Kategorie öffnet Detail.
-  - **Given** Soundscape-Kategorie geöffnet **When** Item in Grid/Liste getappt **Then** Session erstellt/konfiguriert, Navigation zu Live Player oder Config.
-  - **Given** Nutzer in Soundscape-Detail **When** Back getappt **Then** Rückkehr zu Explore/Main.
-  - **Given** Nutzer auf Library-Tab **Then** Favorites, All Mixes, History (oder Äquivalent) erreichbar; Listen zeigen korrekte Einträge.
-  - **Given** Nutzer in Library-Liste **When** Eintrag getappt **Then** Navigation zu Mix/Session-Detail oder Player.
-- **Priorität:** Mittel.
+- **Description:** Categories/lists on Explore; tap to detail/player. Library: Favorites, All Mixes, History.
+- **Test cases:** (Explore categories, tap item, back; Library sections and navigation.)
+- **Priority:** Medium.
 
 #### 8. Profile, Support, Legal (F13)
 
-- **Beschreibung:** Profile, Account, Support, Legal, Version/Upgrade verlinkt.
-- **Testfälle:**
-  - **Given** Nutzer auf Profile-Tab **Then** Account Settings, Support, Legal, Datenschutz (wie implementiert) erreichbar; Unterseiten zeigen korrekten Inhalt.
-  - **Given** Info-Menü/Profile geöffnet **Then** Einträge z. B. Vorbereitung, Brainwave, AGB, Datenschutz, Impressum, Haftungsausschluss, Support, Version vorhanden; Tapp öffnet jeweiligen Screen/Inhalt.
-  - **Given** Version/Upgrade geöffnet **Then** Upgrade/Subscription-Optionen (Demo/User) oder Pro-Panel (Pro) wie designed.
-- **Priorität:** Mittel.
+- **Description:** Profile, Account, Support, Legal, Version/Upgrade linked.
+- **Test cases:** (Profile entries, sub-pages, Version/Upgrade options.)
+- **Priority:** Medium.
 
 #### 9. Subscription / Sales (F14)
 
-- **Beschreibung:** Plan-Anzeige, Subscribe, Restore; Paywall bei gesperrtem Inhalt.
-- **Testfälle:**
-  - **Given** Nutzer auf Subscription/Upgrade-Screen **Then** Pläne (z. B. wöchentlich, monatlich, jährlich) sichtbar, Preise und ggf. Ersparnis, ggf. Empfehlung.
-  - **Given** Nutzer auf Subscription-Screen **When** Subscribe (für einen Plan) getappt **Then** nativer Kauf-Flow (StoreKit) wird ausgelöst; „Käufe wiederherstellen“ sichtbar und funktional, Feedback bei Restore.
-  - **Given** Demo oder nicht abonniert **When** gesperrter Inhalt aufgerufen **Then** Paywall/Upgrade-Prompt, Subscribe oder Restore von dort möglich.
-- **Priorität:** Hoch (CUJ-04).
+- **Description:** Plan display, Subscribe, Restore; paywall on locked content.
+- **Test cases:** (Plans visible, Subscribe flow, Restore, paywall on locked content.)
+- **Priority:** High (CUJ-04).
 
-#### 10. Dialoge (F16)
+#### 10. Dialogs (F16)
 
-- **Beschreibung:** Bestätigungsdialoge (z. B. Exit Session, Favorit löschen), Fehlerdialoge.
-- **Testfälle:**
-  - **Given** Aktion erfordert Bestätigung (z. B. Favorit löschen, Session beenden) **When** Aktion ausgelöst **Then** Modal mit Bestätigen/Abbrechen; Bestätigen führt Aktion aus und schließt; Abbrechen schließt ohne Aktion.
-  - **Given** Speichern einer Session mit Namenpflicht **When** Speichern-Flow **Then** Dialog mit optionalem Textfeld und Bestätigen/Abbrechen; eingegebener Name wird verwendet.
-  - **Given** Fehler (z. B. Netzwerk, Speicher) **When** Fehler an Nutzer **Then** Fehlerdialog oder -meldung, Dismiss und Weiter nutzbar.
-- **Priorität:** Mittel.
+- **Description:** Confirmation dialogs (e.g. Exit Session, Delete favorite), error dialogs.
+- **Test cases:** (Confirm/Cancel, optional text input, error display and dismiss.)
+- **Priority:** Medium.
 
 ---
 
-## 4. Priorisierung und nächste Schritte
+## 5. Prioritization and Next Steps
 
-**Sofort (Basis für UI-Tests):**
+**Immediate (foundation for UI tests):**
 
-1. **AWAVEUITests-Target** in `project.yml` anlegen.
-2. **Smoke-Tests** umsetzen: SMOKE-01 bis SMOKE-04 (Launch, Preloader/Onboarding oder Main Tabs, alle Tabs tappbar, kein Crash).
-3. **Accessibility-IDs** für Tab Bar und zentrale Buttons (z. B. Start, Neue Session generieren, Play/Pause) setzen, damit UI-Tests stabil laufen.
+1. Add **AWAVEUITests target** in `project.yml`.
+2. Implement **smoke tests:** SMOKE-01 to SMOKE-04 (launch, Preloader/Onboarding or Main Tabs, all tabs tappable, no crash).
+3. Set **accessibility IDs** for Tab Bar and main buttons (e.g. Start, Generate new session, Play/Pause) so UI tests run stably.
 
-**Kritische User Journeys (danach):**
+**Critical user journeys (next):**
 
-- CUJ-02 (Session generieren → Config → Play), CUJ-03 (Playback), CUJ-08 (Kategorie, Neue Session generieren).
-- Anschließend CUJ-01 (Onboarding), CUJ-04 (Subscription), CUJ-05/CUJ-06 (Suche/SOS), CUJ-07 (Favoriten).
+- CUJ-02 (Session generate → Config → Play), CUJ-03 (Playback), CUJ-08 (Category, Generate new session).
+- Then CUJ-01 (Onboarding), CUJ-04 (Subscription), CUJ-05/CUJ-06 (Search/SOS), CUJ-07 (Favorites).
 
-**Weitere Bereiche:**
+**Other areas:**
 
-- UI-Testfälle aus Abschnitt 3.3 nach Priorität und Ressourcen umsetzen (Launch/Onboarding, Navigation, dann Kategorien, Suche/SOS, Player, Favoriten, Explore/Library, Profile, Subscription, Dialoge).
-- Unit-Tests für fehlende ViewModels und Services wie in [AWAVE-Test-Coverage-Plan.md](../../AWAVE-Test-Coverage-Plan.md) und [TEST_COVERAGE.md](../TEST_COVERAGE.md) beschrieben ausbauen.
+- Implement UI test cases from §4.3 by priority and resources (Launch/Onboarding, Navigation, then Categories, Search/SOS, Player, Favorites, Explore/Library, Profile, Subscription, Dialogs).
+- Expand unit tests for missing ViewModels and services as in [AWAVE-Test-Coverage-Plan.md](../../AWAVE-Test-Coverage-Plan.md) and [TEST_COVERAGE.md](../TEST_COVERAGE.md).
 
 ---
 
-## 5. Referenzen
+## 6. References
 
-| Dokument | Inhalt |
-|---------|--------|
-| [01-PRD.md](01-PRD.md) | Produkt- und Navigationsüberblick |
-| [02-FEATURE-SPECS.md](02-FEATURE-SPECS.md) | Screen-Specs F01–F16 |
-| [TEST_COVERAGE.md](../TEST_COVERAGE.md) | Szenario-Coverage F01–F16, Smoke/CUJ/Regression, Gap-Analyse, detaillierte Given/When/Then |
-| [AWAVE-Test-Coverage-Plan.md](../../AWAVE-Test-Coverage-Plan.md) | Phasenplan Unit-Tests (Domain, Audio, SessionGenerator, CI), Coverage-Ziele |
-| [TESTING_IMPLEMENTATION_SUMMARY.md](../../handovers/TESTING_IMPLEMENTATION_SUMMARY.md) | Umgesetzte Category-Sessions-Tests (ViewModel + Generator) |
+| Document | Content |
+|----------|---------|
+| [01-PRD.md](01-PRD.md) | Product and navigation overview |
+| [02-FEATURE-SPECS.md](02-FEATURE-SPECS.md) | Screen specs F01–F16 |
+| [TEST_COVERAGE.md](../TEST_COVERAGE.md) | Scenario coverage F01–F16, Smoke/CUJ/Regression, gap analysis, detailed Given/When/Then |
+| [AWAVE-Test-Coverage-Plan.md](../../AWAVE-Test-Coverage-Plan.md) | Phased plan for unit tests (Domain, Audio, SessionGenerator, CI), coverage goals |
+| [TESTING_IMPLEMENTATION_SUMMARY.md](../../handovers/TESTING_IMPLEMENTATION_SUMMARY.md) | Implemented Category-Sessions tests (ViewModel + Generator) |

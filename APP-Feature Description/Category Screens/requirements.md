@@ -72,6 +72,14 @@
 - [x] Category ordering and sorting
 - [x] Sound filtering by category
 
+#### Session Generation (Category Block)
+- [x] First-time / empty state: "Generiere deine erste Session" CTA opens personalization drawer (no auto-generate)
+- [x] Personalization drawer: headline "Individualisiere deine {Category}-Session", length (slider 15–90 min), voice (picker), frequencies (Ein/Aus)
+- [x] Primary action: "{Category}-Session generieren"; on tap: save preferences, close drawer, generate with preferences, show "Deine {Category}-Sessions werden jetzt generiert"
+- [x] "Neue Sessions generieren" opens same drawer (pre-filled from saved preferences); existing sessions replaced after generation
+- [x] Anonymous: sessions and preferences persisted in local storage (UserDefaults); no preload on first launch
+- [x] Registered: sessions in Firestore; preferences in UserDefaults keyed by userId (or Firestore when backend ready)
+
 ### 5. Category Context Management
 
 #### State Management
