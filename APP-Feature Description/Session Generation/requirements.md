@@ -1,7 +1,7 @@
 # Session Generation – Functional Requirements (iOS / Swift)
 
 **Scope:** Topic-based and category-based session generation in the AWAVE iOS app.  
-**Status:** Implemented in Swift; some features (e.g. sound generation via search) known not working (see PRD 07/08).  
+**Status:** Implemented in Swift. Search → session flow works (session suggestion on topic match, OLD-APP parity). Some other items may still be in progress (see PRD 07/08).  
 **Last updated:** 2026-02-16  
 
 ---
@@ -75,8 +75,9 @@
 
 | Requirement | Status | Implementation / Notes |
 |-------------|--------|--------------------------|
-| Search drawer: text input → topic match | ◐ | `SearchViewModel.evaluateForSession`; SymptomFinder; SOS handled |
-| Topic match → generate session and play | ◐ | SearchDrawerView `submitForSession`; **currently not working** (known issue) |
+| Search drawer: text input → topic match | ✓ | `SearchViewModel.evaluateForSession`; SymptomFinder; SOS handled |
+| Session suggestion shown whenever query matches a topic | ✓ | `suggestedTopic` set in `performSearch` whenever SymptomFinder returns a topic (independent of sound results; OLD-APP parity) |
+| Topic match → generate session and play | ✓ | SearchDrawerView `submitForSession`; tap on suggestion or Enter/Go → `SessionGenerator.generate`, `player.loadSession`, `play` |
 | No topic match → open SessionGenerator with manual topic | ✓ | `coordinator.sessionGeneratorInitialTopic = nil`, `showSessionGenerator = true` |
 
 ---
@@ -119,5 +120,5 @@
 | Feature | Document | Relevance |
 |---------|----------|------------|
 | Category Screens | [../Category Screens/requirements.md](../Category%20Screens/requirements.md) | Category block, personalization drawer, "Neue Sessions generieren" |
-| Search Drawer | [../Seach Drawer/requirements.md](../Seach%20Drawer/requirements.md) | Search → topic → session (currently broken) |
+| Search Drawer | [../Seach Drawer/requirements.md](../Seach%20Drawer/requirements.md) | Search → topic → session; session suggestion shown on topic match (OLD-APP parity) |
 | Major Audioplayer | [../Major Audioplayer/requirements.md](../Major%20Audioplayer/requirements.md) | Playback, PhasePlayer, mixer |

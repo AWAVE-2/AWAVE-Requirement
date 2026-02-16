@@ -112,6 +112,12 @@
 - [x] Sound data is transformed to Sound format
 - [x] Sound is passed to audio player
 
+#### Session Suggestion (Topic Match, OLD-APP Parity)
+- [x] When the query matches a session topic (SymptomFinder), a "Vorgeschlagene Session" card is shown
+- [x] Session suggestion is shown whenever a topic matches, independent of whether sound results exist (user can start a session directly from search, as in OLD-APP)
+- [x] Tapping the suggestion or pressing Enter/Go generates a session for that topic, loads it, and starts playback; drawer closes
+- [x] If no topic matches, Enter/Go opens SessionGenerator with no pre-selected topic
+
 ### 5. SOS Trigger Detection
 
 #### SOS Detection

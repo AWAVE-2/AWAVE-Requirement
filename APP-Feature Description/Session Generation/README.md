@@ -1,7 +1,7 @@
 # Session Generation – Feature Overview
 
 **Feature:** Topic-based and category-based therapeutic session generation for AWAVE iOS.  
-**Status:** Implemented in Swift. Sound generation and search→session flow are known issues (see PRD 07/08).  
+**Status:** Implemented in Swift. Search→session flow works (session suggestion on topic match, OLD-APP parity). Other items may be in progress (see PRD 07/08).  
 **Last updated:** 2026-02-16  
 
 ---
@@ -12,7 +12,7 @@ Session Generation produces multi-phase audio sessions from:
 
 - **Topics** (11 types: sleep, dream, obe, stress, healing, angry, sad, depression, trauma, belief, meditation).
 - **Category** (onboarding: Schlaf, Stress, Im Fluss) for the category screens (5 sessions per category, with optional preferences).
-- **Search** (text → topic match → session; currently not working reliably).
+- **Search** (text → topic match → session; session suggestion shown whenever topic matches, including when sound results exist; direct session start as in OLD-APP).
 
 Sessions consist of phases with content IDs for text, music, nature, sound, and noise; resolution is done via the audio library (Firestore + SessionContentMapping), with display names shown in the mixer.
 
@@ -56,7 +56,7 @@ Sessions consist of phases with content IDs for text, music, nature, sound, and 
 ## Related Features
 
 - **Category Screens** – Category block, personalization drawer, "Neue Sessions generieren".
-- **Seach Drawer** – Search text → topic → session (known issue: not working).
+- **Seach Drawer** – Search text → topic → session; session suggestion on topic match (OLD-APP parity).
 - **Major Audioplayer** – Playback, PhasePlayer, mixer labels.
 - **User Onboarding Screens** – Category selection (schlafen, stress, leichtigkeit) used for category→topic mapping.
 
