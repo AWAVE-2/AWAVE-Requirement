@@ -2,6 +2,8 @@
 
 **Purpose:** Single document for production readiness assessment: PRD parity, feature-spec parity, quality criteria, and ship checklist. Use alongside [06-PROJECT-INTEGRATION-PLAN](06-PROJECT-INTEGRATION-PLAN.md) for Done/Open status.
 
+**Platform (Feb 2026):** Native iOS **Swift 6.2, SwiftUI, iOS 26.2**, Firebase. This app is the **baseline (North Star) for the Android app**: [docs/ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md).
+
 **Related docs:** [01-PRD](01-PRD.md) · [02-FEATURE-SPECS](02-FEATURE-SPECS.md) · [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md) · [06-PROJECT-INTEGRATION-PLAN](06-PROJECT-INTEGRATION-PLAN.md)
 
 **Status date:** 2026-02-16  

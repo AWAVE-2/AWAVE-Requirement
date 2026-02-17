@@ -1,6 +1,8 @@
 # AWAVE - Requirements Summary & Implementation Roadmap
 ## Complete Requirements Package Overview
 
+**Android baseline:** The current iOS app (Swift 6.2, SwiftUI, iOS 26.2, Firebase) is the **North Star for the Android app**. Implemented features and doc links: [docs/ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md).
+
 ---
 
 ## Document Index
@@ -113,7 +115,7 @@
 - A) iOS 17+ (latest SwiftUI, `@Observable`, StoreKit 2 views)
 - B) iOS 16+ (broader reach, slightly more boilerplate)
 
-**Recommendation:** Option A. The app is a ground-up rewrite. iOS 17 covers 80%+ of active devices and provides the best developer experience.
+**Current decision (Feb 2026):** Project targets **iOS 26.2** (Swift 6.2, SwiftUI). This iOS app is the **baseline for Android**; see [docs/ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md).
 
 ### ADR-06: Pro Mode Unlock Mechanism
 **Options:**

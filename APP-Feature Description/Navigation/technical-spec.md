@@ -2,49 +2,44 @@
 
 ## 🏗️ Architecture Overview
 
-### Technology Stack
+### Technology Stack (Current: iOS Swift/SwiftUI – baseline for Android)
 
-#### Navigation Library
-- **React Navigation v6**
-  - `@react-navigation/native` (v6.1.18) - Core navigation functionality
-  - `@react-navigation/stack` (v6.4.1) - Stack navigator
-  - `@react-navigation/bottom-tabs` (v6.6.1) - Type definitions (not used for UI)
+#### Navigation (Swift)
+- **SwiftUI NavigationStack** - Root stack, 20+ screens, gesture back
+- **SwiftUI TabView** - Custom tab bar (MainTabView); 5 tabs (3 category + Search + Profile)
+- **Sheets** - Search drawer, SOS drawer, category selection, modals
 
 #### Deep Linking
-- **React Native Linking API** - Native deep link handling
-- **URL Scheme:** `awave://`
+- **URL Scheme:** `awave://` (email verification, password reset)
 - **Token Extraction:** Hash fragments and query parameters
+- Handled in app lifecycle and scene phase
 
 #### State Management
-- **React Context API** - Global navigation state
-- **Local Component State** - Tab state, modal state
-- **AsyncStorage** - Navigation state persistence
+- **OnboardingStorageService** - Initial tab, category preference (UserDefaults; Firestore when backend ready)
+- **Local @State / ViewModel** - Tab state, modal state
+- **Route parameters** - Passed via navigation path / environment
 
 #### Platform Support
-- **iOS:** 13+ (gesture navigation, modal presentations)
-- **Android:** API 21+ (deep linking, gesture navigation)
+- **iOS:** 26.2+ (SwiftUI, gesture navigation, modal presentations). This app is the baseline for Android.
+- **Android:** Implement to match behaviour; min SDK per project.
 
 ---
 
-## 📁 File Structure
+## 📁 File Structure (iOS – AWAVE/AWAVE/)
 
 ```
-src/
-├── navigation/
-│   └── index.tsx                    # Main navigation container and stack navigator
-├── components/
-│   └── navigation/
-│       ├── TabNavigator.tsx        # Custom tab navigator component
-│       ├── NavBar.tsx              # Custom bottom navigation bar
-│       └── UnifiedHeader.tsx       # Consistent header component
-├── screens/
-│   ├── IndexScreen.tsx             # Entry point with preloader
-│   ├── OnboardingSlidesScreen.tsx  # Onboarding flow
-│   ├── AuthScreen.tsx              # Authentication
-│   ├── MainTabs (via TabNavigator) # Main app tabs
-│   └── [20+ other screens]         # Stack screens
-└── hooks/
-    └── useOnboardingStorage.ts      # Navigation state persistence
+AWAVE/AWAVE/
+├── Navigation/
+│   ├── RootView.swift              # Preloader → Onboarding or MainTabView
+│   └── MainTabView.swift           # TabView with category + Search + Profile tabs
+├── Features/
+│   ├── Onboarding/                 # OnboardingView, CategorySelectionView, AnalyticsConsentToastView
+│   ├── Categories/                 # SchlafScreen, StressScreen, ImFlussScreen, CategorySelectionSheet
+│   ├── Profile/                    # ProfileScreen
+│   └── [other features]            # Auth, Player, Search, etc.
+├── Services/
+│   └── TabSelectionService.swift   # Initial tab from OnboardingStorageService
+└── [20+ screens via NavigationStack]
 ```
 
 ---
@@ -129,7 +124,7 @@ type RootStackParamList = {
 ### TabNavigator
 **Location:** `src/components/navigation/TabNavigator.tsx`
 
-**Purpose:** Custom tab navigator replacing React Navigation bottom tabs
+**Purpose:** Custom tab bar (TabView) – 5 tabs; iOS implementation is baseline for Android
 
 **Props:**
 ```typescript
@@ -148,7 +143,7 @@ const [lastActiveTabBeforeSearch, setLastActiveTabBeforeSearch] = useState<Categ
 ```
 
 **Features:**
-- Manages tab state locally (not React Navigation)
+- Manages tab state locally (SwiftUI TabView)
 - Renders active screen based on activeTab
 - Handles modal/drawer state
 - Tracks last active tab before search

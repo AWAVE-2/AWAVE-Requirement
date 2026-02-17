@@ -1,18 +1,17 @@
 # Navigation System - Components Inventory
 
+**Implementation note:** The current app is **Swift/SwiftUI**. Root is `RootView`; tabs in `MainTabView` (TabView); stack via NavigationStack. This is the **baseline for Android**. The list below describes logical components; iOS uses SwiftUI views (e.g. RootView, MainTabView, CategorySelectionSheet).
+
 ## 📱 Navigation Components
 
 ### Navigation Container
-**File:** `src/navigation/index.tsx`  
-**Type:** Root Navigation Component  
-**Purpose:** Main navigation container wrapping entire app
+**File (iOS):** `AWAVE/AWAVE/Navigation/RootView.swift`  
+**Type:** Root view  
+**Purpose:** Main entry (Preloader → Onboarding or MainTabView)
 
-**Props:** None (root component)
-
-**Components Used:**
-- `NavigationContainer` - React Navigation container
-- `Stack.Navigator` - Stack navigator
-- `Stack.Screen` - Individual screen definitions
+**Components Used (iOS):**
+- SwiftUI NavigationStack / TabView
+- RootView, MainTabView, category screens, Search drawer, Profile
 
 **Features:**
 - Wraps entire app
@@ -33,7 +32,7 @@
 **Type:** Stack Navigator Component  
 **Purpose:** Root stack navigator with all screens
 
-**State:** None (uses React Navigation state)
+**State:** Tab/stack state (iOS: SwiftUI state; baseline for Android)
 
 **Screens Registered:**
 1. `Index` - Entry point
@@ -77,7 +76,7 @@
 ### TabNavigator
 **File:** `src/components/navigation/TabNavigator.tsx`  
 **Type:** Custom Tab Navigator Component  
-**Purpose:** Custom tab navigator replacing React Navigation bottom tabs
+**Purpose:** Custom tab bar (iOS: TabView; baseline for Android)
 
 **Props:**
 ```typescript
@@ -135,7 +134,7 @@ interface CustomTabNavigatorProps {
 ### CustomNavbar
 **File:** `src/components/navigation/NavBar.tsx`  
 **Type:** Bottom Navigation Bar Component  
-**Purpose:** Custom bottom navigation bar matching React web app
+**Purpose:** Custom bottom navigation bar (iOS: SwiftUI; baseline for Android)
 
 **Props:**
 ```typescript
@@ -392,7 +391,7 @@ All navigation components use the theme system:
 
 ### Persistent State
 - AsyncStorage - Onboarding state, category selection
-- React Navigation - Navigation stack state
+- NavigationStack / TabView state (iOS SwiftUI; baseline for Android)
 
 ---
 
@@ -438,7 +437,7 @@ All navigation components use the theme system:
 
 ### Dependencies
 - All components depend on theme system
-- Navigation components depend on React Navigation
+- Navigation components use SwiftUI NavigationStack/TabView (iOS); Android should match behaviour
 - Tab components depend on CategoryContext
 - Header depends on navigation hook
 

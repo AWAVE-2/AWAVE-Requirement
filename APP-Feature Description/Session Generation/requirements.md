@@ -2,7 +2,7 @@
 
 **Scope:** Topic-based and category-based session generation in the AWAVE iOS app.  
 **Status:** Implemented in Swift. Search → session flow works (session suggestion on topic match, OLD-APP parity). Some other items may still be in progress (see PRD 07/08).  
-**Last updated:** 2026-02-16  
+**Last updated:** 2026-02-17  
 
 ---
 
@@ -33,7 +33,7 @@
 | Generate 5 varied sessions per category | ✓ | `CategorySessionGenerator.generateSessions(for: category)` |
 | Distinct journey and music genre per slot | ✓ | Shuffled journeys/genres, one per slot |
 | Optional user preferences (voice, duration scale, frequency on/off) | ✓ | `SessionGeneratorPreferences`; second overload of `generateSessions` |
-| Duration scaling (e.g. 15–90 min) | ✓ | `preferences.durationScale(defaultMinutes:)`, applied to phase durations |
+| Duration scaling (e.g. 15–90 min), cap at selected max | ✓ | Scale from **actual** session total: `scale = min(1.0, targetSeconds / totalUnscaled)`; session never exceeds selected duration |
 
 ### 1.3 Session Generator UI (`SessionGeneratorView`)
 
@@ -105,6 +105,7 @@
 
 | Document | Purpose |
 |----------|---------|
+| [../../../SESSION-GENERATION-FIX-SUMMARY.md](../../../SESSION-GENERATION-FIX-SUMMARY.md) | Feb 2026: Duration cap + no voice demo fallback |
 | [base-documentation.md](base-documentation.md) | Content-IDs, resolution order, mixer display |
 | [SESSION_GENERATION_AUDIO_LIBRARY_REFACTORING_REPORT.md](SESSION_GENERATION_AUDIO_LIBRARY_REFACTORING_REPORT.md) | No category fallback, SessionContentResolver, displayNames |
 | [Session-Content-IDs-Catalog.md](Session-Content-IDs-Catalog.md) | Catalog of content IDs |

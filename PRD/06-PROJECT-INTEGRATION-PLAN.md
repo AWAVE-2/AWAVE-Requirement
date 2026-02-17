@@ -3,6 +3,8 @@
 
 **Purpose:** Single documented overview of all requirements, with Done vs Open ToDo Review and full traceability to PRD, Feature Specs, and APP-Feature Description (user stories).
 
+**Platform (Feb 2026):** Native iOS **Swift 6.2, SwiftUI, iOS 26.2**, Firebase. This app is the **baseline (North Star) for the Android app**: [docs/ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md).
+
 **Related PRD docs:** [01-PRD](01-PRD.md) · [02-FEATURE-SPECS](02-FEATURE-SPECS.md) · [03-DATA-MODELS](03-DATA-MODELS.swift) · [04-AUDIO-ARCHITECTURE](04-AUDIO-ARCHITECTURE.md) · [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md) · [07-PRODUCTION-READY-OVERVIEW](07-PRODUCTION-READY-OVERVIEW.md)
 
 ---
@@ -31,7 +33,7 @@ Items below are considered done for the purpose of this plan (e.g. documentation
 
 | Item | Description | Linked documents |
 |------|-------------|-------------------|
-| PRD baseline | Full product requirements for native iOS rewrite (Swift/SwiftUI, iOS 17+) | [01-PRD](01-PRD.md) |
+| PRD baseline | Full product requirements for native iOS app (Swift/SwiftUI, iOS 26.2); baseline for Android | [01-PRD](01-PRD.md) |
 | Feature specs | Screen-level specs F01–F16 for all main flows | [02-FEATURE-SPECS](02-FEATURE-SPECS.md) |
 | Data models | Swift structs for session, phases, content | [03-DATA-MODELS](03-DATA-MODELS.swift) |
 | Audio architecture | Audio engine design (multi-track, synthesis, noise) | [04-AUDIO-ARCHITECTURE](04-AUDIO-ARCHITECTURE.md) |

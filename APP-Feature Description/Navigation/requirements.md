@@ -309,11 +309,10 @@
 
 ## 🔧 Technical Constraints
 
-### Platform Requirements
-- iOS 13+ for gesture navigation
-- Android API 21+ for deep linking
-- React Navigation v6 compatibility
-- React Native 0.76.9 compatibility
+### Platform Requirements (Current iOS Implementation)
+- **iOS 26.2+** (SwiftUI, NavigationStack, gesture navigation). This app is the baseline for Android; Android should match behaviour and min SDK per project.
+- Deep linking: `awave://` URL scheme; token extraction from hash/query params.
+- Swift/SwiftUI: NavigationStack, TabView, sheet presentations. No React Navigation.
 
 ### Performance Constraints
 - Navigation state size < 1MB

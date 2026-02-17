@@ -7,11 +7,11 @@
 
 ## 📋 Feature Overview
 
-The Navigation system provides comprehensive routing and navigation capabilities for the AWAVE app. It implements a hierarchical navigation structure using React Navigation, supporting stack navigation, tab navigation, modal presentations, and deep linking. The system ensures seamless user experience with gesture-based navigation, route protection, and intelligent navigation state management.
+The Navigation system provides comprehensive routing and navigation capabilities for the AWAVE **iOS app (Swift/SwiftUI)**. It implements a hierarchical navigation structure using **NavigationStack and TabView**, supporting stack navigation, tab navigation, modal presentations, and deep linking. This behaviour is the **baseline for the Android app**. The system ensures seamless user experience with gesture-based navigation, route protection, and intelligent navigation state management.
 
 ### Description
 
-The navigation system is built on React Navigation and provides:
+The navigation system is implemented in Swift/SwiftUI and provides:
 - **Stack Navigation** - Hierarchical screen navigation with back button support
 - **Tab Navigation** - Custom bottom tab bar with category and utility tabs
 - **Modal Navigation** - Modal presentations for drawers and overlays
@@ -41,7 +41,7 @@ The navigation system is built on React Navigation and provides:
 - Route parameter passing
 
 ### 2. Tab Navigation
-- Custom bottom tab bar (replaces React Navigation tabs)
+- Custom bottom tab bar (TabView; 5 tabs: 3 category + Search + Profile)
 - 3 category tabs (Schlafen, Stress, Leichtigkeit)
 - 2 utility tabs (Search, Profile)
 - Active tab state management
@@ -77,20 +77,19 @@ The navigation system is built on React Navigation and provides:
 
 ## 🏗️ Architecture
 
-### Technology Stack
-- **Navigation Library:** React Navigation v6
-  - `@react-navigation/native` - Core navigation
-  - `@react-navigation/stack` - Stack navigator
-  - `@react-navigation/bottom-tabs` - Tab navigator (used for type definitions)
-- **State Management:** React Context API + Local State
-- **Deep Linking:** React Native Linking API
+### Technology Stack (iOS – baseline for Android)
+- **Framework:** SwiftUI; **iOS 26.2+**
+- **Stack:** NavigationStack (root stack, 20+ screens)
+- **Tabs:** TabView with custom tab bar (MainTabView); 3 category tabs + Search + Profile
+- **State:** OnboardingStorageService (initial tab), local tab state, route parameters
+- **Deep Linking:** `awave://` URL scheme; token extraction for email verification / password reset
 
-### Key Components
-- `Navigation` - Main navigation container
-- `MainNavigator` - Root stack navigator
-- `TabNavigator` - Custom tab navigator component
-- `CustomNavbar` - Bottom navigation bar
-- `UnifiedHeader` - Consistent header component
+### Key Components (Swift)
+- `RootView` - App root (Preloader → Onboarding or MainTabView)
+- `MainTabView` - Tab container with category and utility tabs
+- `TabSelectionService` - Initial tab from onboarding
+- `CategorySelectionSheet` - Production UI to change home category
+- Category screens: `SchlafScreen`, `StressScreen`, `ImFlussScreen`; Search drawer; Profile
 
 ---
 
@@ -167,10 +166,10 @@ The navigation system is built on React Navigation and provides:
 - **Profile** - Tab navigation integration
 - **Audio Player** - Navigation on access denial
 
-### External Services
-- React Navigation (navigation library)
-- React Native Linking (deep links)
-- AsyncStorage (navigation state persistence)
+### External Services (iOS implementation)
+- SwiftUI NavigationStack & TabView
+- URL scheme handling for `awave://` deep links
+- OnboardingStorageService (UserDefaults) for initial tab / category preference
 
 ---
 
@@ -197,18 +196,19 @@ The navigation system is built on React Navigation and provides:
 
 ## 📚 Additional Resources
 
-- [React Navigation Documentation](https://reactnavigation.org/)
-- [React Native Linking API](https://reactnative.dev/docs/linking)
-- [Deep Linking Guide](https://reactnavigation.org/docs/deep-linking/)
+- [SwiftUI NavigationStack](https://developer.apple.com/documentation/swiftui/navigationstack)
+- [SwiftUI TabView](https://developer.apple.com/documentation/swiftui/tabview)
+- [Linking (URL schemes)](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app)
+- **Android baseline:** This iOS behaviour is the North Star; see `docs/ANDROID-NORDSTERN.md`
 
 ---
 
 ## 📝 Notes
 
-- Custom tab navigator replaces React Navigation's bottom tabs
-- Navigation state persists across app restarts
+- Implementation is Swift/SwiftUI (TabView + NavigationStack); this is the baseline for Android
+- Navigation state persists across app restarts (OnboardingStorageService, tab state)
 - Deep links use `awave://` URL scheme
-- Modal presentations use native formSheet on iOS
+- Modal presentations use sheet/formSheet on iOS
 - Gesture navigation enabled for stack screens
 - Tab state loaded from onboarding storage on app launch
 

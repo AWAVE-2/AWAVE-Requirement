@@ -1,8 +1,10 @@
 # Navigation System - Services Documentation
 
+**Implementation note:** The current app is **Swift/SwiftUI** (iOS 26.2). Navigation uses NavigationStack, TabView, OnboardingStorageService, and URL scheme handling. This behaviour is the **baseline for Android**. The requirements below describe the intended capabilities; Swift equivalents are used in code (e.g. `@Environment(\.dismiss)`, TabSelectionService).
+
 ## 🔧 Service Layer Overview
 
-The navigation system primarily uses React Navigation's built-in services, with additional utilities for state persistence, deep linking, and route protection. This document covers navigation-related hooks, utilities, and integration points.
+The navigation system uses SwiftUI navigation and local services for state persistence, deep linking, and route protection. This document covers navigation-related utilities and integration points (conceptually; iOS uses Swift types and services).
 
 ---
 

@@ -1,10 +1,11 @@
 # AWAVE - Product Requirements Document
-## Native iOS Rewrite (Swift / SwiftUI)
+## Native iOS App (Swift / SwiftUI)
 
 **App ID:** `de.awave.app`
 **Current Version:** 1.3
-**Source Platform:** Capacitor 6 (Vanilla JS + jQuery + Web Audio API)
-**Target Platform:** Native iOS (Swift 5.9+, SwiftUI, iOS 17+)
+**Platform:** Native iOS (Swift 6.2, SwiftUI, **iOS 26.2+**). Backend: Firebase (Auth, Firestore, Storage). No Supabase.
+**Android baseline:** The current iOS app is the **North Star for the Android app**. See [docs/ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md) for implemented features and tech mapping.
+**Legacy reference:** Original product concept from Capacitor 6 (Web Audio API); content/tiers described there inform this PRD.
 
 ---
 

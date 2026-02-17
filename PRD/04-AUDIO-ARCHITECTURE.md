@@ -1,6 +1,8 @@
 # AWAVE - Audio Architecture Assessment
 ## AVAudioEngine Migration from Web Audio API
 
+**Context (Feb 2026):** Current app is **native iOS (Swift 6.2, SwiftUI, iOS 26.2)**; playback uses PhasePlayer, SessionContentMapping, pre-resolve, and Firebase/Storage. This behaviour is the **baseline for the Android app**. See [docs/ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md).
+
 ---
 
 ## 1. Current Architecture (Web Audio API)

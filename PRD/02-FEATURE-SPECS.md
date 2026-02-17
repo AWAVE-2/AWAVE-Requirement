@@ -1,6 +1,8 @@
 # AWAVE - Feature-by-Feature Specifications
 ## Screen-Level Detail for Native iOS Implementation
 
+**Implementation context (Feb 2026):** The app is implemented in **Swift 6.2 / SwiftUI**, **iOS 26.2**. This behaviour is the **baseline for the Android app**. See [docs/ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md) for current feature list and [docs/DOCUMENTATION-INDEX.md](../../DOCUMENTATION-INDEX.md) for recent implementations (navigation, onboarding, session generation, trial, etc.).
+
 ---
 
 ## F01: Splash Screen

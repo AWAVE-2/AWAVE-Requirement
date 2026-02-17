@@ -269,7 +269,7 @@ User Action                    System Response
 - Gesture navigation works
 
 **Stack Management:**
-- Navigation stack maintained by React Navigation
+- Navigation stack maintained by SwiftUI NavigationStack (iOS); Android should match behaviour
 - Back button works on all stack screens
 - Gesture navigation enabled
 

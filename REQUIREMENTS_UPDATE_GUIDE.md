@@ -2,7 +2,7 @@
 
 ## Overview
 
-The requirements files were originally written for a React Native/TypeScript app using Supabase, but the actual implementation is a native Swift app using Firebase. This guide outlines what needs to be updated across all requirements files.
+The requirements files were originally written for a React Native/TypeScript app using Supabase, but the **actual implementation is a native Swift app (SwiftUI, iOS 26.2) using Firebase**. This app is the **baseline (North Star) for the Android app**. This guide outlines what needs to be updated across all requirements files and points Android to the correct reference.
 
 ## Key Differences
 
@@ -129,8 +129,9 @@ For each requirements file:
 ## Notes
 
 - The app uses **Firebase** (Firestore, Storage, Auth), not Supabase
-- The app uses **Swift** with protocol-oriented architecture, not React/TypeScript
+- The app uses **Swift/SwiftUI** (iOS 26.2) with protocol-oriented architecture, not React/TypeScript
 - The app uses **UserDefaults** and **FileManager** for local storage, not AsyncStorage
-- Many analytics and advanced features are not yet implemented
+- **iOS is the baseline for Android:** see `docs/ANDROID-NORDSTERN.md` for feature list and tech mapping
+- Many analytics and advanced features are not yet implemented (see Backlog-Parity)
 - Real-time subscriptions are not implemented
 - Offline queue is not implemented

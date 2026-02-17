@@ -113,7 +113,7 @@ FeatureName/
 1. **Structured Documentation** - All features have dedicated folders
 2. **Easy Navigation** - Clear mapping between code and features
 3. **Requirement Tracking** - Each feature can document requirements
-4. **Feature Parity** - Track web vs native feature parity
+4. **Feature Parity** - Current iOS = baseline for Android; track parity with OLD-APP/Web via Backlog-Parity folder
 5. **Onboarding** - New team members can quickly understand features
 6. **Testing** - Test cases can be organized by feature
 7. **Maintenance** - Easy to update documentation as code changes
