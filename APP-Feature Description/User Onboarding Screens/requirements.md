@@ -279,9 +279,9 @@
 - Wave cycle: 4500ms
 
 ### Category Mappings
-- `schlafen` → `sleep` session type
-- `stress` → `meditation` session type
-- `leichtigkeit` → `focus` session type
+- **Storage / backend keys:** `schlafen` (sleep), `stress` (Ruhe/calm), `leichtigkeit` (flow). Used for persistence and backend compatibility.
+- **Display titles (UI):** Schlaf, Ruhe, Flow (`OnboardingCategory.title`). Shown on Home section headers and in Category Overview.
+- **Session generation:** Onboarding category maps to `SessionTopic` via `CategorySessionGenerator.mapToSessionTopic`: Schlaf (schlafen)→`SessionTopic.sleep`, Ruhe (stress)→`SessionTopic.stress`, Im Fluss (leichtigkeit)→`SessionTopic.meditation`. See Session Generation / Session-Content-IDs-Catalog. Home shows the onboarding-selected category and/or categories with favorites; sessions generated per category use this mapping.
 
 ---
 

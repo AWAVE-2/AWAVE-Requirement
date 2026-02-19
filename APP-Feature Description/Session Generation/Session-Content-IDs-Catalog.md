@@ -6,6 +6,12 @@
 
 ---
 
+## App UI categories and SessionTopic
+
+The app exposes **3 categories** on Home and Category Detail: **Schlaf**, **Ruhe**, **Im Fluss** (from `OnboardingCategory`: sleep, calm, flow). Session generation for these uses `CategorySessionGenerator.mapToSessionTopic`: Schlaf → `SessionTopic.sleep`, Ruhe → `SessionTopic.stress`, Im Fluss → `SessionTopic.meditation`. Content IDs use topic raw values (e.g. `franca/sleep/intro`, `marion/stress/body`, `flo/meditation/...`). `SessionContentMapping` maps these to catalog themes and sound IDs.
+
+---
+
 ## Text (Stimme/Topic/Stage)
 
 - **Schema:** `{voice}/{topic}/{stage}` oder `{voice}/{topic}/{stage}/v{variant}`
@@ -52,3 +58,9 @@
 - In `sound_metadata.json`: Für alle vom Generator genutzten Werte `content_id` setzen (oder über Migration aus Pfad/Name ableiten).
 - Firestore: Nach Migration müssen `sounds`-Dokumente das Feld `contentId` mit exakt diesen Werten haben.
 - Optional: `SessionContentMapping.soundId(for:)` für Content-IDs befüllen, die noch nicht in Firestore als `contentId` existieren.
+
+## Einzigartige Text-Sessions
+
+- Der Generator erzeugt pro Slot unterschiedliche Text-Content-IDs mit Variant-Suffix: `{voice}/{topic}/{stage}/v0` … `/v4`.
+- **SessionContentResolver** fällt bei fehlendem Treffer im Katalog auf die Basis-Content-ID (ohne `/vN`) zurück, damit die Wiedergabe nicht abbricht.
+- Für **wirklich einzigartige Text-Sessions** (unterschiedliche Sprachdateien pro Session) sollten pro voice/topic/stage mehrere Varianten (v0…v4) im Katalog vorhanden oder in SessionContentMapping auf unterschiedliche Dokumente/Dateien abgebildet sein. Ohne diese Einträge werden alle fünf Sessions auf dieselbe Basis-Datei aufgelöst.

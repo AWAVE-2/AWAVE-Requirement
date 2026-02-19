@@ -2,7 +2,19 @@
 
 **Scope:** Topic-based and category-based session generation in the AWAVE iOS app.  
 **Status:** Implemented in Swift. Search → session flow works (session suggestion on topic match, OLD-APP parity). Some other items may still be in progress (see PRD 07/08).  
-**Last updated:** 2026-02-17  
+**Last updated:** 2026-02-19  
+
+---
+
+## 0. Category and Home Rules
+
+| Requirement | Status | Notes |
+|-------------|--------|--------|
+| App UI exposes 3 categories | ✓ | Schlaf, Ruhe, Im Fluss (from `OnboardingCategory`: sleep, calm, flow). Category titles on Home are Schlaf / Ruhe / Flow (`OnboardingCategory.title`). |
+| Home shows onboarding-selected category and/or categories with favorites | ✓ | First visit: one section for `displayCategory`. With favorites: sections per `categoriesWithFavorites`; each section title is the category title (Schlaf, Ruhe, Flow). |
+| Category Detail reached via Category Overview | ✓ | Category Overview lists Schlafen, Ruhe, Im Fluss; each opens SchlafScreen, RuheScreen, or ImFlussScreen respectively. |
+| Category screens generate only topic-matching sessions | ✓ | Schlaf→sleep, Ruhe→stress, Flow→meditation; no mixing. Session generation for categories uses only `SessionTopic.sleep`, `.stress`, `.meditation` via `CategorySessionGenerator.mapToSessionTopic(OnboardingCategory)`. |
+| Generated sessions persist per category | ✓ | Local + Firestore per `OnboardingCategory`. |
 
 ---
 
@@ -56,6 +68,7 @@
 | "Neue Sessions generieren" reopens drawer (pre-filled) | ✓ | Preferences from storage |
 | Anonymous: local storage (UserDefaults) | ✓ | `LocalCategorySessionStorage` |
 | Registered: Firestore sessions; preferences keyed by user | ✓ | CategorySessionsViewModel |
+| Deduplication: no duplicate content vs existing sessions | ✓ | `SessionContentFingerprint`; up to 10 generation attempts to avoid same fingerprint as persisted |
 
 ---
 
@@ -89,6 +102,8 @@
 | Naming logic (non-fantasy, fantasy, info text) | ✓ | AWAVE-Session-Naming-Logic.md, SessionNameGenerator |
 | Content-ID schema (text, music, nature, sound, noise) | ✓ | base-documentation.md, Session-Content-IDs-Catalog.md |
 | Session uniqueness / time update | ✓ | PLAN-Session-Uniqueness-And-Time-Update.md |
+| Content fingerprint & deduplication | ✓ | SessionContentFingerprint; CategorySessionsViewModel avoids persisting sessions with same content as existing |
+| Text uniqueness (v0…v4 in catalog) | ◐ | Session-Content-IDs-Catalog.md; resolver fallback keeps playback working when variants missing |
 
 ---
 

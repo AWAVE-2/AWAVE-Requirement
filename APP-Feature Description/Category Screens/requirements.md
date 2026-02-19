@@ -22,9 +22,12 @@
 
 ### 2. Category Navigation
 
+#### Category Overview and Detail
+- [x] Category Overview lists three tiles: **Schlafen**, **Ruhe**, **Im Fluss** (from `OnboardingCategory`). Tapping a tile opens the corresponding detail screen: SchlafScreen, RuheScreen, or ImFlussScreen. Session generation on these screens uses `CategorySessionGenerator.mapToSessionTopic(OnboardingCategory)` (Schlaf→sleep, Ruhe→stress, Im Fluss→meditation); see Session Generation / Session-Content-IDs-Catalog.
+
 #### Tab Navigation
 - [x] Bottom tab navigation between categories
-- [x] Three category tabs: Schlafen, Stress, Im Fluss
+- [x] Three category tabs: Schlafen, Ruhe, Im Fluss
 - [x] Active tab highlighting
 - [x] Smooth tab transitions
 - [x] Tab state persistence
@@ -73,12 +76,14 @@
 - [x] Sound filtering by category
 
 #### Session Generation (Category Block)
+- [x] Each category screen generates **only** sessions for that category’s topic (Schlaf→sleep, Ruhe→stress, Flow→meditation); no mixing.
 - [x] First-time / empty state: "Generiere deine erste Session" CTA opens personalization drawer (no auto-generate)
 - [x] Personalization drawer: headline "Individualisiere deine {Category}-Session", length (slider 15–90 min), voice (picker), frequencies (Ein/Aus)
 - [x] Primary action: "{Category}-Session generieren"; on tap: save preferences, close drawer, generate with preferences, show "Deine {Category}-Sessions werden jetzt generiert"
 - [x] "Neue Sessions generieren" opens same drawer (pre-filled from saved preferences); existing sessions replaced after generation
 - [x] Anonymous: sessions and preferences persisted in local storage (UserDefaults); no preload on first launch
 - [x] Registered: sessions in Firestore; preferences in UserDefaults keyed by userId (or Firestore when backend ready)
+- [x] **Home:** The Home screen shows only the onboarding-selected category’s sessions (see Session Generation and User Onboarding requirements).
 
 ### 5. Category Context Management
 

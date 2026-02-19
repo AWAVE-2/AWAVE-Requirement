@@ -36,3 +36,11 @@
 3. Topic-Genre-Pools: In SessionTopicConfig (oder zentral) pro Topic einen Array von erlaubten Genres definieren; CategorySessionGenerator nutzt diesen Pool für die 5 Slots.
 4. Zeitberechnung: Prüfung durchführen (Berechnung + Anzeige + Player), Befund dokumentieren, notwendige Anpassungen umsetzen.
 5. Tests: Eindeutigkeit von Journey und Genre über die 5 Slots in CategorySessionGeneratorTests; SessionGenerator mit optionalen Parametern testen.
+
+---
+
+## 4. Content-Fingerprint und Deduplizierung (umgesetzt 02/2026)
+
+- **Content-Fingerprint:** `SessionContentFingerprint.fingerprint(session)` erzeugt einen deterministischen String aus den Phasen-Inhalten (text/music/nature content IDs, sortiert). Zwei Sessions mit gleichem Inhalt haben denselben Fingerprint.
+- **Deduplizierung:** In `CategorySessionsViewModel.generateSessions(with:)` werden vor dem Ersetzen die bereits persistierten Sessions der Kategorie geladen. Nach jeder Generierung wird geprüft, ob alle fünf neuen Sessions paarweise verschiedene Fingerprints haben und ob keiner mit einem bereits vorhandenen übereinstimmt. Bei Duplikat wird die Generierung mit neuem Zufallsseed wiederholt (max. 10 Versuche). So werden keine inhaltlich identischen Sessions zu bereits vorhandenen erzeugt.
+- **User-Preferences:** Stimme, Dauer und Frequenz-Einstellung bleiben unverändert; die Deduplizierung betrifft nur die Auswahl von Journey/Genre/Varianten.
