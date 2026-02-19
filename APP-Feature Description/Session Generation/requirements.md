@@ -88,10 +88,10 @@
 
 | Requirement | Status | Implementation / Notes |
 |-------------|--------|--------------------------|
-| Search drawer: text input → topic match | ✓ | `SearchViewModel.evaluateForSession`; SymptomFinder; SOS handled |
-| Session suggestion shown whenever query matches a topic | ✓ | `suggestedTopic` set in `performSearch` whenever SymptomFinder returns a topic (independent of sound results; OLD-APP parity) |
-| Topic match → generate session and play | ✓ | SearchDrawerView `submitForSession`; tap on suggestion or Enter/Go → `SessionGenerator.generate`, `player.loadSession`, `play` |
-| No topic match → open SessionGenerator with manual topic | ✓ | `coordinator.sessionGeneratorInitialTopic = nil`, `showSessionGenerator = true` |
+| Search drawer: text input → topic match | ✓ | SearchViewModel uses SymptomFinder (findMatchingTopics); SOS handled before debounce and in performTopicEvaluation |
+| At least 3 session suggestions per query (keyword-based) | ✓ | suggestedTopics from findMatchingTopics; filled to 3 with fallback (sleep, stress, meditation + allCases) |
+| Session start only via card tap (Play on suggestion) | ✓ | SearchDrawerView: tap on session card → CategorySessionGenerator.generateSingleSession, loadSession, play; no Enter/Submit start; X icon clears search text |
+| No topic match → open SessionGenerator with manual topic | ✓ | noMatchView: coordinator.sessionGeneratorInitialTopic = nil, showSessionGenerator = true |
 
 ---
 

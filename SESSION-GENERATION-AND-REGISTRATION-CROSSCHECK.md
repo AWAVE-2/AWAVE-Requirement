@@ -29,7 +29,7 @@
 | `SessionContentMapping` | Fallback contentId → sound document ID | ✓ Yes – base-documentation; **now** requirements.md |
 | `SessionGeneratorView` | Topic grid, voice, "Session erstellen", initialTopic | ◐ Partial – Category Screens / Search; **now** Session Generation/requirements.md |
 | Category block (CategorySessionGeneratorBlock, PersonalizationDrawer) | First-time CTA, drawer, "Neue Sessions generieren", preferences | ✓ Yes – Category Screens/requirements.md; **now** Session Generation/requirements.md |
-| Search → session | evaluateForSession, submitForSession, SessionGenerator.generate | ◐ Search drawer requirements; **known not working** – PRD 07/08; **now** Session Generation/requirements.md §3 |
+| Search → session | suggestedTopics (findMatchingTopics), card tap → CategorySessionGenerator.generateSingleSession | ✓ Session drawer: 3 suggestions, X icon, start only via card; Session Generation/requirements.md §3 |
 
 ### 2.2 Gaps Addressed by New Documents
 

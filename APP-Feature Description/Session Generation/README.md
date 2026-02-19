@@ -52,8 +52,15 @@ Sessions consist of phases with content IDs for text, music, nature, sound, and 
 | **AWAVE-Session-Naming-Logic.md** | Naming logic and examples. |
 | **AWAVE-Session-Generation-Naming.md** | Naming implementation details. |
 | **Session-Preload-System.md** | Preload system design. |
-| **PLAN-Session-Uniqueness-And-Time-Update.md** | Uniqueness and time-update plan. |
+| **PLAN-Session-Uniqueness-And-Time-Update.md** | Uniqueness and time-update plan; includes Content-Fingerprint and deduplication (Feb 2026). |
 | **SESSION_GENERATOR_ABSCHLUSSBERICHT.md** | German completion report. |
+
+**Handover & Abschlussbericht (Session-Uniqueness, Deduplizierung):**
+
+| Document | Location | Content |
+|----------|----------|---------|
+| HANDOVER_SESSION_UNIQUENESS_AND_DEDUPLICATION.md | [docs/handovers/](../../../handovers/HANDOVER_SESSION_UNIQUENESS_AND_DEDUPLICATION.md) | Handover: Content-Fingerprint, Deduplizierung, geänderte Dateien. |
+| ABSCHLUSSBERICHT-SESSION-UNIQUENESS-AND-DEDUPLICATION.md | [docs/](../../../ABSCHLUSSBERICHT-SESSION-UNIQUENESS-AND-DEDUPLICATION.md) | Abschlussbericht: Session-Einzigartigkeit und Deduplizierung. |
 
 ---
 
