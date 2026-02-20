@@ -1,9 +1,9 @@
 # Navigation System - Feature Documentation
 
-**Feature Name:** Navigation & Routing  
-**Status:** ✅ Complete  
-**Priority:** High  
-**Last Updated:** 2025-01-27
+**Feature Name:** Navigation & Routing
+**Status:** ✅ Complete
+**Priority:** High
+**Last Updated:** 2026-02-01
 
 ## 📋 Feature Overview
 
@@ -72,6 +72,15 @@ The navigation system is implemented in Swift/SwiftUI and provides:
 - Navigation history tracking
 - Last active tab before modal/drawer
 - Initial tab determination from onboarding
+
+### 7. Category Preference Management (NEW - Feb 2026)
+- Production UI for changing home category
+- CategorySelectionSheet component
+- Profile settings integration
+- Category persistence across sessions
+- Authentication flow integration
+- Sign-out clears category preference
+- Developer reset tools
 
 ---
 

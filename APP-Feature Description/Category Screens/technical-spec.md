@@ -2,7 +2,7 @@
 
 ## 🏗️ Architecture Overview
 
-### Technology Stack
+### Technology Stack (React Native - Reference)
 
 #### Backend
 - **Firestore** - Primary data source (Firebase / Google Cloud)
@@ -29,8 +29,51 @@
 
 ---
 
+## 🍎 Swift iOS Implementation
+
+### Technology Stack
+
+#### Backend
+- **Firebase Firestore** - Category session storage
+  - `users/{userId}/categorySessions/{category}/sessions/{sessionId}` - Session documents
+  - Batch operations for atomic saves/deletes
+  - Offline persistence built-in
+
+#### State Management
+- **SwiftUI @Observable** - CategorySessionsViewModel
+- **@Environment** - Dependency injection
+- **Property Wrappers** - @Published for reactive state
+
+#### UI Components
+- **SwiftUI** - Native UI framework
+- **LazyVGrid** - Session grid layout
+- **NavigationStack** - Navigation structure
+- **@Observable** macro - State management
+
+#### Services Layer
+- `CategorySessionGenerator` - Deterministic session generation
+- `FirestoreSessionRepository` - Backend data persistence
+- `SessionRepositoryProtocol` - Repository abstraction
+- `AuthServiceProtocol` - User authentication
+- `MockSessionRepository` - Testing support
+
+### Key Differences from React Native
+
+| Feature | React Native | Swift iOS |
+|---------|--------------|-----------|
+| Backend | Supabase | Firebase Firestore |
+| State | Context API | @Observable |
+| Sessions | Backend-fetched sounds | Generated sessions (SessionGenerator) |
+| Navigation | Tab Navigator | NavigationStack + TabView |
+| Data Structure | Sound metadata | Full Session objects with phases |
+| Offline | AsyncStorage | Firestore offline + local generation |
+| Testing | Jest/React Testing Library | XCTest + Swift Testing |
+
+---
+
 ## 📁 File Structure
 
+### React Native (Reference)
 ```
 src/
 ├── screens/
@@ -55,6 +98,44 @@ src/
 │   └── categories.ts                  # Category data (legacy)
 └── navigation/
     └── TabNavigator.tsx               # Tab navigation component
+```
+
+### Swift iOS Implementation
+```
+AWAVE/
+├── Features/
+│   ├── Categories/
+│   │   ├── CategorySessionsView.swift           # Category sessions screen
+│   │   └── CategorySessionsViewModel.swift      # ViewModel with business logic
+│   └── Home/
+│       └── HomeView.swift                       # Entry point with navigation
+├── Services/
+│   ├── CategorySessionGenerator.swift           # Session generation logic
+│   └── Mock/
+│       └── MockSessionRepository.swift          # Mock for testing
+├── Navigation/
+│   ├── Destinations.swift                       # Navigation destinations
+│   └── AppCoordinator.swift                     # Navigation coordinator
+└── Tests/
+    ├── Features/
+    │   └── Categories/
+    │       └── CategorySessionsViewModelTests.swift  # ViewModel tests (14 tests)
+    └── Services/
+        └── CategorySessionGeneratorTests.swift       # Generator tests (16 tests)
+
+Packages/
+├── AWAVEDomain/
+│   └── Sources/
+│       ├── Models/
+│       │   ├── OnboardingCategory.swift         # Category enum
+│       │   ├── Session.swift                    # Session model
+│       │   └── Voice.swift                      # Voice enum
+│       └── Repositories/
+│           └── SessionRepositoryProtocol.swift  # Repository protocol
+└── AWAVEData/
+    └── Sources/
+        └── Repositories/
+            └── FirestoreSessionRepository.swift # Firestore implementation
 ```
 
 ---
