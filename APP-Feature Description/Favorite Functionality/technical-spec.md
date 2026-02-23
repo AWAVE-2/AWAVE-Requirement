@@ -1,11 +1,41 @@
 # Favorite Functionality - Technical Specification
 
-## 🏗️ Architecture Overview
+## iOS Implementation (AWAVE Swift App)
+
+**Implementation report:** The guided-session favorites implementation (mixer state in Firebase/local, tap-to-load with mixer, Home real tiles, category favorites, offline cache, download on save) and the full requirement-to-implementation mapping (F-01–F-12) are documented in **[FINAL-REPORT-MAJOR-AUDIOPLAYER-FAVORITES-MIXER-OFFLINE.md](../../../FINAL-REPORT-MAJOR-AUDIOPLAYER-FAVORITES-MIXER-OFFLINE.md)**.
+
+### Separation of Favorites (Mandatory)
+
+- **Klangwelten favorites:** Stored only in `users/{userId}/mixes` with `playbackMode: .klangwelten`. **Never** written to `favoriteSessions`. Displayed only in Klangwelten tab ("Deine Klangwelten") and Klangwelten player. Klangwelten save flow must **not** call `favoriteSessionRepository.addFavoriteSession()`.
+- **Category session/mix favorites:** Stored in `users/{userId}/favoriteSessions`. When resolving `customMix` items for Home or category detail, **exclude** any mix where `mix.playbackMode == .klangwelten` so Klangwelten mixes never appear on Home or category "Favorisierte Sessions".
+
+### Session/Mix Favorites (per category – category-based only)
+
+- **Storage:** Firestore `users/{userId}/favoriteSessions`; document ID `{itemType}_{itemId}` (e.g. `customMix_abc123`); fields: `category`, `itemType` (session | customMix), `itemId`, `addedAt`. Used **only** for category-based session/mix favorites (major audio player), not for Klangwelten.
+- **Protocol:** `FavoriteSessionRepositoryProtocol`; implementation `FirestoreFavoriteSessionRepository`.
+- **Home screen:** `HomeViewModel.loadContent()` loads `getFavoriteSessions(userId, category)` per onboarding category; when resolving mixes from favoriteSessions, only include mixes where `playbackMode != .klangwelten`. `categoriesWithFavorites` = categories with ≥1 favorite; `favoritesByCategory` = resolved sessions + filtered mixes. Only categories in `categoriesWithFavorites` get a section; display category = onboarding choice.
+- **Category detail:** SchlafScreen, RuheScreen, ImFlussScreen each have `favoriteSessionsSection` (headline "Favorisierte Sessions"); when resolving customMix from favoriteSessions, exclude mixes with `playbackMode == .klangwelten`. Section shown when `resolvedFavoriteSessions` or filtered `resolvedFavoriteMixes` non-empty; tiles for sessions and mixes.
+- **Player:** `PlayerViewModel.currentFavoriteCategory` set when loading a session from a category (e.g. `loadSession(_, category: .flow)`). Full player heart: session mode → `toggleFavorite()` (session + addFavoriteSession) or opens mixer; mixer save → `MixerSheetView.saveMix()` → `customMixRepository.saveMix()` then `favoriteSessionRepository.addFavoriteSession(..., itemType: .customMix, itemId: mix.id)`. Category for add = `favoriteCategoryRaw ?? player.currentFavoriteCategory`. Known bug: addFavoriteSession can fail after successful saveMix ("Mix was saved but could not be added to favorites.").
+
+### Klangwelten Favorites (saved Klangwelten mixes only)
+
+- **Storage:** `users/{userId}/mixes` with `playbackMode: .klangwelten` only. No `favoriteSessions` entries for Klangwelten mixes.
+- **Display:** KlangweltenEntryView loads `customMixRepository.getMixes(userId)` and filters `playbackMode == .klangwelten`; shows "Deine Klangwelten". Tapping a saved Klangwelt opens Klangwelten player via `player.loadCustomMix(mix, sounds:, category:)` and coordinator.
+- **Save flow:** KlangweltenSoundDrawerView `saveKlangweltFavorite()` calls only `customMixRepository.saveMix(..., playbackMode: .klangwelten)`; must **not** call `favoriteSessionRepository.addFavoriteSession()`.
+
+### Sound Favorites (Library)
+
+- **Storage:** Firestore (FavoritesRepository); Library screen and player heart for single-sound mode.
+- **Entities:** `Favorite` (soundId, etc.); `FavoriteSession` (category, itemType, itemId) – used only for category-based session/mix favorites, not Klangwelten.
+
+---
+
+## 🏗️ Architecture Overview (Reference – legacy/other platforms)
 
 ### Technology Stack
 
 #### Backend
-- **Supabase** - PostgreSQL database with real-time capabilities
+- **Supabase** - PostgreSQL database with real-time capabilities (reference; iOS uses Firestore)
   - `user_favorites` table for persistent storage
   - Row-level security (RLS) for user data isolation
   - Real-time subscriptions (optional for live updates)
