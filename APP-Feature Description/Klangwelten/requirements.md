@@ -105,7 +105,27 @@
 - [x] Bottom controls (when sounds selected)
 - [x] Error display section
 
-### 6. User Experience
+### 6. Saved Klangwelten (Favorites) and Tap-to-Restart
+
+#### Tap Tile → Restart Session (Not Sound Drawer)
+- [ ] Tapping a saved Klangwelten tile opens the **player phase** of the Klangwelten experience (playback controls), not the sound-selection drawer (three carousels).
+- [ ] The stored session (same sounds, same volumes) loads and plays immediately when the tile is tapped.
+- [ ] User can still open "Zurück zur Auswahl" from the player to change sounds.
+
+#### Canonical Flow (Create → Select → Confirm → Play → Save → Tap Tile)
+1. User creates a new session (e.g. "Neue Klangwelt erstellen") → sound drawer opens (selection phase).
+2. User selects sounds in the three carousels and taps **Bestätigen** → Klangwelten player starts.
+3. User saves to favorites (name + confirm) → favorite appears under "Deine Klangwelten".
+4. Tapping that tile restarts the **exact same session** (same sounds, same volumes) in the **player phase**.
+
+#### Persistence and Offline
+- [ ] Session data (mix: name, tracks with soundId + volume) is persisted in **Firestore** and in a **local cache** so "Deine Klangwelten" and playback are available offline.
+- [ ] When the user saves a Klangwelt to favorites, the **audio files for all tracks in that mix are downloaded locally** so the session can be played without network (e.g. airplane mode).
+- [ ] Offline: mix list is read from local cache; track sounds are resolved from a local Sound metadata cache; playback proceeds only if all track files are present locally (otherwise show clear message).
+
+**Reference:** `draft/PROPOSAL-KLANGWELTEN-TAP-TILE-RESTART-SESSION-AND-OFFLINE.md`, `docs/ANALYSIS-KLANGWELTEN-PERSISTENCE-AND-OFFLINE.md`, `docs/PROPOSAL-KLANGWELTEN-FAVORITE-TAP-START-SESSION.md`.
+
+### 7. User Experience
 
 #### Visual Feedback
 - [x] Selected sound cards highlighted

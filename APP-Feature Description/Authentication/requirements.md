@@ -76,22 +76,17 @@
 ### 4. Password Management
 
 #### Forgot Password
-- [ ] Email input for password reset request (Not implemented)
-- [ ] Email format validation (Not implemented)
-- [ ] Reset link email sent to user (Not implemented - Firebase Auth supports this but UI not implemented)
-- [ ] Success confirmation (Not implemented)
-- [ ] Resend functionality with cooldown (Not implemented)
-- [ ] Error handling (Not implemented)
+- [x] Email input for password reset request (AuthView "Passwort vergessen?" in sign-in mode; uses same email field)
+- [x] Email format validation (AuthViewModel.sendPasswordReset validates non-empty and contains "@")
+- [x] Reset link email sent to user (AuthService.sendPasswordReset → Firebase Auth)
+- [x] Success confirmation (Alert "E-Mail gesendet" after successful send)
+- [ ] Resend functionality with cooldown (Not implemented; user can tap again to resend)
+- [x] Error handling (userFacingMessage for rate limit, network, etc.)
 
 #### Reset Password
-- [ ] Deep link handling for reset link (Not implemented)
-- [ ] New password input with visibility toggle (Not implemented)
-- [ ] Password confirmation field (Not implemented)
-- [ ] Real-time password strength validation (Not implemented)
-- [ ] Password match validation (Not implemented)
-- [ ] Password strength requirements enforcement (Not implemented)
-- [ ] Success confirmation and navigation (Not implemented)
-- [ ] Error handling for expired/invalid links (Not implemented)
+- [x] Reset flow: user clicks link in email → Firebase-hosted page (not in-app) → enters new password → signs in (Firebase handles reset page)
+- [ ] In-app deep link / in-app reset UI (Not implemented; optional; Firebase hosted page is standard)
+- [x] User can sign in with new password after reset (via Firebase page then return to app)
 
 ### 5. Session Management
 

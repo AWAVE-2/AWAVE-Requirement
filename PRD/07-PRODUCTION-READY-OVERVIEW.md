@@ -6,14 +6,14 @@
 
 **Related docs:** [01-PRD](01-PRD.md) · [02-FEATURE-SPECS](02-FEATURE-SPECS.md) · [05-REQUIREMENTS-SUMMARY](05-REQUIREMENTS-SUMMARY.md) · [06-PROJECT-INTEGRATION-PLAN](06-PROJECT-INTEGRATION-PLAN.md)
 
-**Status date:** 2026-02-16  
+**Status date:** 2026-02-23  
 **Language:** English  
 
 ---
 
 ## 1. Document Index & Percentage Overview
 
-### 1.1 Known Issues (as of 2026-02-16)
+### 1.1 Known Issues (as of 2026-02-23)
 
 The following are **known not to work or to be incomplete** in the current build. They affect production readiness and should be tracked until resolved:
 
@@ -52,6 +52,7 @@ The following are **known not to work or to be incomplete** in the current build
 | §5 | Old App (Cordova) vs New iOS – gap summary |
 | §6 | Ship preparation checklist |
 | §7 | Summary & recommendation |
+| §8 | What is still missing for production readiness |
 
 ---
 
@@ -118,7 +119,7 @@ The following are **known not to work or to be incomplete** in the current build
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
-| Multi-track playback (5: Text, Music, Nature, Sound, Demo) | ◐ | 3-track (e.g. voice, music, nature); no Sound/Demo track, no frequency/noise synthesis |
+| Multi-track playback (5: Text, Music, Nature, Sound, Demo) | ◐ | 5-slot engine in code (voice, music, nature, etc.); frequency/noise synthesis not wired in playback |
 | Per-track volume, fade-in/out, cross-phase continuity | ◐ | Volume/fading for 3 tracks; no phases |
 | 12 frequency modes (root, binaural, monaural, isochronic, bilateral, molateral, Shepard variants) | ✗ | Not implemented (critical gap) |
 | 6 colored noise + 6 NeuroFlow | ✗ | Not implemented (critical gap) |
@@ -240,7 +241,7 @@ The following are **known not to work or to be incomplete** in the current build
 | Frequency generation (12 modes) | No real-time binaural/isochronic/Shepard synthesis | Core therapeutic value missing |
 | Noise generation (12 types) | No colored noise, no NeuroFlow | Core therapeutic value missing |
 | Multi-phase sessions | Only flat mixes; no phase list, no cross-phase continuity | Session model and UX differ from PRD |
-| 6-track engine | Current engine is 3-track (no Sound, Frequency, Noise tracks) | Cannot fulfill PRD §7 |
+| 6-track engine | Engine has 5 slots; Frequency/Noise tracks not integrated in playback | Partial parity; freq/noise synthesis in AWAVEAudio not wired to player |
 
 ### 5.2 Major Gaps (Content & Intelligence)
 
@@ -258,14 +259,14 @@ The following are **known not to work or to be incomplete** in the current build
 | Demo timer (10 min) | Not implemented |
 | Session import/export (.awave) | Not implemented |
 | Real-time content swap | Not implemented in player |
-| Real user ID | Hardcoded "local-user" in many flows (critical for production) |
+| Real user ID | ✓ FIXED — `AppState.effectiveUserId` (Auth UID or "anonymous") used throughout; no "local-user" in app code |
 | Sleep timer | Not implemented |
 | Playback seeking | Slider read-only |
 | Forgot password / password visibility | Not implemented |
 
 ### 5.4 What the New App Has Beyond Old App
 
-- Native iOS, SwiftUI, 4-tab navigation, 3-track engine, Firebase Auth, Apple Sign-In  
+- Native iOS, SwiftUI, 4-tab navigation, 5-slot audio engine, Firebase Auth, Apple Sign-In  
 - Custom mixes (save/load/delete), favorites, session history, “Continue Listening”, stats, streaks  
 - Offline downloads, NetworkMonitor, OfflineBanner, cached playback  
 - StoreKit 2, SubscribeScreen, DownsellScreen, premium gating  
@@ -281,10 +282,10 @@ The following are **known not to work or to be incomplete** in the current build
 
 | Task | Status | Owner/Notes |
 |------|--------|-------------|
-| Replace "local-user" with real user ID everywhere | ✗ | 15+ files; use appState.currentUser?.id |
-| Consolidate auth listeners (single source of truth) | ✗ | Avoid duplicate listeners |
-| Production Firebase config | ✗ | Required for release |
-| Privacy policy & terms (screens/links) | ✗ | Required for App Store |
+| Replace "local-user" with real user ID everywhere | ✓ | **DONE** — `AppState.effectiveUserId` (Auth UID or "anonymous") used throughout; no hardcoded "local-user" in app code |
+| Consolidate auth listeners (single source of truth) | ◐ | RootView auth listener; verify no duplicate listeners in production |
+| Production Firebase config | ◐ | `FirebaseConfig.useStaging` uses `#if DEBUG` (staging in debug, production in release); verify project for release |
+| Privacy policy & terms (screens/links) | ◐ | PrivacyPolicyView, TermsView exist; verify content rendered and URLs in App Store Connect |
 
 ### 6.2 High Priority (Features)
 
@@ -320,23 +321,69 @@ The following are **known not to work or to be incomplete** in the current build
 
 ### 7.1 Parity Summary
 
-- **PRD:** Partial. Navigation, subscriptions, favorites, offline, and core playback (3-track) are in place. **Not in place:** demo timer, Pro tier, session editor, multi-phase engine, frequency/noise synthesis, .awave import/export, full symptom finder, 4-voice UI.
+- **PRD:** Partial. Navigation, subscriptions, favorites, offline, and core playback (5-slot engine) are in place. **Not in place:** demo timer, Pro tier, session editor, multi-phase engine, frequency/noise synthesis, .awave import/export, full symptom finder, 4-voice UI.
 - **Feature Specs F01–F16:** Majority of screens and flows implemented or partially implemented; **F12 (Session Editor)** and several F10/F11/F13/F16 details are open or partial.
 - **Quality criteria (05-REQUIREMENTS-SUMMARY):** Functional parity with legacy app is **not** achieved until frequency/noise synthesis, multi-phase sessions, and session editor (Pro) are implemented. Current app is suitable for a **subset** of the original product (guided sessions + soundscapes + subscriptions + offline), not full therapeutic parity.
 
 ### 7.2 Production Readiness (Current Build)
 
-- **Blockers:** Real user ID (no "local-user"), production Firebase, privacy/terms.
-- **Strongly recommended before release:** Sleep timer, playback seeking, auth consolidation, forgot password, accessibility baseline.
+- **Resolved:** Real user ID — `effectiveUserId` used throughout; no "local-user" in app code. **Remaining:** Production Firebase verification, privacy/terms, background audio, frequency/noise in player, push notifications, full account deletion (Firestore wipe).
+- **Strongly recommended before release:** Sleep timer, playback seeking, forgot password, accessibility baseline, Crashlytics, server-side receipt validation.
 - **Optional for first release:** Full PRD parity (frequency, noise, multi-phase, editor, demo timer, .awave) can be scheduled in a later phase if product accepts a “simplified” first version.
 
 ### 7.3 Recommended Next Steps
 
-1. **Immediate:** Fix "local-user" and auth listeners; add production Firebase and legal screens.  
-2. **Short term:** Sleep timer, seeking, forgot password; accessibility and analytics/Crashlytics.  
+1. **Immediate:** Verify production Firebase and legal screens (content + URLs); fix background audio; implement full account deletion (Firestore data wipe + Auth).  
+2. **Short term:** Wire frequency/noise to player or defer; fix push delivery; sleep timer, seeking, forgot password; accessibility; add Crashlytics; server-side receipt validation.  
 3. **Roadmap:** Decide whether to ship without full PRD parity or to prioritize frequency/noise and multi-phase engine for a “full parity” release.  
 4. **Ongoing:** Update [06-PROJECT-INTEGRATION-PLAN](06-PROJECT-INTEGRATION-PLAN.md) and this document as features are completed.
 
 ---
 
-*Document version: 1.2 · Production ready overview with known issues, percentage views, and requirement links (APP-Feature Description) for AWAVE iOS. Last updated 2026-02-16.*
+## 8. What Is Still Missing for Production Readiness
+
+*Summary as of 2026-02-23. See [PRODUCTION-GO-LIVE-TODO.md](../../../PRODUCTION-GO-LIVE-TODO.md) and [req-vs-implementation-v2.md](../../launchready/req-vs-implementation-v2.md) for full backlog.*
+
+### 8.1 Critical (Launch Blockers)
+
+| Item | Status | Notes |
+|------|--------|-------|
+| **Background audio** | Not working reliably | Lock screen / Control Center / Dynamic Island playback unreliable; AVAudioSession configured but runtime fails |
+| **Account deletion (GDPR)** | Incomplete | Firebase Auth `user.delete()` called; Firestore user data (favorites, mixes, history, fcmTokens, etc.) not deleted |
+| **Frequency/noise in player** | Not wired | 12 frequency modes + 6 noise types in AWAVEAudio package; not integrated in playback engine |
+| **Push notifications** | Not working | FCM token upload and client code present; delivery/registration not fully working |
+| **Privacy policy & terms** | Needs verification | Screens exist; confirm content complete and URLs registered in App Store Connect |
+
+### 8.2 High Priority (Before Paid Launch)
+
+| Item | Status | Notes |
+|------|--------|-------|
+| **Server-side receipt validation** | Missing | StoreKit 2 client-only; Cloud Function for receipt validation not deployed |
+| **Crashlytics** | Not integrated | Removed in prior cleanup; Phase 4 go-live doc has steps to re-add |
+| **Systematic error handling** | Partial | Many `try?` still present; silent failures in data layer; do/catch + logging recommended |
+| **CI build-and-test** | Disabled | `.github/workflows/pr-check.yml` has SwiftLint; build/test job `if: false` (Xcode 26 not on runners) |
+
+### 8.3 Medium Priority (Quality & Compliance)
+
+| Item | Status | Notes |
+|------|--------|-------|
+| **UI test target** | Missing | No AWAVEUITests; unit ~15–20%; see [08-TEST-COVERAGE-AND-UI-TESTS](08-TESTABDECKUNG-UND-UI-TESTS.md) |
+| **Accessibility** | Partial | Some VoiceOver labels; Dynamic Type and full a11y not complete |
+| **Demo timer (10 min)** | Not implemented | PRD requirement for demo tier |
+| **Session editor / Pro tier** | Deferred | Explicitly out of scope for first release |
+
+### 8.4 Already Done (No Longer Blockers)
+
+- Real user ID (`effectiveUserId` everywhere; no "local-user").
+- Apple Sign-In, Google Sign-In, email auth.
+- StoreKit 2 subscriptions, premium gating, restore purchases.
+- Mock subscription guarded with `#if DEBUG`.
+- Offline support (LocalCategorySessionStorage, category cache, home).
+- Session generation (category-based, dedup, preferences).
+- SOS, SymptomFinder, expanded keywords.
+- Profile decomposed; design system (AWAVEColors) unified.
+- Go-live phases 1–4 documented (Firebase, signing, TestFlight, post-launch).
+
+---
+
+*Document version: 1.3 · Production ready overview with known issues, percentage views, requirement links, and "still missing" summary. Last updated 2026-02-23.*
