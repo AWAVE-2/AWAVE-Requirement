@@ -10,7 +10,7 @@
 The Favorite Functionality system in AWAVE iOS enables users to save and manage **three** distinct kinds of favorites. **Klangwelten favorites** and **category session/mix favorites** are strictly separated and must not be mixed in storage or display.
 
 1. **Sound favorites** – Single sounds (Library, player). Stored via Firestore `FavoritesRepository`; displayed in Library and category screens.
-2. **Klangwelten favorites** – Saved Klangwelten mixes (3-slot ambient mixes created in the Klangwelten flow). Stored **only** in Firestore `users/{userId}/mixes` with `playbackMode: .klangwelten`; **not** in `favoriteSessions`. Displayed **only** in the Klangwelten tab ("Deine Klangwelten") and Klangwelten detail/player. Tapping a saved Klangwelt opens the Klangwelten player only.
+2. **Klangwelten favorites** – Saved Klangwelten mixes (4-slot ambient mixes created in the Klangwelten flow). Stored **only** in Firestore `users/{userId}/mixes` with `playbackMode: .klangwelten`; **not** in `favoriteSessions`. Displayed **only** in the Klangwelten tab ("Deine Klangwelten") and Klangwelten detail/player. Tapping a saved Klangwelt opens the Klangwelten player only.
 3. **Session/mix favorites (category-based)** – Generator sessions and saved mixes from the **major audio player** **per category** (Schlaf, Ruhe, Im Fluss). Stored in Firestore `users/{userId}/favoriteSessions`; drive **Home screen sections** and **category detail "Meine Favoriten" / "Favorisierte Sessions"** only. **Never** displayed in the Klangwelten screen. When resolving `customMix` entries from `favoriteSessions`, mixes with `playbackMode == .klangwelten` must be excluded so Klangwelten mixes do not appear on Home or category detail.
 
 ### Description (iOS / Firestore)

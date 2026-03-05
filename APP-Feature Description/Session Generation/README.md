@@ -1,8 +1,8 @@
 # Session Generation – Feature Overview
 
 **Feature:** Topic-based and category-based therapeutic session generation for AWAVE iOS.  
-**Status:** Implemented in Swift. Search→session flow works (session suggestion on topic match, OLD-APP parity). Other items may be in progress (see PRD 07/08).  
-**Last updated:** 2026-02-19  
+**Status:** Implemented in Swift. Search→session flow works (session suggestion on topic match, OLD-APP parity). Session Generation Epic: Sub-Epics A–F closed; see [EPIC-COMPLETION-STATUS-REPORT](../../../draft/session%20generation/EPIC-COMPLETION-STATUS-REPORT.md).  
+**Last updated:** 2026-02-25  
 
 ---
 
@@ -10,7 +10,7 @@
 
 Session Generation produces multi-phase audio sessions from:
 
-- **Topics** (11 types: sleep, dream, obe, stress, healing, angry, sad, depression, trauma, belief, meditation).
+- **Topics** (12 types: sleep, dream, obe, stress, healing, angry, sad, depression, trauma, belief, meditation, fantasy).
 - **Category** (onboarding: Schlaf, Ruhe, Im Fluss) for the category screens and Home:
   - **Category titles** on Home and in the app are Schlaf, Ruhe, Flow (from `OnboardingCategory.title`).
   - **Category Detail** is reached via Category Overview; one of SchlafScreen, RuheScreen, ImFlussScreen per category.
@@ -53,6 +53,7 @@ Sessions consist of phases with content IDs for text, music, nature, sound, and 
 | **AWAVE-Session-Generation-Naming.md** | Naming implementation details. |
 | **Session-Preload-System.md** | Preload system design. |
 | **PLAN-Session-Uniqueness-And-Time-Update.md** | Uniqueness and time-update plan; includes Content-Fingerprint and deduplication (Feb 2026). |
+| **EPIC-COMPLETION-STATUS-REPORT** | [draft/session generation/EPIC-COMPLETION-STATUS-REPORT.md](../../../draft/session%20generation/EPIC-COMPLETION-STATUS-REPORT.md) — Session Generation Epic status (Sub-Epics A–F), handovers, summaries. |
 | **SESSION_GENERATOR_ABSCHLUSSBERICHT.md** | German completion report. |
 
 **Handover & Abschlussbericht (Session-Uniqueness, Deduplizierung):**

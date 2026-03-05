@@ -53,6 +53,8 @@ The system generates frequencies using Web Audio API (in OLD-APP) or native audi
 - [ ] Theta preset (6 Hz) - deep meditation
 - [ ] Delta preset (2 Hz) - deep sleep
 
+**Klangwelten (Swift app):** Slot 2 (Frequenzen) in the Klangwelten sound drawer is implemented with these six presets (Alpha, Theta, Delta, Beta, Gamma, Stille/Silence). See `draft/PROPOSAL-KLANGWELTEN-FREQUENCY-DRAWER-OLD-APP-PARITY.md` and `AWAVE/Features/Klangwelten/FrequencyPresets.swift`.
+
 ### User Stories
 
 - As a user, I want to add binaural beats to my session so that I can enhance my meditation experience

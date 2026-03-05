@@ -2,7 +2,7 @@
 l only — no code changes.  
 **Context:** APP v1.0 (OLD-APP) is being replaced by the new Swift app. The file `OLD-APP/1.0.0_sounds.json` is intended as a bridge for metadata; this document proposes how it can improve the Swift app’s audiofile relation metadata and session generation.
 
-**Status:** Proposa
+**Status:** Proposal
 **References:**  
 `SESSION-GENERATOR-KERNLOGIK.md`, `docs/ANALYSIS-SESSION-GENERATOR-TEXT-SOUNDS-STATUS.md`, `docs/ANALYSIS-SESSION-GENERATOR-SOUND-REPETITION-PROPOSAL.md`, `OLD-APP/src/js/content-database.js`.
 

@@ -97,7 +97,7 @@ In the native iOS app (Swift), session phases are resolved via **Content-IDs**: 
 
 **Resolution order (as of 2026 refactoring):** (1) `getSound(byContentId:)`, (2) `SessionContentMapping.soundId(for:)`. There is **no** category-based fallback anymore ("first sound of category"), so each session only loads content from the audio library with a matching `contentId` and not always the same demo track. Failed resolutions are logged (`AWAVELogger.audio.warning`). Without matching Firestore `contentId` entries or SessionContentMapping, only Frequency and optionally Noise are played.
 
-**Mixer display:** The tracks resolved from the library are shown in the mixer with their **display name** (`Sound.title`) (e.g. "Wald", "Ambient", "Franca – Intro"), not by filename or content ID. For this, `preResolveSessionContentURLs` provides a map `contentId → displayName` in addition to the URLs, and PhasePlayer passes this name to the audio engine.
+**Mixer display:** In session mode the mixer shows **one name per slot** for the whole session: **Stimme** (slot 0), **Musik** (slot 1), **Naturklänge** (slot 2), **Klänge** (slot 3), plus the separate Waves row for frequency. These labels come from `SessionSlotDisplayNames` and are passed to `PhasePlayer.load(slotDisplayNames:)`; they are not phase-based (e.g. "Einleitung", "Trost"). Phase names remain in `SessionPhase.name` for session tile summaries and accessibility. When no slot display name is provided, the app falls back to the resolved content display name (`Sound.title`) or content ID.
 
 ### Sleep Screen and Session Generator (iOS)
 

@@ -25,7 +25,7 @@
 | Requirement | Status | Implementation / Notes |
 |-------------|--------|--------------------------|
 | Generate multi-phase session from a single topic | ✓ | `SessionGenerator.generate(topic:voice:...)` |
-| Support 11 session topics | ✓ | `SessionTopic` enum: sleep, dream, obe, stress, healing, angry, sad, depression, trauma, belief, meditation |
+| Support 12 session topics | ✓ | `SessionTopic` enum: sleep, dream, obe, stress, healing, angry, sad, depression, trauma, belief, meditation, fantasy |
 | Stage sequences per topic | ✓ | `SessionTopic.stages` (e.g. sleep: intro, body, thinkstop, breath, hypnosis, fantasy, introAff, affirmation, silence) |
 | SAD topic: two paths (Comfort vs Guided) | ✓ | 44% comfort path, else guided; stages differ |
 | Optional journey (fantasy) | ✓ | `FantasyJourneyManager.Journey`; used for fantasy stages and naming |
@@ -51,7 +51,7 @@
 
 | Requirement | Status | Implementation / Notes |
 |-------------|--------|--------------------------|
-| Topic grid (all 11 topics) | ✓ | `SessionTopic.allCases` in grid |
+| Topic grid (all 12 topics) | ✓ | `SessionTopic.allCases` in grid |
 | Voice picker | ✓ | `selectedVoice`, voice section |
 | Primary action: "Session erstellen" | ✓ | Calls `SessionGenerator.generate`, then `player.loadSession` + `play` |
 | Pre-selected topic from search/drawer | ✓ | `initialTopic` from coordinator |
