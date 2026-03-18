@@ -128,6 +128,18 @@ class TrackPlayer {
 
 **Alternative for simpler tracks:** `AVAudioPlayer` can work for text and sound tracks where mixing is not needed, but unifies poorly with the engine graph. Prefer all-engine approach.
 
+#### 2.3 Multi-Phase Playback (Implemented: SessionPlayerService and PhasePlayer)
+
+The current iOS app implements sequential multi-phase session playback as follows:
+
+- **SessionPlayerService** (AWAVE app) — Owns the session and `currentPhaseIndex`. When playback starts or advances, it calls **loadCurrentPhase()**: loads the phase at `session.phases[currentPhaseIndex]` into a **PhasePlayer** instance, which attaches all layers (text, music, nature, sound, frequency) to the **AWAVEAudioEngine** and runs the phase timer and clip queues. When the phase completes, **PhasePlayer** invokes **onPhaseComplete**; SessionPlayerService then runs **advanceToNextPhase()** (increments index, captures user volumes, stops current PhasePlayer, loads next phase via loadCurrentPhase(), notifies **onPhaseDidChange**). When there is no next phase, **finishSession()** runs (removeAllTracks, onSessionDidFinish). This is the baseline for Android.
+
+- **PhasePlayer** (AWAVEAudio package) — Loads one `SessionPhase` into the engine with a given `resolveURL` closure; manages per-layer fade controllers, text clip queues, and phase duration; on completion calls onPhaseComplete so SessionPlayerService can advance.
+
+- **Frequency and noise** — Frequency synthesis is implemented in AWAVEAudio (FrequencyGenerator, etc.) and is loaded per phase by PhasePlayer. Noise (colored noise files) is supported where phase config includes noise content.
+
+See [Session Generation Phase-Playback-Flow](../APP-Feature%20Description/Session%20Generation/Phase-Playback-Flow.md) for the phase flow and [Session-Lifecycle-Flow](../APP-Feature%20Description/Session%20Generation/Session-Lifecycle-Flow.md) for the full lifecycle (generation → playback → tracking).
+
 #### B. Frequency Synthesis
 
 **Critical requirement.** This is the most complex audio component.

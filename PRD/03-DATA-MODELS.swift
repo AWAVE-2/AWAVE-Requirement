@@ -1,6 +1,11 @@
-// AWAVE - Swift Data Models
+// AWAVE - Swift Data Models (Reference / Illustrative)
 // Extracted from: session-object.js, content-database.js, upgrade-demo.js
 // Target: Swift 5.9+ / SwiftUI / iOS 17+
+//
+// NOTE: This file is for reference only. The source of truth for session and phase
+// types in the app is the AWAVEDomain package (e.g. Session, SessionPhase, and
+// related entities). Use AWAVEDomain types when implementing or documenting the
+// current iOS or Android app.
 
 import Foundation
 

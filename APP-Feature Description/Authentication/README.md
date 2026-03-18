@@ -1,18 +1,18 @@
 # Authentication System - Feature Documentation
 
 **Feature Name:** Authentication & Account Management
-**Status:** ⚠️ Partially Complete (Email/password and Apple Sign-In done; Google Sign-In and some flows pending)
+**Status:** Implemented (Email/password, Apple Sign-In, Google Sign-In); some flows pending (email verification, forgot password UI)
 **Priority:** High
-**Last Updated:** 2026-02-16
+**Last Updated:** 2026-03
 
 ## 📋 Feature Overview
 
-The Authentication system provides secure user authentication and account management for the AWAVE iOS app. It is built on **Firebase Auth** and supports email/password and **Apple Sign-In** (implemented). **Google Sign-In** is not yet implemented. The app also uses **Google Cloud** (Firebase runs on GCP) for backend services.
+The Authentication system provides secure user authentication and account management for the AWAVE iOS app. It is built on **Firebase Auth** and supports **email/password**, **Apple Sign-In**, and **Google Sign-In** (all implemented). Tech stack: **Swift**, **Firebase Auth**, **AuthenticationServices** (Apple), **Google Sign-In SDK**.
 
 ### Description
 
 The authentication system is built on **Firebase Auth** and provides:
-- **Multi-provider authentication** (Email/Password ✓, Apple Sign-In ✓, Google Sign-In – not implemented)
+- **Multi-provider authentication** (Email/Password ✓, Apple Sign-In ✓, Google Sign-In ✓)
 - **Secure password management** with strength validation
 - **Email verification** workflow
 - **Password reset** functionality (backend supported; UI pending)
@@ -39,9 +39,9 @@ The authentication system is built on **Firebase Auth** and provides:
 - [x] Secure password storage
 
 ### 2. OAuth Authentication
-- [ ] **Google Sign-In** - Not implemented (would use Firebase Auth Google provider; requires Google Cloud OAuth client config)
+- [x] **Google Sign-In** - Implemented (GoogleSignInService, Firebase Auth Google provider; handleURL for callback)
 - [x] **Apple Sign-In** - Implemented (AppleSignInHelper, Firebase Auth Apple provider)
-- [x] Automatic profile creation (FirestoreUserRepository on Apple Sign-In)
+- [x] Automatic profile creation (FirestoreUserRepository on Apple/Google Sign-In)
 - [ ] Avatar and name sync (partial)
 
 ### 3. Email Verification
@@ -74,15 +74,17 @@ The authentication system is built on **Firebase Auth** and provides:
 
 ### Technology Stack
 - **Backend:** Firebase Auth (Google Cloud)
-- **Apple Sign-In:** AuthenticationServices (native) + Firebase Auth Apple provider
-- **Google Sign-In:** Not implemented (would use Firebase Auth Google provider; Google Cloud Console OAuth client required)
+- **Swift / Firebase:** No React/TypeScript or Supabase; all auth is native Swift with Firebase.
+- **Apple Sign-In:** AuthenticationServices (native) + Firebase Auth Apple provider (AppleSignInHelper)
+- **Google Sign-In:** Google Sign-In SDK + Firebase Auth Google provider (GoogleSignInService; handleURL for callback)
 - **Storage:** UserDefaults, Keychain (tokens); user data in Firestore
 - **State Management:** SwiftUI, @Observable
 
 ### Key Components
-- `AuthService` / `AuthServiceProtocol` - Authentication and session
-- `AuthView` / `AuthViewModel` - Main authentication UI
-- `AppleSignInHelper` - Apple Sign-In flow
+- `AuthService` / `AuthServiceProtocol` - Authentication and session (Firebase Auth)
+- `AuthView` / `AuthViewModel` - Main authentication UI (login/signup, Apple + Google buttons)
+- `AppleSignInHelper` - Apple Sign-In flow (nonce, credential, Firebase)
+- `GoogleSignInService` - Google Sign-In flow (presenting UI, credential, Firebase)
 - `FirestoreUserRepository` - User profile creation/update after sign-in
 - Session lifecycle via Firebase Auth
 
@@ -134,9 +136,9 @@ The authentication system is built on **Firebase Auth** and provides:
 
 ### External Services
 - Firebase Auth (authentication backend; runs on Google Cloud)
-- Apple Sign-In (AuthenticationServices + Firebase Auth)
-- Google Sign-In (not implemented; would use Firebase Auth + Google Cloud OAuth)
-- Email service (verification and reset emails via Firebase Auth)
+- Apple Sign-In (AuthenticationServices + Firebase Auth Apple provider)
+- Google Sign-In (Google Sign-In SDK + Firebase Auth Google provider; implemented)
+- Email service (verification and reset emails via Firebase Auth; backend supported, UI pending where noted)
 
 ---
 

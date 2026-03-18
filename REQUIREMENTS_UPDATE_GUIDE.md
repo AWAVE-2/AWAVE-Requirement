@@ -38,12 +38,9 @@ The requirements files were originally written for a React Native/TypeScript app
 - SOS keyword detection
 - Notification preferences (database)
 - Real-time subscriptions
-- Most analytics features
 - Background download service
 - Download progress tracking
 - Session import/export
-- Multi-phase sessions
-- Frequency generation
 - Noise generation
 - Procedural sound generation
 
@@ -54,12 +51,15 @@ The requirements files were originally written for a React Native/TypeScript app
 - Firestore repositories (FirestoreUserRepository, FirestoreSoundRepository, etc.)
 - Firebase Storage (FirebaseStorageRepository)
 - Session tracking (FirestoreSessionTracker)
+- Analytics (AnalyticsService, AnalyticsConsentService — opt-in, Firebase Analytics)
 - Favorites management (FirestoreFavoritesRepository)
 - Custom mixes (FirestoreCustomMixRepository)
 - Basic search (client-side filtering)
 - Onboarding storage (OnboardingStorageService)
 - StoreKit integration (StoreKitManager)
 - Basic audio playback (AWAVEAudioEngine)
+- Multi-phase playback (SessionPlayerService, PhasePlayer in AWAVEAudio)
+- Frequency generation (FrequencyGenerator in AWAVEAudio)
 
 ## Update Pattern
 

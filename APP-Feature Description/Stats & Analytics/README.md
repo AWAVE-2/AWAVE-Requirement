@@ -1,23 +1,20 @@
 # Stats & Analytics System - Feature Documentation
 
 **Feature Name:** Stats & Analytics  
-**Status:** ✅ Complete  
+**Status:** Implemented (Swift / Firebase)  
 **Priority:** High  
-**Last Updated:** 2025-01-27
+**Last Updated:** 2026-03
 
 ## 📋 Feature Overview
 
-The Stats & Analytics system provides comprehensive user statistics, progress tracking, and insights for meditation and audio sessions. It enables users to visualize their meditation journey through detailed analytics, achievement badges, and activity charts.
+The Stats & Analytics system provides user statistics and progress tracking for meditation and audio sessions. **Data source:** Firestore `users/{userId}/playbackHistory` (session records) and **Firebase Analytics** (event stream, consent-gated). No Supabase.
 
 ### Description
 
-The Stats & Analytics system tracks and displays:
-- **Session Statistics** - Total minutes, sessions, averages, and streaks
-- **Achievement Badges** - Gamification with unlockable achievements
-- **Activity Charts** - Visual representation of meditation activity over time
-- **Most Used Sounds** - Top played sounds based on usage data
-- **Time Period Analysis** - Week, month, and year views
-- **Daily Analytics** - Automatic aggregation of daily session data
+The system tracks and displays:
+- **Session statistics** — Total listening time, session count, current streak, longest streak, sessions this week, listening time this week, favorite category (from FirestoreSessionTracker.getStats).
+- **Analytics events** — Firebase Analytics: screen views, session started/completed/abandoned/resumed, favorites, search, subscription, download, onboarding; all gated by AnalyticsConsentService (opt-in).
+- **Stats UI** — Profile screen shows a stats section (StatsView) when the user is signed in; unauthenticated users see a blurred placeholder (ProfileBlurredStatsView).
 
 ### User Value
 
@@ -68,38 +65,35 @@ The Stats & Analytics system tracks and displays:
 - Visual icons for each metric
 - Glass morphism design
 
-### 6. Daily Analytics Aggregation
-- Automatic daily aggregation after session completion
-- Tracks total session time, sessions started, sessions completed
-- Stored in `app_usage_analytics` table
-- Background processing
+### 6. Data sources (Swift)
+- **Firestore** — `users/{userId}/playbackHistory` (session documents). FirestoreSessionTracker.getStats(userId) aggregates to UserStats (totalListeningTime, sessionCount, streaks, sessionsThisWeek, listeningTimeThisWeek, favoriteCategory).
+- **Firebase Analytics** — Events (session lifecycle, screen views, favorites, etc.) when user has consented; see [Session Tracking](../Session%20Tracking/) technical-spec.
+
+**Implemented vs mock (current iOS):**
+- **Implemented:** Session-based stats (total time, session count, streaks, this week, favorite category) from Firestore via FirestoreSessionTracker.getStats; stats section on Profile (StatsView); analytics event logging (AnalyticsService + consent).
+- **Not implemented / partial:** Dedicated full-screen Stats dashboard (e.g. week/month/year tabs, charts, most played sounds list) as in the legacy spec; achievement badges with real unlock logic; daily aggregation to a separate analytics table. These remain as product options; current baseline is Profile stats + Firestore playback history + Firebase Analytics events.
 
 ---
 
 ## 🏗️ Architecture
 
 ### Technology Stack
-- **Backend:** Supabase Database
-- **Services:** SessionTrackingService
-- **State Management:** React Hooks (useSessionStats, useWeeklyActivity, useMostPlayedSounds)
-- **Charts:** Custom React Native components
-- **Storage:** Supabase `user_sessions` and `app_usage_analytics` tables
+- **Backend:** Firestore (playbackHistory), Firebase Analytics (events)
+- **Services:** FirestoreSessionTracker (SessionTrackingProtocol), AnalyticsService, AnalyticsConsentService
+- **State:** SwiftUI; ProfileViewModel loads stats via sessionTracker.getStats(userId)
 
-### Key Components
-- `StatsScreen` - Main statistics dashboard
-- `SummaryStats` - Quick stats overview
-- `BadgeDisplay` - Achievement badges
-- `MeditationChart` - Activity visualization
-- `MostUsedSounds` - Top sounds list
-- `TimePeriodTabs` - Period selection
-- `StatsSummary` - Profile screen summary card
+### Key Components (Swift)
+- `ProfileView` / `ProfileViewModel` — Profile screen; loadStats() calls sessionTracker.getStats(userId); displays StatsView or ProfileBlurredStatsView
+- `StatsView` — Displays UserStats (total listening time, session count, streaks, this week, favorite category)
+- `ProfileBlurredStatsView` — Placeholder when not signed in (blurred StatsView)
+- `AnalyticsService` — Event logging (consent-gated)
+- `AnalyticsConsentService` — Opt-in persistence and Firebase setAnalyticsCollectionEnabled
 
 ---
 
 ## 📱 Screens
 
-1. **StatsScreen** (`/stats`) - Main statistics dashboard with all analytics
-2. **ProfileScreen** - Contains `StatsSummary` component for quick overview
+1. **Profile** — Contains stats section (StatsView) when signed in; data from FirestoreSessionTracker.getStats. No separate dedicated Stats tab in current iOS app.
 
 ---
 
@@ -126,9 +120,8 @@ The Stats & Analytics system tracks and displays:
 - **Authentication** - User-specific statistics
 
 ### External Services
-- Supabase Database (`user_sessions` table)
-- Supabase Database (`app_usage_analytics` table)
-- Supabase Database (`sound_metadata` table)
+- Firestore (`users/{userId}/playbackHistory` — session documents)
+- Firebase Analytics (events; consent-gated)
 
 ---
 
@@ -156,18 +149,15 @@ The Stats & Analytics system tracks and displays:
 
 ## 📚 Additional Resources
 
-- [Session Tracking Service Documentation](../Session Tracking/)
-- [Supabase Database Schema](../../SYSTEM_DESIGN_COMPATIBILITY_ANALYSIS.md)
+- [Session Tracking](../Session%20Tracking/) — FirestoreSessionTracker, schema, AnalyticsService, consent
 
 ---
 
 ## 📝 Notes
 
-- Statistics are calculated in real-time from session data
-- Daily analytics are automatically aggregated after session completion
-- Achievement badges are currently mock data (TODO: implement real badge logic)
-- Time period filtering for statistics is partially implemented (week/month/year views use same data)
-- Chart data is formatted for week view; month/year views need full implementation
+- Stats are loaded from Firestore via FirestoreSessionTracker.getStats when the user opens Profile (signed-in).
+- Analytics events are sent only when the user has granted analytics consent (onboarding toast; AnalyticsConsentService).
+- A dedicated Stats screen with charts, period tabs, and most played sounds is not in the current iOS baseline; it can be added later and documented here.
 
 ---
 

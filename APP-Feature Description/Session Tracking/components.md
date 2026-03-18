@@ -1,355 +1,72 @@
-# Session Tracking System - Components Inventory
+# Session Tracking System - Components Inventory (Swift)
 
-## 📱 Screens
-
-### StatsScreen
-**File:** `src/screens/StatsScreen.tsx`  
-**Route:** `/stats`  
-**Purpose:** Main statistics screen displaying session analytics
-
-**State:**
-- `activeTab: 'week' | 'month' | 'year'` - Selected time period
-
-**Components Used:**
-- `BadgeDisplay` - Achievement badges
-- `SummaryStats` - Summary statistics
-- `TimePeriodTabs` - Time period selector
-- `MeditationChart` - Activity chart
-- `MostUsedSounds` - Most played sounds list
-
-**Hooks Used:**
-- `useSessionStats` - Session statistics
-- `useWeeklyActivity` - Weekly activity data
-- `useUnifiedTheme` - Theme styling
-
-**Features:**
-- Achievement badges display
-- Summary statistics (total minutes, sessions, average, streak)
-- Time period tabs (week, month, year)
-- Activity chart visualization
-- Most played sounds list
-- Responsive layout
-- Scrollable content
-
-**User Interactions:**
-- Switch between time periods
-- View achievement progress
-- Scroll through statistics
-- View activity charts
+**Implementation:** Native iOS (Swift, SwiftUI). Session data in Firestore `users/{userId}/playbackHistory`. Analytics via Firebase Analytics (consent-gated). No React/TypeScript or Supabase.
 
 ---
 
-## 🧩 Components
+## Session tracking and analytics usage
 
-### AudioPlayerEnhanced
-**File:** `src/components/AudioPlayerEnhanced.tsx`  
-**Type:** Audio Player Component with Session Tracking
+### PlayerViewModel
+**Location:** AWAVE/AWAVE/Features/Player/PlayerViewModel.swift
 
-**Props:**
-```typescript
-interface AudioPlayerEnhancedProps {
-  sound: Sound;
-  favoriteId?: string | null;
-  onClose: () => void;
-}
-```
+**Role:** Primary owner of session lifecycle and session analytics events.
 
-**State:**
-- `currentSessionId: string | null` - Active session ID
-- `sessionStartTime: number` - Session start timestamp
+- **Session start:** Calls `sessionTracker.startSession(userId:soundIds:type:sessionTitle:mixId:totalDuration:guidedSessionId:category:)` when starting guided session, Klangwelten mix, or single-sound playback. Stores `activeSessionId`. Logs `AnalyticsService.shared.log(.sessionStarted(mode:category:))`.
+- **Progress:** Calls `sessionTracker.updateProgress(id:userId:durationPlayed:)` (e.g. when app goes to background or on periodic update). Uses `LastPlaybackSnapshotStore` and `NowPlayingService.updateProgress` for display/continuation.
+- **Session end:** On playback stop or abandon, calls `sessionTracker.endSession(id:userId:durationPlayed:)` and logs `AnalyticsService.shared.log(.sessionCompleted(...))` or `.sessionAbandoned(...)`. On resume (Weiterhören), logs `.sessionResumed(...)` and may call `sessionTracker.restoreActiveSession(id:userId:)`.
+- **Dependencies:** Injected `sessionTracker: SessionTrackingProtocol` (DependencyContainer provides FirestoreSessionTracker).
 
-**Hooks Used:**
-- `useSupabaseAudio` - Audio playback
-- `useProductionAuth` - User authentication
-- `SessionTrackingService` - Session tracking
+### HomeViewModel / HomeView
+**Location:** AWAVE/AWAVE/Features/Home/HomeViewModel.swift, HomeView.swift
 
-**Features:**
-- Automatic session creation on playback start
-- Progress updates every 30 seconds
-- Session completion on playback end
-- Session completion on player close
-- Session completion on app termination
-- Background tracking support
-- Error handling
+**Role:** Starts playback (and thus session) when user taps a session or "Weiterhören". Delegates to PlayerViewModel.startSessionWithPreloader(session, category:, mixerState:). Session start/end/update are performed inside PlayerViewModel and sessionTracker.
 
-**Session Tracking Integration:**
-- Starts session when `isPlaying` becomes true
-- Updates progress every 30 seconds during playback
-- Completes session when playback ends or player closes
-- Handles app state changes (background/foreground)
+### Category screens (SchlafScreen, RuheScreen, ImFlussScreen)
+**Location:** AWAVE/AWAVE/Features/Categories/*.swift
 
-**User Interactions:**
-- Play/pause audio
-- Close player
-- Navigate away (triggers session completion)
+**Role:** When user taps a generated session or continues listening, they call `player.startSessionWithPreloader(session, category:, mixerState:)`. Session tracking runs inside PlayerViewModel.
+
+### LibraryViewModel
+**Location:** AWAVE/AWAVE/Features/Library/LibraryViewModel.swift
+
+**Role:** Injected with `sessionTracker: SessionTrackingProtocol`. Used for any library-driven playback that creates a session; actual start/end/update are coordinated with PlayerViewModel when the player is used.
+
+### DependencyContainer
+**Location:** AWAVE/AWAVE/App/DependencyContainer.swift
+
+**Role:** Constructs `sessionTracker` as `FirestoreSessionTracker()` and injects it into PlayerViewModel, HomeViewModel, LibraryViewModel.
 
 ---
 
-### SummaryStats
-**File:** `src/components/stats/SummaryStats.tsx`  
-**Type:** Statistics Display Component
+## Analytics (screen views and events)
 
-**Props:**
-```typescript
-interface SummaryStatsProps {
-  totalMinutes: number;
-  totalSessions: number;
-  averageSession: number;
-  period: 'week' | 'month' | 'year';
-}
-```
+- **AnalyticsService.shared.log(.screenView(.home))** — HomeView.onAppear
+- **AnalyticsService.shared.log(.screenView(.schlaf))** — SchlafScreen
+- **AnalyticsService.shared.log(.screenView(.ruhe))** — RuheScreen
+- **AnalyticsService.shared.log(.screenView(.imFluss))** — ImFlussScreen
+- **AnalyticsService.shared.log(.screenView(.player))** — FullPlayerView
+- **AnalyticsService.shared.log(.screenView(.klangwelten))** — KlangweltenScreen
+- **AnalyticsService.shared.log(.screenView(.search))** — SearchDrawerView
+- **AnalyticsService.shared.log(.screenView(.profile))** — ProfileView
+- **AnalyticsService.shared.log(.screenView(.onboarding))** — OnboardingView
+- **Session events** — PlayerViewModel (sessionStarted, sessionCompleted, sessionAbandoned, sessionResumed)
+- **Favorites, mix, search, SOS, trial, purchase, download, onboarding** — See AnalyticsService.Event in technical-spec or Analytics-Event-Catalog (if present).
 
-**Features:**
-- Total minutes display
-- Total sessions count
-- Average session length
-- Period indicator
-- Formatted numbers
-- Icon indicators
-
-**Data Source:**
-- `useSessionStats` hook
+All events are dropped when `AnalyticsConsentService.shared.hasAnalyticsConsent` is false.
 
 ---
 
-### MeditationChart
-**File:** `src/components/stats/MeditationChart.tsx`  
-**Type:** Activity Chart Component
+## FirestoreSessionTracker implementation notes
 
-**Props:**
-```typescript
-interface MeditationChartProps {
-  data: ActivityData[];
-  period: 'week' | 'month' | 'year';
-}
-```
-
-**Features:**
-- Bar chart visualization
-- Activity data display
-- Period-specific formatting
-- Zero-value handling
-- Responsive design
-
-**Data Source:**
-- `useWeeklyActivity` hook
+- **FirestoreSessionTracker** — Uses `AWAVEDataFirestoreConfig.firestore()`. startSession creates a new document in `users/{userId}/playbackHistory` and stores the session id + userId in an in-memory lock-protected dictionary so endSession(id:durationPlayed:) can resolve userId. Overloads with userId are used when the app has been restarted and in-memory state is lost.
+- **getMostPlayedSounds, getRecentSessions** — Implemented on FirestoreSessionTracker; query Firestore aggregation/ordering as needed for stats UI.
 
 ---
 
-### MostUsedSounds
-**File:** `src/components/stats/MostUsedSounds.tsx`  
-**Type:** Most Played Sounds List Component
+## Stats display (Stats & Analytics feature)
 
-**Props:**
-```typescript
-interface MostUsedSoundsProps {
-  limit?: number; // Default: 5
-}
-```
-
-**Features:**
-- Most played sounds list
-- Play count display
-- Sound metadata (title, description)
-- Sorted by play count
-- Loading state
-- Error state
-
-**Data Source:**
-- `useMostPlayedSounds` hook
-- `SessionTrackingService.getMostPlayedSounds()`
+Stats and charts (e.g. total minutes, sessions, most played sounds) consume data from Firestore playbackHistory and/or Firebase Analytics. See [Stats & Analytics](../Stats%20%26%20Analytics/) for Swift screens and view models that display this data.
 
 ---
 
-### TimePeriodTabs
-**File:** `src/components/stats/TimePeriodTabs.tsx`  
-**Type:** Tab Selector Component
-
-**Props:**
-```typescript
-interface TimePeriodTabsProps {
-  activeTab: 'week' | 'month' | 'year';
-  onTabChange: (tab: 'week' | 'month' | 'year') => void;
-}
-```
-
-**Features:**
-- Three tab options (week, month, year)
-- Active tab highlighting
-- Tab switching
-- Responsive design
-
----
-
-### BadgeDisplay
-**File:** `src/components/stats/BadgeDisplay.tsx`  
-**Type:** Achievement Badges Component
-
-**Props:**
-```typescript
-interface BadgeDisplayProps {
-  badges: AchievementBadge[];
-}
-```
-
-**Features:**
-- Achievement badges grid
-- Unlocked/locked states
-- Progress indicators
-- Icon display
-- Color coding
-
-**Badge Types:**
-- First session
-- Streak badges (3, 7, 30 days)
-- Time-based (60 minutes)
-- Activity-based (focus, explorer, night owl, early bird)
-
----
-
-## 🔗 Component Relationships
-
-### StatsScreen Component Tree
-```
-StatsScreen
-├── SafeAreaView
-│   └── ScrollView
-│       ├── BadgeDisplay
-│       │   └── AchievementBadge[] (grid)
-│       ├── MostUsedSounds
-│       │   └── useMostPlayedSounds hook
-│       ├── TimePeriodTabs
-│       │   ├── Tab (Week)
-│       │   ├── Tab (Month)
-│       │   └── Tab (Year)
-│       ├── SummaryStats
-│       │   └── useSessionStats hook
-│       └── MeditationChart
-│           └── useWeeklyActivity hook
-```
-
-### AudioPlayerEnhanced Session Tracking Flow
-```
-AudioPlayerEnhanced
-├── useEffect (Playback Start)
-│   └── SessionTrackingService.startSession()
-│       └── Sets currentSessionId
-├── useEffect (Progress Updates)
-│   └── setInterval (30s)
-│       └── SessionTrackingService.updateProgress()
-└── useEffect (Cleanup)
-    └── SessionTrackingService.completeSession()
-```
-
----
-
-## 🎨 Styling
-
-### Theme Integration
-All components use the theme system via `useUnifiedTheme` hook:
-- Colors: `theme.colors.primary`, `theme.colors.textPrimary`, etc.
-- Typography: `theme.typography.fontFamily`
-- Spacing: Consistent padding and margins
-
-### Responsive Design
-- ScrollView for small screens
-- SafeAreaView for status bar handling
-- Flexible layouts
-- Chart responsiveness
-
-### Accessibility
-- Semantic labels
-- Touch target sizes (min 44x44)
-- Color contrast compliance
-- Screen reader support
-
----
-
-## 🔄 State Management
-
-### Local State
-- Component-specific UI state
-- Loading states
-- Error states
-- Tab selection
-
-### Hook State
-- `useSessionStats` - Statistics data
-- `useWeeklyActivity` - Activity data
-- `useMostPlayedSounds` - Sound analytics
-- `useSessionTracking` - Session lifecycle
-
-### Persistent State
-- Supabase database - Session records
-- Supabase database - Analytics records
-
----
-
-## 🧪 Testing Considerations
-
-### Component Tests
-- Statistics display accuracy
-- Chart rendering
-- Tab switching
-- Loading states
-- Error states
-
-### Integration Tests
-- Hook data fetching
-- Service method calls
-- Database operations
-- Error handling
-
-### E2E Tests
-- Complete statistics flow
-- Session tracking during playback
-- Chart data updates
-- Most played sounds updates
-
----
-
-## 📊 Component Metrics
-
-### Complexity
-- **StatsScreen:** Medium (multiple components, data fetching)
-- **AudioPlayerEnhanced:** High (audio + session tracking)
-- **SummaryStats:** Low (display only)
-- **MeditationChart:** Medium (chart rendering)
-- **MostUsedSounds:** Medium (data fetching + display)
-
-### Reusability
-- **SummaryStats:** High (reusable statistics display)
-- **MeditationChart:** High (reusable chart component)
-- **TimePeriodTabs:** High (reusable tab component)
-- **BadgeDisplay:** Medium (achievement-specific)
-
-### Dependencies
-- All components depend on theme system
-- Statistics components depend on hooks
-- AudioPlayerEnhanced depends on SessionTrackingService
-- All components depend on navigation (implicit)
-
----
-
-## 🔌 Integration Points
-
-### Audio Player Integration
-- `AudioPlayerEnhanced` automatically tracks sessions
-- No manual session management required
-- Seamless integration with audio playback
-
-### Statistics Display
-- `StatsScreen` consumes session data
-- Real-time statistics updates
-- Period-based filtering
-
-### Analytics Consumption
-- Components fetch data on mount
-- Manual refresh capability
-- Loading and error states
-
----
-
-*For service dependencies, see `services.md`*  
-*For user flows, see `user-flows.md`*  
-*For technical details, see `technical-spec.md`*
+*For technical details (schema, protocol, analytics event list), see technical-spec.md.*

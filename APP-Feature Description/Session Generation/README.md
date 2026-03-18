@@ -35,7 +35,10 @@ Sessions consist of phases with content IDs for text, music, nature, sound, and 
 | `SessionGeneratorView` | UI: topic grid, voice, "Session erstellen"; supports `initialTopic` (e.g. from search). |
 | `CategorySessionGeneratorBlock` / `CategorySessionPersonalizationDrawerView` | Category-screen block: drawer, preferences, "Neue Sessions generieren". |
 | `CategorySessionsViewModel` | Loads/stores category sessions and preferences (local/Firestore). |
-| `SessionPlayerService` / `PhasePlayer` | Playback using resolved URLs and display names. |
+| **SessionPlayerService** | **Playback orchestrator:** owns session and current phase index; calls `loadCurrentPhase()` → PhasePlayer; on `onPhaseComplete` runs `advanceToNextPhase()` then loads next phase; session end → `finishSession()`. (AWAVE app: `Services/SessionPlayerService.swift`.) |
+| **PhasePlayer** | **Per-phase playback:** loads one `SessionPhase` into the audio engine (text, music, nature, sound, frequency); clip queues, fade controllers, phase timer; invokes `onPhaseComplete` when phase ends. (AWAVEAudio package: `Engine/PhasePlayer.swift`.) |
+
+For the phase-playback flow (SessionPlayerService → PhasePlayer → engine), see **[Phase-Playback-Flow.md](Phase-Playback-Flow.md)**. Known issues (mixer slots, volume, pre-resolve): [docs/20260306_leftovers.md](../../../20260306_leftovers.md).
 
 ---
 
@@ -45,6 +48,8 @@ Sessions consist of phases with content IDs for text, music, nature, sound, and 
 |----------|---------|
 | **requirements.md** | Functional requirements checklist (this feature); references to other docs. |
 | **README.md** | This overview and index. |
+| **Phase-Playback-Flow.md** | Phase playback flow: SessionPlayerService → PhasePlayer → engine; for Android parity. |
+| **Session-Lifecycle-Flow.md** | End-to-end flow: session generation → pre-resolve → manifest → phase playback → session end → tracking and analytics. |
 | **base-documentation.md** | Content-IDs for iOS, resolution order, mixer display. |
 | **base-dockuemtation.md** | Legacy typo filename; same content as base-documentation. |
 | **SESSION_GENERATION_AUDIO_LIBRARY_REFACTORING_REPORT.md** | Refactoring: no category fallback, SessionContentResolver, displayNames. |

@@ -8,7 +8,7 @@
 
 **Die aktuelle iOS-App ist die verbindliche Baseline für die Android-Entwicklung.**
 
-- 📄 [**ANDROID-NORDSTERN.md**](./ANDROID-NORDSTERN.md) – Vollständiger Nordstern: implementierte Features, Tech-Stack (iOS → Android), Quick Reference zu allen Anforderungen und Handover-Docs. **Startpunkt für das Android-Team.**
+- 📄 [**ANDROID-NORDSTERN.md**](../../ANDROID-NORDSTERN.md) – Vollständiger Nordstern: implementierte Features, Tech-Stack (iOS → Android), Quick Reference zu allen Anforderungen und Handover-Docs. **Startpunkt für das Android-Team.** (File lives at `docs/ANDROID-NORDSTERN.md`.)
 - Parity-Backlog (Features aus OLD-APP/Web noch nicht in iOS): `Requirements/APP-Feature Description/Backlog-Parity-OLD-APP-and-Web/README.md`
 - Requirements-Update (Swift/Firebase statt React/Supabase): `Requirements/REQUIREMENTS_UPDATE_GUIDE.md`
 
@@ -215,7 +215,7 @@
 ## 📂 Documentation Structure
 
 ### Requirements Documentation
-PRD docs are aligned with **iOS 26.2 / Swift 6.2** and reference the **Android North Star** ([ANDROID-NORDSTERN.md](./ANDROID-NORDSTERN.md)).
+PRD docs are aligned with **iOS 26.2 / Swift 6.2** and reference the **Android North Star** ([ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md)).
 ```
 docs/Requirements/
 ├── PRD/
@@ -245,7 +245,7 @@ docs/Requirements/
 ### Implementation Documentation
 ```
 docs/
-├── ANDROID-NORDSTERN.md (Nordstern für Android ✅)
+├── ANDROID-NORDSTERN.md (at docs/; Nordstern für Android ✅)
 ├── IMPLEMENTATION-SUMMARY-Feb-2026.md (NEW ✅)
 ├── HANDOVER-Category-Management-Implementation.md (NEW ✅)
 ├── HANDOVER-Mix-Speichern-Herz-Drawer-Kategorie.md (Feb 2026 ✅)
@@ -262,7 +262,7 @@ docs/
 ## 🔍 Quick Reference
 
 ### Android (Nordstern)
-- **Nordstern-Dokument:** [ANDROID-NORDSTERN.md](./ANDROID-NORDSTERN.md) – Baseline für Android, alle implementierten Features, Tech-Mapping, Referenzen
+- **Nordstern-Dokument:** [ANDROID-NORDSTERN.md](../../ANDROID-NORDSTERN.md) – Baseline für Android, alle implementierten Features, Tech-Mapping, Referenzen
 - **Parity-Backlog:** `Requirements/APP-Feature Description/Backlog-Parity-OLD-APP-and-Web/README.md`
 
 ### Finding Information

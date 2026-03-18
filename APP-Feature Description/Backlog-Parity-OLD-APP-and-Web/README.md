@@ -22,8 +22,8 @@ The previous "missing migration" folders targeted a **React Native iOS app**, wh
 
 | Feature | Status in iOS | Documented in | Notes |
 |--------|----------------|----------------|--------|
-| **Multi-Phase Session System** | Not implemented | [Major Audioplayer](../Major%20Audioplayer/), [Session Generation](../Session%20Generation/), [PRD 04-AUDIO-ARCHITECTURE](../../PRD/04-AUDIO-ARCHITECTURE.md) | Flat sessions only; phase model in PRD. Detail: `missing migration from OLD-APP (V.1)/Multi-Phase Session System/` |
-| **Frequency Generation** | Not implemented | [PRD 04-AUDIO-ARCHITECTURE](../../PRD/04-AUDIO-ARCHITECTURE.md), [07-PRODUCTION-READY](../../PRD/07-PRODUCTION-READY-OVERVIEW.md) | Binaural, isochronic, etc. Detail: `missing migration from OLD-APP (V.1)/Frequency Generation System/` |
+| **Multi-Phase Session System** | Implemented | [Major Audioplayer](../Major%20Audioplayer/), [Session Generation](../Session%20Generation/), [PRD 04-AUDIO-ARCHITECTURE](../../PRD/04-AUDIO-ARCHITECTURE.md) | SessionPlayerService + PhasePlayer (AWAVEAudio); sequential phase playback, loadCurrentPhase → advanceToNextPhase. See [Session Generation Phase-Playback-Flow](../Session%20Generation/Phase-Playback-Flow.md). |
+| **Frequency Generation** | Implemented | [PRD 04-AUDIO-ARCHITECTURE](../../PRD/04-AUDIO-ARCHITECTURE.md), [07-PRODUCTION-READY](../../PRD/07-PRODUCTION-READY-OVERVIEW.md) | FrequencyGenerator in AWAVEAudio; binaural/isochronic synthesis per phase. |
 | **Noise Generation** | Not implemented | [PRD 04-AUDIO-ARCHITECTURE](../../PRD/04-AUDIO-ARCHITECTURE.md) | Colored noise, NeuroFlow. Same PRD as above. |
 | **Session Import/Export** | Not implemented | [PRD 01-PRD](../../PRD/01-PRD.md) §10.3 | .awave format. Detail: `missing migration from OLD-APP (V.1)/Session Import Export/` |
 | **Content Database** | Partial (Firestore) | [Session Generation](../Session%20Generation/), [Databases](../Databases/) | Firestore `sounds` + content IDs. Detail: `missing migration from OLD-APP (V.1)/Content Database/` |
@@ -31,7 +31,7 @@ The previous "missing migration" folders targeted a **React Native iOS app**, wh
 | **Symptom Finder** | Partial (Search) | [Seach Drawer](../Seach%20Drawer/), [SOS Screen](../SOS%20Screen/) | Search + SOS; full keyword DB not migrated. |
 | **Multiple Voice Options** | Partial | [Session Generation](../Session%20Generation/), [Major Audioplayer](../Major%20Audioplayer/) | Voice in session model; UI may be partial. |
 | **Live Volume Control** | Implemented | [Major Audioplayer](../Major%20Audioplayer/) | Per-track volume in mixer. |
-| **Session Generator** | Implemented | [Session Generation](../Session%20Generation/), [Category Screens](../Category%20Screens/) | CategorySessionGenerator, SessionGenerator. |
+| **Session Generator** | Implemented | [Session Generation](../Session%20Generation/), [Category Screens](../Category%20Screens/) | CategorySessionGenerator, SessionGenerator; multi-phase playback via SessionPlayerService + PhasePlayer (same implementation as Multi-Phase Session System above). |
 | **Preset Frequency Settings** | Not implemented | PRD 04 | Gamma/beta/alpha/theta/delta presets. |
 | **Pro Mode Unlock** | Not implemented | [PRD 01-PRD](../../PRD/01-PRD.md) §2.3 | SHA256 password. |
 | **Session Phase Editor** | Not implemented | PRD §8 | Pro-only phase editor. |
